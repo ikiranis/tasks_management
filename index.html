@@ -4,36 +4,43 @@
     <meta charset="UTF-8">
     <title>Πλατφόρμα Διαχείρισης Εργασιών</title>
 
+    <link href="css/index.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container-fluid">
-    <header class="bg-dark">
-        <div class="row text-center text-light">
+<div class="container">
+    <header>
+        <div class="bg-dark text-center text-light py-3">
             <h1>Πλατφόρμα Διαχείρισης Εργασιών</h1>
         </div>
 
-        <nav class="row">
-            <div class="col-12">
-                <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html"><img src="images/logo.png" alt="Logo" width="50" height="50"></a>
-                    </li>
-                    <li class="nav-item">
+        <nav class="navbar navbar-expand-lg navbar-light my-0">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="Logo" width="50" height="50">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
                         <a class="nav-link" href="index.html">Αρχική</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="tasks.html">Λίστα εργασιών</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="groups.html">Ομάδεςς</a>
+                        <a class="nav-link" href="groups.html">Ομάδες</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="login.html">Login</a>
                     </li>
                 </ul>
             </div>
-
         </nav>
     </header>
 
