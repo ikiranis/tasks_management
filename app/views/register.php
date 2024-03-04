@@ -37,14 +37,14 @@
                         <a class="nav-link btn btn-light" href="../index.html">Αρχική</a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a class="nav-link btn btn-light active" href="tasks.html">Λίστα εργασιών</a>
+                        <a class="nav-link btn btn-light" href="tasks.php">Λίστα εργασιών</a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a class="nav-link btn btn-light" href="groups.html">Ομάδες</a>
+                        <a class="nav-link btn btn-light" href="groups.php">Ομάδες</a>
                     </li>
                 </ul>
 
-                <a class="btn ms-auto" href="login.html" title="Είσοδος">
+                <a class="btn ms-auto" href="login.php" title="Είσοδος">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
                          class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -59,57 +59,42 @@
 
     <section class="mb-5">
         <div class="container text-center">
-            <div class="row">
-                <div class="col-lg-6 col-12 mb-3 mb-lg-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 col-sm-8">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Δημιουργία του site</strong>
+                            <h3>Εγγραφή Χρήστη</h3>
                         </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <div>Υλοποίηση του frontend</div>
-                                <div>Υλοποίηση του backend</div>
-                                <div>Σύνδεση frontend με backend</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-12 mb-3 mb-lg-0">
-                    <div class="card">
-                        <div class="card-header">
-                            <strong>Συντήρηση του site</strong>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <div>Επιδιόρθωση σφαλμάτων</div>
-                                <div>Προσθήκη νέων λειτουργιών</div>
-                                <div>Ενημέρωση του backend</div>
-                            </div>
+                        <div class="card-body text-start">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Όνομα Χρήστη</label>
+                                    <input type="text" class="form-control" id="username" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Κωδικός Πρόσβασης</label>
+                                    <input type="password" class="form-control" id="password" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="verify_password" class="form-label">Επιβεβαίωση Κωδικού</label>
+                                    <input type="password" class="form-control" id="verify_password" required>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <button type="submit" class="btn btn-primary w-75">Εγγραφή</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <form class="mt-5 row">
-                <div class="col-12 col-lg-6 mt-2 mt-lg-0">
-                    <input type="text" class="form-control" placeholder="Τίτλος Λίστας" aria-label="Τίτλος Λίστας">
-                </div>
-
-                <div class="col-12 col-lg-3 mt-2 mt-lg-0">
-                    <select class="form-select" aria-label="Κατηγορία">
-                        <option selected value="1">Κατηγορία 1</option>
-                        <option value="2">Κατηγορία 2</option>
-                        <option value="3">Κατηγορία 3</option>
-                    </select>
-                </div>
-
-                <div class="col-12 col-lg-3 mt-2 mt-lg-0">
-                    <button class="form-control btn btn-primary" type="button">Δημιουργία
-                        Λίστας
-                    </button>
-                </div>
-
-            </form>
         </div>
     </section>
 

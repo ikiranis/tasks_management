@@ -1,6 +1,6 @@
 <?php
 
-use apps4net\syncDB\services\EnvVariables;
+use apps4net\tasks\services\EnvVariables;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

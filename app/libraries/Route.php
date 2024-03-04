@@ -22,7 +22,7 @@
  *
  */
 
-namespace apps4net\syncDB\libraries;
+namespace apps4net\tasks\libraries;
 
 class Route
 {

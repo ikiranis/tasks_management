@@ -37,14 +37,14 @@
                         <a class="nav-link btn btn-light" href="../index.html">Αρχική</a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a class="nav-link btn btn-light" href="tasks.html">Λίστα εργασιών</a>
+                        <a class="nav-link btn btn-light" href="tasks.php">Λίστα εργασιών</a>
                     </li>
                     <li class="nav-item mx-1">
                         <a class="nav-link btn btn-light active" href="groups.html">Ομάδες</a>
                     </li>
                 </ul>
 
-                <a class="btn ms-auto" href="login.html" title="Είσοδος">
+                <a class="btn ms-auto" href="login.php" title="Είσοδος">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
                          class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"

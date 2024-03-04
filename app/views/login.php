@@ -37,22 +37,12 @@
                         <a class="nav-link btn btn-light" href="../index.html">Αρχική</a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a class="nav-link btn btn-light" href="tasks.html">Λίστα εργασιών</a>
+                        <a class="nav-link btn btn-light" href="tasks.php">Λίστα εργασιών</a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a class="nav-link btn btn-light" href="groups.html">Ομάδες</a>
+                        <a class="nav-link btn btn-light" href="groups.php">Ομάδες</a>
                     </li>
                 </ul>
-
-                <a class="btn ms-auto" href="login.html" title="Είσοδος">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                         class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                              d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
-                        <path fill-rule="evenodd"
-                              d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                    </svg>
-                </a>
             </div>
         </nav>
     </header>
@@ -61,9 +51,9 @@
         <div class="container text-center">
             <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="card">
+                    <div class="card mt-5">
                         <div class="card-header">
-                            <h3>Εγγραφή Χρήστη</h3>
+                            <h3>Είσοδος Χρήστη</h3>
                         </div>
                         <div class="card-body text-start">
                             <form>
@@ -73,22 +63,16 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" required>
-                                </div>
-
-                                <div class="mb-3">
                                     <label for="password" class="form-label">Κωδικός Πρόσβασης</label>
                                     <input type="password" class="form-control" id="password" required>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="verify_password" class="form-label">Επιβεβαίωση Κωδικού</label>
-                                    <input type="password" class="form-control" id="verify_password" required>
+                                <div class="row justify-content-center">
+                                    <button type="submit" class="btn btn-primary w-75">Είσοδος</button>
                                 </div>
 
-                                <div class="row justify-content-center">
-                                    <button type="submit" class="btn btn-primary w-75">Εγγραφή</button>
+                                <div class="mt-3 text-center">
+                                    <a href="register.php">Εγγραφή νέου χρήστη</a>
                                 </div>
                             </form>
                         </div>

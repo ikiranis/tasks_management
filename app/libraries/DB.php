@@ -13,7 +13,7 @@
  *
  */
 
-namespace apps4net\syncDB\libraries;
+namespace apps4net\tasks\libraries;
 
 use http\Env;
 

@@ -13,7 +13,7 @@
  *
  */
 
-namespace apps4net\syncDB\controllers;
+namespace apps4net\tasks\controllers;
 
 class Controller
 {
@@ -31,7 +31,6 @@ class Controller
     {
         // set headers to allow CORS
         header("Access-Control-Allow-Origin: *");
-        header("Content-Type: application/json; charset=UTF-8");
     }
 
     /**
@@ -43,6 +42,8 @@ class Controller
      */
     protected function returnError(string $code, string $message): void
     {
+        header("Content-Type: application/json; charset=UTF-8");
+
         http_response_code($code);
 
         echo json_encode([
@@ -60,6 +61,8 @@ class Controller
      */
     protected function returnSuccess(array $data): void
     {
+        header("Content-Type: application/json; charset=UTF-8");
+
         http_response_code(200);
 
         echo json_encode([
@@ -67,5 +70,19 @@ class Controller
         ]);
 
         exit();
+    }
+
+    /**
+     * Display the selected view page
+     *
+     * @param string $view
+     * @return void
+     */
+    protected function view(string $view)
+    {
+        // Set header for HTML
+        header("Content-Type: text/html; charset=UTF-8");
+
+        require_once __DIR__ . '/../views/' . $view . '.php';
     }
 }
