@@ -1,11 +1,11 @@
 {
-    "name": "apps4net/api",
-    "description": "description",
+    "name": "apps4net/tasks",
+    "description": "A simple task manager",
     "minimum-stability": "stable",
     "license": "proprietary",
     "authors": [
         {
-            "name": "rocean",
+            "name": "Yiannis Kiranis",
             "email": "rocean74@gmail.com"
         }
     ],
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "apps4net\\syncDB\\": "app/"
+            "apps4net\\tasks\\": "app/"
         }
     }
 }

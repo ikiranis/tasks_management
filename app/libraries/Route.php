@@ -91,6 +91,8 @@ class Route
     }
 
     /**
+     * Run the routes
+     *
      * @return void
      */
     public static function run(): void

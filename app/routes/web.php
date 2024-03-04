@@ -1,15 +1,4 @@
 <?php
-/**
- *
- * File: index.php
- *
- * Created by Yiannis Kiranis <rocean74@gmail.com>
- * http://www.apps4net.eu
- *
- * Date: 19/1/24
- * Time: 12:54 μ.μ.
- *
- */
 
 namespace apps4net\syncDB\routes;
 

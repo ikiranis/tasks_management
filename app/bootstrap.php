@@ -9,8 +9,3 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-// Check if we are in Joomla environment and get the env variables from configuration.php
-if($_ENV['JOOMLA_ENV'] == "true") {
-    $envVariables = new EnvVariables();
-    $envVariables->set();
-}
