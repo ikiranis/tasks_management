@@ -1,0 +1,23 @@
+{
+    "name": "apps4net/api",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "rocean",
+            "email": "rocean74@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1.0",
+        "ext-pdo": "*",
+        "vlucas/phpdotenv": "^5.6",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "apps4net\\syncDB\\": "app/"
+        }
+    }
+}
