@@ -15,37 +15,7 @@
 </head>
 <body>
 <div class="container">
-    <header>
-        <div class="bg-dark text-center text-light py-3">
-            <h1>Πλατφόρμα Διαχείρισης Εργασιών</h1>
-        </div>
-
-        <nav class="navbar navbar-expand-lg navbar-light my-0">
-            <a class="navbar-brand" href="../index.html">
-                <img src="../images/logo.svg" alt="Logo" width="100">
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item mx-1">
-                        <a class="nav-link btn btn-light" href="../index.html">Αρχική</a>
-                    </li>
-                    <li class="nav-item mx-1">
-                        <a class="nav-link btn btn-light" href="tasks.php">Λίστα εργασιών</a>
-                    </li>
-                    <li class="nav-item mx-1">
-                        <a class="nav-link btn btn-light" href="groups.php">Ομάδες</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <?php require_once __DIR__ . '/../components/header.php'; ?>
 
     <section class="mb-5">
         <div class="container text-center">
@@ -82,15 +52,7 @@
         </div>
     </section>
 
-    <footer class="fixed-bottom">
-        <div class="container bg-dark text-light py-1 text-center">
-            <div class="d-flex justify-content-center">
-                <span class="mx-1"><a href="#" class="text-light">Όροι Χρήσης</a></span>
-                <span class="mx-1">|</span>
-                <span class="mx-1"><a href="#" class="text-light">Πολιτική Απορρήτου</a></span>
-            </div>
-        </div>
-    </footer>
+    <?php require_once __DIR__ . '/../components/footer.php'; ?>
 </div>
 </body>
 </html>
