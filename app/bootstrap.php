@@ -1,6 +1,7 @@
 <?php
 
-use apps4net\tasks\services\EnvVariables;
+// Start session to use it in the whole app
+session_start();
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
