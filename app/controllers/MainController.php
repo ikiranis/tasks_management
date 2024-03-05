@@ -19,7 +19,6 @@ use apps4net\tasks\controllers\Controller;
 
 class MainController extends Controller
 {
-
    public function index(): void
    {
        $this->view('index');
