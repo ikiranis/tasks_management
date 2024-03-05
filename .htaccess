@@ -6,3 +6,7 @@ Options -Indexes
     Order allow,deny
     Deny from all
 </Files>
+
+location / {
+    try_files $uri $uri/ /index.php?$query_string;
+}
