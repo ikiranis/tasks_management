@@ -26,15 +26,15 @@
                             <h3>Είσοδος Χρήστη</h3>
                         </div>
                         <div class="card-body text-start">
-                            <form>
+                            <form action="checkLogin" method="POST">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Όνομα Χρήστη</label>
-                                    <input type="text" class="form-control" id="username" required>
+                                    <input type="text" class="form-control" name="username" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Κωδικός Πρόσβασης</label>
-                                    <input type="password" class="form-control" id="password" required>
+                                    <input type="password" class="form-control" name="password" required>
                                 </div>
 
                                 <div class="row justify-content-center">
@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div class="mt-3 text-center">
-                                    <a href="register.php">Εγγραφή νέου χρήστη</a>
+                                    <a href="register">Εγγραφή νέου χρήστη</a>
                                 </div>
                             </form>
                         </div>

@@ -19,10 +19,12 @@ use http\Env;
 
 class DB
 {
-   public static ?\PDO $conn = null;
+    public static ?\PDO $conn = null;
 
     /**
      * Make the DB connection
+     *
+     * @return void
      */
     public static function connect(): void
     {
@@ -36,7 +38,17 @@ class DB
 
             self::$conn = $conn;
         } catch (\PDOException $e) {
-           throw new \PDOException("Connection failed: " . $e->getMessage());
+            throw new \PDOException("Connection failed: " . $e->getMessage());
         }
+    }
+
+    /**
+     * Close the DB connection
+     *
+     * @return void
+     */
+    public static function close(): void
+    {
+        self::$conn = null;
     }
 }

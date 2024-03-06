@@ -22,24 +22,6 @@ class User
     private string $email;
     private int $role;
 
-    /**
-     * @param int $id
-     * @param string $username
-     * @param string $password
-     * @param string $name
-     * @param string $email
-     * @param int $role
-     */
-    public function __construct(int $id, string $username, string $password, string $name, string $email, int $role)
-    {
-        $this->id = $id;
-        $this->username = $username;
-        $this->password = $password;
-        $this->name = $name;
-        $this->email = $email;
-        $this->role = $role;
-    }
-
     public function getId(): int
     {
         return $this->id;
