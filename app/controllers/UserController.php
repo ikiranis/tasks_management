@@ -15,12 +15,14 @@ namespace apps4net\tasks\controllers;
 
 use apps4net\tasks\services\UserService;
 
-class UserController
+class UserController extends Controller
 {
-    private UserService $userService;
+    private UserService $userService; // User service to handle the user data
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->userService = new UserService();
     }
 
@@ -38,12 +40,37 @@ class UserController
             $result = $this->userService->loginUser($username, $password);
 
             if ($result) {
-                echo "true";
+                $this->view('index');
             } else {
-                echo "false";
+                $this->view('login');
             }
         } catch (\Exception $e) {
             echo "Error: " . $e->getMessage();
         }
+
+    }
+
+    /**
+     * Register a new user
+     *
+     * @return void
+     */
+    public function registerUser(): void
+    {
+        // Get the data from the form
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+
+        // Register the user
+        try {
+            $this->userService->registerUser($username, $password, $name, $email);
+        } catch (\Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+
+        // Redirect to the login page
+        $this->view('login');
     }
 }

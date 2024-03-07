@@ -17,6 +17,7 @@ Route::get('tasks', [MainController::class, 'tasks']);
 
 // Utilities
 Route::post('checkLogin', [UserController::class, 'checkLogin']);
+Route::post('registerUser', [UserController::class, 'registerUser']);
 
 // Run the routes
 

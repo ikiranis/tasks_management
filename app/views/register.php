@@ -26,25 +26,30 @@
                             <h3>Εγγραφή Χρήστη</h3>
                         </div>
                         <div class="card-body text-start">
-                            <form>
+                            <form action="registerUser" method="POST">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Όνομα Χρήστη</label>
-                                    <input type="text" class="form-control" id="username" required>
+                                    <input type="text" class="form-control" name="username" id="username" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Ονοματεπώνυμο</label>
+                                    <input type="text" class="form-control" name="name" id="name">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                    <input type="email" class="form-control" name="email" id="email" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Κωδικός Πρόσβασης</label>
-                                    <input type="password" class="form-control" id="password" required>
+                                    <input type="password" class="form-control" name="password" id="password" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="verify_password" class="form-label">Επιβεβαίωση Κωδικού</label>
-                                    <input type="password" class="form-control" id="verify_password" required>
+                                    <input type="password" class="form-control" name="verify_password" id="verify_password" required>
                                 </div>
 
                                 <div class="row justify-content-center">
