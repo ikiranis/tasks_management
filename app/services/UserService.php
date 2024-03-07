@@ -42,9 +42,13 @@ class UserService
 
         DB::close();
 
+        // If user exists
         if ($user) {
+            // Check the password with the hashed password
             if (password_verify($password, $user->getPassword())) {
+                // Set the session variables for the logged in user
                 $_SESSION['username'] = $username;
+                $_SESSION['role'] = $user->getRole();
 
                 return true;
             }
