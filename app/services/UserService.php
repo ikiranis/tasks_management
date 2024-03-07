@@ -27,12 +27,14 @@ class UserService
     {
         DB::connect();
 
+        // Search for the user in the database
         try {
             $stmt = DB::$conn->prepare("SELECT username, password FROM users WHERE username = :username");
             $stmt->bindParam(':username', $username);
 
             $stmt->execute();
 
+            // Get the user data as an object
             $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\User');
 
             $user = $stmt->fetch();
