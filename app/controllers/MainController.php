@@ -19,48 +19,49 @@ use apps4net\tasks\libraries\Permission;
 
 class MainController extends Controller
 {
-    public function index(): void
+
+    public function __construct()
     {
-        if (!Permission::getPermissionFor('index')) {
-            $this->view('404');
+        parent::__construct();
+
+        // Check if the user has permission to access the page
+        // If not, display 404 page
+
+        // Get the page to display
+        $page = ltrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+
+        // Empty page means index
+        if($page === '') {
+            $page = 'index';
         }
 
+        if (!Permission::getPermissionFor($page)) {
+            $this->view('404');
+        }
+    }
+
+    public function index(): void
+    {
         $this->view('index');
     }
 
-    public function groups(): void
+    public function teams(): void
     {
-        if (!Permission::getPermissionFor('teams')) {
-            $this->view('404');
-        }
-
         $this->view('teams');
     }
 
     public function login(): void
     {
-        if (!Permission::getPermissionFor('login')) {
-            $this->view('404');
-        }
-
-        $this->view('login');
+       $this->view('login');
     }
 
     public function register(): void
     {
-        if (!Permission::getPermissionFor('register')) {
-            $this->view('404');
-        }
-
-        $this->view('register');
+       $this->view('register');
     }
 
     public function tasks(): void
     {
-        if (!Permission::getPermissionFor('tasks')) {
-            $this->view('404');
-        }
-
-        $this->view('tasks');
+       $this->view('tasks');
     }
 }

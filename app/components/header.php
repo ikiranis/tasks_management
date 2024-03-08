@@ -23,11 +23,13 @@
                     <a class="nav-link btn btn-light" href="tasks">Λίστα εργασιών</a>
                 </li>
                 <li class="nav-item mx-1">
-                    <a class="nav-link btn btn-light" href="groups">Ομάδες</a>
+                    <a class="nav-link btn btn-light" href="teams">Ομάδες</a>
                 </li>
             </ul>
 
             <a class="btn ms-auto" href="login" title="Είσοδος">
+                <?php echo $_SESSION['username']; ?>
+                
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
                      class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
