@@ -29,7 +29,7 @@ class UserService
 
         // Search for the user in the database
         try {
-            $stmt = DB::$conn->prepare("SELECT username, password FROM users WHERE username = :username");
+            $stmt = DB::$conn->prepare("SELECT * FROM users WHERE username = :username");
             $stmt->bindParam(':username', $username);
 
             $stmt->execute();
