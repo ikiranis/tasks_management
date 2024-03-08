@@ -30,16 +30,21 @@ class Permission
         ],
         'teams' => [
             'login', 0
-        ]
+        ],
     ];
 
     public static function getPermissionFor(string $action): bool
     {
+        if(!array_key_exists($action, self::$permissions)) {
+            return true;
+        }
+
         $permissionsForAction = self::$permissions[$action];
 
         if (in_array('all', $permissionsForAction)) {
             return true;
         }
+
 
         // If permissions has "login" and the user is not logged in, return false
         if (in_array('login', $permissionsForAction) && !isset($_SESSION['username'])) {

@@ -73,4 +73,17 @@ class UserController extends Controller
         // Redirect to the login page
         $this->view('login');
     }
+
+    /**
+     * Logout the user
+     *
+     * @return void
+     */
+    public function logout(): void
+    {
+        $_SESSION['username'] = null;
+        $_SESSION['role'] = null;
+
+        $this->view('index');
+    }
 }

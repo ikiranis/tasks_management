@@ -37,6 +37,7 @@ class MainController extends Controller
 
         if (!Permission::getPermissionFor($page)) {
             $this->view('404');
+            exit();
         }
     }
 
