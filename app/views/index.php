@@ -17,6 +17,12 @@
 <div class="container">
     <?php require_once __DIR__ . '/../components/header.php'; ?>
 
+    <?php
+    echo $_SESSION['username'];
+
+    echo \apps4net\tasks\libraries\Permission::getPermissionFor('index');
+    ?>
+
     <section class="mb-5">
         <div class="container text-center">
             <h3>Καλωσορίσατε στην Πλατφόρμα Διαχείρισης Εργασιών</h3>
@@ -46,7 +52,7 @@
         </div>
     </section>
 
-   <?php require_once __DIR__ . '/../components/footer.php'; ?>
+    <?php require_once __DIR__ . '/../components/footer.php'; ?>
 </div>
 </body>
 </html>

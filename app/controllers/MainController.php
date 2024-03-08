@@ -15,30 +15,52 @@
 
 namespace apps4net\tasks\controllers;
 
+use apps4net\tasks\libraries\Permission;
+
 class MainController extends Controller
 {
-   public function index(): void
-   {
-       $this->view('index');
-   }
+    public function index(): void
+    {
+        if (!Permission::getPermissionFor('index')) {
+            $this->view('404');
+        }
 
-   public function groups(): void
-   {
-         $this->view('groups');
-   }
+        $this->view('index');
+    }
+
+    public function groups(): void
+    {
+        if (!Permission::getPermissionFor('teams')) {
+            $this->view('404');
+        }
+
+        $this->view('teams');
+    }
 
     public function login(): void
     {
-            $this->view('login');
+        if (!Permission::getPermissionFor('login')) {
+            $this->view('404');
+        }
+
+        $this->view('login');
     }
 
     public function register(): void
     {
-            $this->view('register');
+        if (!Permission::getPermissionFor('register')) {
+            $this->view('404');
+        }
+
+        $this->view('register');
     }
 
     public function tasks(): void
     {
-            $this->view('tasks');
+        if (!Permission::getPermissionFor('tasks')) {
+            $this->view('404');
+        }
+
+        $this->view('tasks');
     }
 }

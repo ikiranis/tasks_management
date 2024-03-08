@@ -1,3 +1,14 @@
+<?php
+use apps4net\tasks\libraries\Permission;
+
+$checkPermission = Permission::getPermissionFor('teams');
+if (!$checkPermission) {
+
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +27,7 @@
 <body>
 <div class="container">
     <?php require_once __DIR__ . '/../components/header.php'; ?>
+
 
     <section class="mb-5">
         <div class="container text-center">
