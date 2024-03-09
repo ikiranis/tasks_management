@@ -1,8 +1,11 @@
 <?php
 use apps4net\tasks\libraries\App;
-
-App::component('head');
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<?php App::component('head'); ?>
 
 <body>
 <div class="container">
