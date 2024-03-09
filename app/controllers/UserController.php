@@ -40,14 +40,15 @@ class UserController extends Controller
             $result = $this->userService->loginUser($username, $password);
 
             if ($result) {
-                $this->view('index');
+                // Redirect page
+                header("Location: /");
             } else {
+
                 $this->view('login');
             }
         } catch (\Exception $e) {
             echo "Error: " . $e->getMessage();
         }
-
     }
 
     /**
@@ -84,6 +85,7 @@ class UserController extends Controller
         $_SESSION['username'] = null;
         $_SESSION['role'] = null;
 
-        $this->view('index');
+        // Redirect to the index page
+        header("Location: /");
     }
 }
