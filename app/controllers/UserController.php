@@ -13,6 +13,7 @@
 
 namespace apps4net\tasks\controllers;
 
+use apps4net\tasks\libraries\App;
 use apps4net\tasks\services\UserService;
 
 class UserController extends Controller
@@ -43,8 +44,7 @@ class UserController extends Controller
                 // Redirect page
                 header("Location: /");
             } else {
-
-                $this->view('login');
+                App::view('login');
             }
         } catch (\Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -72,7 +72,7 @@ class UserController extends Controller
         }
 
         // Redirect to the login page
-        $this->view('login');
+        App::view('login');
     }
 
     /**

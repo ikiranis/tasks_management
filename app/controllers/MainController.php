@@ -29,33 +29,33 @@ class MainController extends Controller
         // If not, display 404 page
 
         if (!Permission::getPermissionFor(App::getCurrentPage())) {
-            $this->view('404');
+            App::view('404');
             exit();
         }
     }
 
     public function index(): void
     {
-        $this->view('index');
+        App::view('index');
     }
 
     public function teams(): void
     {
-        $this->view('teams');
+        App::view('teams');
     }
 
     public function login(): void
     {
-       $this->view('login');
+       App::view('login');
     }
 
     public function register(): void
     {
-       $this->view('register');
+       App::view('register');
     }
 
     public function tasks(): void
     {
-       $this->view('tasks');
+       App::view('tasks');
     }
 }

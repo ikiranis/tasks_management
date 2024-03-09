@@ -73,22 +73,4 @@ class Controller
 
         exit();
     }
-
-    /**
-     * Display the selected view page
-     *
-     * @param string $view
-     * @param array $data
-     * @return void
-     */
-    protected function view(string $view, array $data = []): void
-    {
-        // Set header for HTML
-        header("Content-Type: text/html; charset=UTF-8");
-
-        // Extract the data to variables and pass them to the view
-        extract($data);
-
-        require_once __DIR__ . '/../views/' . $view . '.php';
-    }
 }
