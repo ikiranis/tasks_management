@@ -1,3 +1,21 @@
+<?php
+
+use apps4net\tasks\libraries\App;
+use apps4net\tasks\libraries\Permission;
+
+/**
+ * Check if the current page is active
+ *
+ * @param string $pageToCheck
+ * @return string
+ */
+function isActive(string $pageToCheck): string
+{
+    return (App::getCurrentPage() === $pageToCheck) ? 'active' : '';
+}
+
+?>
+
 <header>
     <div class="bg-dark text-center text-light py-3">
         <h1>Πλατφόρμα Διαχείρισης Εργασιών</h1>
@@ -17,17 +35,31 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item mx-1">
-                    <a class="nav-link btn btn-light active" href="/">Αρχική</a>
+                    <a class="nav-link btn btn-light <?php echo isActive('index'); ?>" href="/">Αρχική</a>
                 </li>
-                <li class="nav-item mx-1">
-                    <a class="nav-link btn btn-light" href="tasks">Λίστα εργασιών</a>
-                </li>
-                <li class="nav-item mx-1">
-                    <a class="nav-link btn btn-light" href="teams">Ομάδες</a>
-                </li>
+                <?php
+                // Check if the user has permission to view the tasks and teams menu items
+
+                if (Permission::getPermissionFor('tasks')) {
+                    ?>
+                    <li class="nav-item mx-1">
+                        <a class="nav-link btn btn-light <?php echo isActive('tasks'); ?>" href="tasks">Λίστα εργασιών</a>
+                    </li>
+                    <?php
+                }
+                if (Permission::getPermissionFor('teams')) {
+                    ?>
+                    <li class="nav-item mx-1">
+                        <a class="nav-link btn btn-light <?php echo isActive('teams'); ?>" href="teams">Ομάδες</a>
+                    </li>
+                    <?php
+                }
+                ?>
             </ul>
 
             <?php
+            // Check if the user is logged in and show the username or the login button
+
             if (!isset($_SESSION['username'])) {
                 ?>
 
@@ -46,7 +78,7 @@
                 ?>
 
                 <a class="btn ms-auto" href="logout" title="Έξοδος">
-                    <?php echo $_SESSION['username']; ?>
+                    <span><?php echo $_SESSION['username']; ?></span>
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
                          class="bi bi-box-arrow-left" viewBox="0 0 16 16">

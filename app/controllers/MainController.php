@@ -15,6 +15,7 @@
 
 namespace apps4net\tasks\controllers;
 
+use apps4net\tasks\libraries\App;
 use apps4net\tasks\libraries\Permission;
 
 class MainController extends Controller
@@ -27,15 +28,7 @@ class MainController extends Controller
         // Check if the user has permission to access the page
         // If not, display 404 page
 
-        // Get the page to display
-        $page = ltrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-
-        // Empty page means index
-        if($page === '') {
-            $page = 'index';
-        }
-
-        if (!Permission::getPermissionFor($page)) {
+        if (!Permission::getPermissionFor(App::getCurrentPage())) {
             $this->view('404');
             exit();
         }

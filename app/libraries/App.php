@@ -16,5 +16,22 @@ namespace apps4net\tasks\libraries;
 class App
 {
 
+    /**
+     * Get the current page to display
+     *
+     * @return string
+     */
+    public static function getCurrentPage(): string
+    {
+        // Get the page to display
+        $page = ltrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+
+        // Empty page means index
+        if($page === '') {
+            $page = 'index';
+        }
+
+        return $page;
+    }
 
 }

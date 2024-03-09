@@ -34,14 +34,22 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-center">
-                <a href="/login">
-                    <button class="btn btn-primary mt-3 mx-3" type="button">Είσοδος</button>
-                </a>
-                <a href="/register">
-                    <button class="btn btn-primary mt-3 mx-3" type="button">Εγγραφή</button>
-                </a>
-            </div>
+            <?php
+            // Display the login and register buttons if the user is not logged in
+            
+            if (!isset($_SESSION['username'])) {
+                ?>
+                <div class="d-flex justify-content-center">
+                    <a href="/login">
+                        <button class="btn btn-primary mt-3 mx-3" type="button">Είσοδος</button>
+                    </a>
+                    <a href="/register">
+                        <button class="btn btn-primary mt-3 mx-3" type="button">Εγγραφή</button>
+                    </a>
+                </div>
+                <?php
+            }
+            ?>
 
         </div>
     </section>
