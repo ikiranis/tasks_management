@@ -9,6 +9,8 @@
  * Date: 5/3/24
  * Time: 6:48 μ.μ.
  *
+ * Basic application class with utility methods
+ *
  */
 
 namespace apps4net\tasks\libraries;
@@ -33,9 +35,16 @@ class App
         require_once __DIR__ . '/../views/' . $view . '.php';
     }
 
+    /**
+     * Display the selected component
+     *
+     * @param string $component
+     * @param array $data
+     * @return void
+     */
     public static function component(string $component, array $data = []): void
     {
-        // Extract the data to variables and pass them to the view
+        // Extract the data to variables and pass them to the component
         extract($data);
 
         include(__DIR__ . '/../components/' . $component . '.php');
@@ -58,5 +67,4 @@ class App
 
         return $page;
     }
-
 }
