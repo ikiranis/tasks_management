@@ -33,6 +33,14 @@ class App
         require_once __DIR__ . '/../views/' . $view . '.php';
     }
 
+    public static function component(string $component, array $data = []): void
+    {
+        // Extract the data to variables and pass them to the view
+        extract($data);
+
+        include(__DIR__ . '/../components/' . $component . '.php');
+    }
+
     /**
      * Get the current page to display
      *
