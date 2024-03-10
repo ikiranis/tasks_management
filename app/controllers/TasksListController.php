@@ -58,7 +58,7 @@ class TasksListController extends Controller
         try {
             $tasksList = $this->tasksListService->create($title, $categoryId, $statusId);
 
-            // Get the HTML of the tasks list component, to add it to the page
+            // Get the HTML of the tasks list component, to add it to the page, without refreshing
             $html = App::componentHTML('tasksList', ['list' => $tasksList]);
 
             // Return success json response
