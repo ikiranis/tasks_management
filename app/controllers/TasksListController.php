@@ -51,6 +51,7 @@ class TasksListController extends Controller
      */
     public function createTasksList(): void
     {
+        // Get the data from the form
         $title = $_POST['title'];
         $categoryId = (int)$_POST['category'];
         $statusId = 0;
