@@ -1,5 +1,7 @@
 <?php
+
 use apps4net\tasks\libraries\App;
+
 ?>
 
 <!DOCTYPE html>
@@ -44,13 +46,14 @@ use apps4net\tasks\libraries\App;
                 </div>
             </div>
 
-            <form class="mt-5 row">
+            <form id="createListForm" action="createTasksList" method="POST" class="mt-5 row">
                 <div class="col-12 col-lg-6 mt-2 mt-lg-0">
-                    <input type="text" class="form-control" placeholder="Τίτλος Λίστας" aria-label="Τίτλος Λίστας">
+                    <input type="text" class="form-control" placeholder="Τίτλος Λίστας" name="title"
+                           aria-label="Τίτλος Λίστας">
                 </div>
 
                 <div class="col-12 col-lg-3 mt-2 mt-lg-0">
-                    <select class="form-select" aria-label="Κατηγορία">
+                    <select class="form-select" name="category" aria-label="Κατηγορία">
                         <option selected value="1">Κατηγορία 1</option>
                         <option value="2">Κατηγορία 2</option>
                         <option value="3">Κατηγορία 3</option>
@@ -58,7 +61,7 @@ use apps4net\tasks\libraries\App;
                 </div>
 
                 <div class="col-12 col-lg-3 mt-2 mt-lg-0">
-                    <button class="form-control btn btn-primary" type="button">Δημιουργία
+                    <button type="submit" class="form-control btn btn-primary">Δημιουργία
                         Λίστας
                     </button>
                 </div>
@@ -71,3 +74,32 @@ use apps4net\tasks\libraries\App;
 </div>
 </body>
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const createListForm = document.getElementById('createListForm');
+
+        createListForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => {
+                            throw new Error(err.error);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success: ', data);
+                })
+                .catch(error => {
+                    console.error('Error: ', error);
+                });
+        });
+    });
+</script>
