@@ -16,34 +16,26 @@ use apps4net\tasks\libraries\App;
     <section class="mb-5">
         <div class="container text-center">
             <div class="row">
-                <div class="col-lg-6 col-12 mb-3 mb-lg-0">
-                    <div class="card">
-                        <div class="card-header">
-                            <strong>Δημιουργία του site</strong>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <div>Υλοποίηση του frontend</div>
-                                <div>Υλοποίηση του backend</div>
-                                <div>Σύνδεση frontend με backend</div>
+                <?php
+                foreach ($tasksList as $list) {
+                    ?>
+                    <div class="col-lg-6 col-12 mb-3 mt-3 mb-lg-0">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong><?= $list['title'] ?></strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <div>Υλοποίηση του frontend</div>
+                                    <div>Υλοποίηση του backend</div>
+                                    <div>Σύνδεση frontend με backend</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-12 mb-3 mb-lg-0">
-                    <div class="card">
-                        <div class="card-header">
-                            <strong>Συντήρηση του site</strong>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <div>Επιδιόρθωση σφαλμάτων</div>
-                                <div>Προσθήκη νέων λειτουργιών</div>
-                                <div>Ενημέρωση του backend</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <?php
+                }
+                ?>
             </div>
 
             <form id="createListForm" action="api/createTasksList" method="POST" class="mt-5 row">
@@ -104,6 +96,9 @@ use apps4net\tasks\libraries\App;
                 .then(data => {
                     // Do this on success
                     console.log('Success: ', data.data);
+
+                    // refresh page
+                    location.reload();
                 })
                 .catch(error => {
                     // Do this on error

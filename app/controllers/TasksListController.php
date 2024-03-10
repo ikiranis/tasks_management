@@ -13,6 +13,7 @@
 
 namespace apps4net\tasks\controllers;
 
+use apps4net\tasks\libraries\App;
 use apps4net\tasks\services\TasksListService;
 
 class TasksListController extends Controller
@@ -24,6 +25,23 @@ class TasksListController extends Controller
         parent::__construct();
 
         $this->tasksListService = new TasksListService();
+    }
+
+    /**
+     * Display the tasks main view
+     *
+     * @return void
+     */
+    public function index(): void
+    {
+        try {
+            $tasksList = $this->tasksListService->getAll();
+
+            App::view('tasks', ['tasksList' => $tasksList]);
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
     }
 
     /**

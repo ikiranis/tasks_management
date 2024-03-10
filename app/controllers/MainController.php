@@ -46,16 +46,13 @@ class MainController extends Controller
 
     public function login(): void
     {
-       App::view('login');
+        App::view('login');
     }
 
     public function register(): void
     {
-       App::view('register');
+        App::view('register');
     }
 
-    public function tasks(): void
-    {
-       App::view('tasks');
-    }
+
 }

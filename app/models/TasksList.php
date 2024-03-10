@@ -20,20 +20,6 @@ class TasksList
     private int $category;
     private int $status;
 
-    /**
-     * @param int $id
-     * @param string $title
-     * @param int $category
-     * @param int $status
-     */
-    public function __construct(int $id, string $title, int $category, int $status)
-    {
-        $this->id = $id;
-        $this->title = $title;
-        $this->category = $category;
-        $this->status = $status;
-    }
-
     public function getId(): int
     {
         return $this->id;

@@ -48,4 +48,31 @@ class TasksListService
         return $listId;
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function getAll(): false|array
+    {
+        DB::connect();
+
+        $sql = "SELECT * FROM tasks_list";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->execute();
+
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\TasksList');
+
+            $tasksList = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        DB::close();
+
+        error_log(print_r($tasksList, true));
+
+        return $tasksList;
+    }
+
 }
