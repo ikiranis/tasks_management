@@ -46,7 +46,7 @@ use apps4net\tasks\libraries\App;
                 </div>
             </div>
 
-            <form id="createListForm" action="createTasksList" method="POST" class="mt-5 row">
+            <form id="createListForm" action="api/createTasksList" method="POST" class="mt-5 row">
                 <div class="col-12 col-lg-6 mt-2 mt-lg-0">
                     <input type="text" class="form-control" placeholder="Τίτλος Λίστας" name="title"
                            aria-label="Τίτλος Λίστας">
