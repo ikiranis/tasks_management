@@ -77,27 +77,36 @@ use apps4net\tasks\libraries\App;
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        // The form to create a new task list
         const createListForm = document.getElementById('createListForm');
 
+        // On createListForm submit, call the API to create a new task list
         createListForm.addEventListener('submit', function (e) {
+            // Prevent the default form submit
             e.preventDefault();
 
+            // Make the API call
             fetch(this.action, {
                 method: 'POST',
                 body: new FormData(this)
             })
                 .then(response => {
+                    // Get the response and check if it's ok
                     if (!response.ok) {
                         return response.json().then(err => {
                             throw new Error(err.error);
                         });
                     }
+
+                    // Return the success response
                     return response.json();
                 })
                 .then(data => {
+                    // Do this on success
                     console.log('Success: ', data.data);
                 })
                 .catch(error => {
+                    // Do this on error
                     console.error('Error: ', error);
                 });
         });
