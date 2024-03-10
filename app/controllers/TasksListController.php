@@ -56,10 +56,13 @@ class TasksListController extends Controller
         $statusId = 0;
 
         try {
-            $listId = $this->tasksListService->create($title, $categoryId, $statusId);
+            $tasksList = $this->tasksListService->create($title, $categoryId, $statusId);
+
+            // Get the HTML of the tasks list component, to add it to the page
+            $html = App::componentHTML('tasksList', ['list' => $tasksList]);
 
             // Return success json response
-            $this->returnSuccess(['listId' => $listId]);
+            $this->returnSuccess(['tasksList' => $html]);
         } catch (\Exception $e) {
             // Return error message
             $this->returnError(400, $e->getMessage());

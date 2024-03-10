@@ -14,6 +14,7 @@
 namespace apps4net\tasks\services;
 
 use apps4net\tasks\libraries\DB;
+use apps4net\tasks\models\TasksList;
 
 class TasksListService
 {
@@ -23,7 +24,7 @@ class TasksListService
      *
      * @throws \Exception
      */
-    public function create(string $title, int $categoryId, int $statusId): int
+    public function create(string $title, int $categoryId, int $statusId): TasksList
     {
         DB::connect();
 
@@ -38,14 +39,20 @@ class TasksListService
 
             $stmt->execute();
 
-            $listId = DB::$conn->lastInsertId();
+            // Create TasksList object with the new data
+            $tasksList = new TasksList();
+
+            $tasksList->setId(DB::$conn->lastInsertId());
+            $tasksList->setTitle($title);
+            $tasksList->setCategoryId($categoryId);
+            $tasksList->setStatusId($statusId);
         } catch (\PDOException $e) {
             throw new \Exception("Error: " . $e->getMessage());
         }
 
         DB::close();
 
-        return $listId;
+        return $tasksList;
     }
 
     /**
@@ -63,14 +70,12 @@ class TasksListService
 
             $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\TasksList');
 
-            $tasksList = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $tasksList = $stmt->fetchAll();
         } catch (\PDOException $e) {
             throw new \Exception("Error: " . $e->getMessage());
         }
 
         DB::close();
-
-        error_log(print_r($tasksList, true));
 
         return $tasksList;
     }

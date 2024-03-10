@@ -51,6 +51,28 @@ class App
     }
 
     /**
+     * Get the HTML of the selected component
+     *
+     * @param string $component
+     * @param array $data
+     * @return string
+     */
+    public static function componentHTML(string $component, array $data = []): string
+    {
+        // Extract the data to variables and pass them to the component
+        extract($data);
+
+        // Start output buffering
+        ob_start();
+
+        // Include the component file
+        include(__DIR__ . '/../components/' . $component . '.php');
+
+        // Get the contents of the output buffer and clean it.
+        return ob_get_clean();
+    }
+
+    /**
      * Get the current page to display
      *
      * @return string

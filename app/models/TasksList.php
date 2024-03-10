@@ -17,8 +17,8 @@ class TasksList
 {
     private int $id;
     private string $title;
-    private int $category;
-    private int $status;
+    private int $categoryId;
+    private int $statusId;
 
     public function getId(): int
     {
@@ -40,23 +40,23 @@ class TasksList
         $this->title = $title;
     }
 
-    public function getCategory(): int
+    public function getCategoryId(): int
     {
-        return $this->category;
+        return $this->categoryId;
     }
 
-    public function setCategory(int $category): void
+    public function setCategoryId(int $categoryId): void
     {
-        $this->category = $category;
+        $this->categoryId = $categoryId;
     }
 
-    public function getStatus(): int
+    public function getStatusId(): int
     {
-        return $this->status;
+        return $this->statusId;
     }
 
-    public function setStatus(int $status): void
+    public function setStatusId(int $statusId): void
     {
-        $this->status = $status;
+        $this->statusId = $statusId;
     }
 }

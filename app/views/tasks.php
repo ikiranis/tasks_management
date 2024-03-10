@@ -17,23 +17,9 @@ use apps4net\tasks\libraries\App;
         <div class="container text-center">
             <div class="row">
                 <?php
+                // Display the tasks lists components, for every item in array $tasksList
                 foreach ($tasksList as $list) {
-                    ?>
-                    <div class="col-lg-6 col-12 mb-3 mt-3 mb-lg-0">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong><?= $list['title'] ?></strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-text">
-                                    <div>Υλοποίηση του frontend</div>
-                                    <div>Υλοποίηση του backend</div>
-                                    <div>Σύνδεση frontend με backend</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
+                    App::component('tasksList', ['list' => $list]);
                 }
                 ?>
             </div>
@@ -95,10 +81,11 @@ use apps4net\tasks\libraries\App;
                 })
                 .then(data => {
                     // Do this on success
-                    console.log('Success: ', data.data);
+                    // console.log('Success: ', data.data);
 
-                    // refresh page
-                    location.reload();
+                    // Display new tasks list component with the new data, at the top of the page
+                    const tasksList = document.querySelector('.row');
+                    tasksList.insertAdjacentHTML('afterbegin', data.data.tasksList);
                 })
                 .catch(error => {
                     // Do this on error
