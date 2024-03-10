@@ -95,7 +95,7 @@ use apps4net\tasks\libraries\App;
                     return response.json();
                 })
                 .then(data => {
-                    console.log('Success: ', data);
+                    console.log('Success: ', data.data);
                 })
                 .catch(error => {
                     console.error('Error: ', error);

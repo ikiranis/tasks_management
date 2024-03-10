@@ -37,20 +37,15 @@ class TasksListController extends Controller
         $categoryId = (int)$_POST['category'];
         $statusId = 0;
 
-        error_log('title: ' . $title);
-        error_log('category: ' . $categoryId);
-
         try {
             $listId = $this->tasksListService->create($title, $categoryId, $statusId);
-        } catch (\Exception $e) {
-            // Return json response
-            echo json_encode(['message' => $e->getMessage(), 'code' => 400]);
-            return;
-        }
 
-        error_log("its ok " . $listId);
-        // Return json response
-        echo json_encode(['listId' => $listId, 'code' => 200]);
+            // Return success json response
+            $this->returnSuccess(['listId' => $listId]);
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
     }
 
 }
