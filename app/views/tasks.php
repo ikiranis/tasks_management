@@ -85,7 +85,7 @@ use apps4net\tasks\libraries\App;
 
                     // Display new tasks list component with the new data, at the top of the page
                     const tasksList = document.querySelector('.row');
-                    tasksList.insertAdjacentHTML('afterbegin', data.data.tasksList);
+                    tasksList.insertAdjacentHTML('afterbegin', data.data.HTMLComponent);
                 })
                 .catch(error => {
                     // Do this on error

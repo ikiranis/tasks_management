@@ -56,13 +56,14 @@ class TasksListController extends Controller
         $statusId = 0;
 
         try {
+            // Create the new task list in DB
             $tasksList = $this->tasksListService->create($title, $categoryId, $statusId);
 
             // Get the HTML of the tasks list component, to add it to the page, without refreshing
-            $html = App::componentHTML('tasksList', ['list' => $tasksList]);
+            $HTMLComponent = App::componentHTML('tasksList', ['list' => $tasksList]);
 
             // Return success json response
-            $this->returnSuccess(['tasksList' => $html]);
+            $this->returnSuccess(['tasksList' => $tasksList, 'HTMLComponent' => $HTMLComponent]);
         } catch (\Exception $e) {
             // Return error message
             $this->returnError(400, $e->getMessage());
