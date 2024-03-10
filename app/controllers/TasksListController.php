@@ -57,7 +57,7 @@ class TasksListController extends Controller
         $statusId = 0;
 
         try {
-            // Create the new task list in DB
+            // Create the new tasks list in DB
             $tasksList = $this->tasksListService->create($title, $categoryId, $statusId);
 
             // Get the HTML of the tasks list component, to add it to the page, without refreshing
