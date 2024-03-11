@@ -86,7 +86,6 @@ class TasksListController extends Controller
             // Create the new task in DB
             $task = $this->tasksListService->addTask($title, $tasksListId);
 
-            error_log(print_r($task, true));
             // Return success json response
             $this->returnSuccess(['task' => $task]);
         } catch (\Exception $e) {
