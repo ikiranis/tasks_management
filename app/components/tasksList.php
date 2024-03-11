@@ -36,9 +36,20 @@
         </div>
         <div class="card-body">
             <div class="card-text">
-                <div>Υλοποίηση του frontend</div>
-                <div>Υλοποίηση του backend</div>
-                <div>Σύνδεση frontend με backend</div>
+
+                <?php
+                if (count($list->getTasks()) == 0) {
+                    ?>
+                    <div class="text-center emptyTasks">Δεν υπάρχουν εργασίες</div>
+                    <?php
+                }
+
+                foreach ($list->getTasks() as $task) {
+                    ?>
+                    <div><?= $task->getTitle() ?></div>
+                    <?php
+                }
+                ?>
             </div>
         </div>
 

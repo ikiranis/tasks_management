@@ -127,10 +127,17 @@ use apps4net\tasks\libraries\App;
                 .then(data => {
                     // Do this on success
 
-                    // Add new task to the tasks list component
+                    // Add new task to the tasks list
                     const parentCard = taskForm.closest('.card');
                     const cardText = parentCard.querySelector('.card-text');
+                    const emptyTasks = parentCard.querySelector('.emptyTasks');
 
+                    // Remove the empty tasks message
+                    if (emptyTasks) {
+                        emptyTasks.remove();
+                    }
+
+                    // Display the new task
                     cardText.insertAdjacentHTML('beforeend', '<div>' + data.task.title + '</div>')
                 })
                 .catch(error => {

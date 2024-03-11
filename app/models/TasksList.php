@@ -13,6 +13,8 @@
 
 namespace apps4net\tasks\models;
 
+use apps4net\tasks\libraries\DB;
+
 class TasksList
 {
     private int $id;
@@ -58,5 +60,33 @@ class TasksList
     public function setStatusId(int $statusId): void
     {
         $this->statusId = $statusId;
+    }
+
+    /**
+     * Get the tasks for the current list
+     *
+     * @throws \Exception
+     */
+    public function getTasks(): array
+    {
+        // Get the tasks for the current list
+        DB::connect();
+
+        $sql = "SELECT * FROM tasks WHERE tasksListId = :tasksListId";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':tasksListId', $this->id);
+            $stmt->execute();
+
+            // Get the tasks as an array of objects
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\Task');
+
+            $tasks = $stmt->fetchAll();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        return $tasks;
     }
 }
