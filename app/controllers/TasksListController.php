@@ -117,8 +117,6 @@ class TasksListController extends Controller
         // Get the data from the form
         $taskId = (int)$_POST['taskId'];
 
-        error_log($taskId);
-
         try {
             // Delete the task from DB
             $this->tasksListService->deleteTask($taskId);
