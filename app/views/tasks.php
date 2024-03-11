@@ -103,6 +103,12 @@ use apps4net\tasks\libraries\App;
         const taskForm = document.getElementById('taskForm' + id);
         taskForm.classList.remove('d-none');
 
+        // Check if submit event listener has been added
+        // Prevent adding the same event listener multiple times
+        if (taskForm.hasAttribute('data-event-listener-added')) {
+            return
+        }
+
         // On createListForm submit, call the API to create a new task list
         taskForm.addEventListener('submit', function (e) {
             // Prevent the default form submit
@@ -127,6 +133,9 @@ use apps4net\tasks\libraries\App;
                 .then(data => {
                     // Do this on success
 
+                    // Clean form data
+                    this.reset();
+
                     // Add new task to the tasks list
                     const parentCard = taskForm.closest('.card');
                     const cardText = parentCard.querySelector('.card-text');
@@ -147,5 +156,8 @@ use apps4net\tasks\libraries\App;
 
             taskForm.classList.add('d-none');
         });
+
+        // Add a custom attribute to the form to indicate that an event listener has been added
+        taskForm.setAttribute('data-event-listener-added', 'true');
     }
 </script>

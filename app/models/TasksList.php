@@ -72,7 +72,7 @@ class TasksList
         // Get the tasks for the current list
         DB::connect();
 
-        $sql = "SELECT * FROM tasks WHERE tasksListId = :tasksListId";
+        $sql = "SELECT * FROM tasks WHERE tasksListId = :tasksListId ORDER BY title ASC";
 
         try {
             $stmt = DB::$conn->prepare($sql);
@@ -86,6 +86,8 @@ class TasksList
         } catch (\PDOException $e) {
             throw new \Exception("Error: " . $e->getMessage());
         }
+
+        DB::close();
 
         return $tasks;
     }
