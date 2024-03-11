@@ -174,7 +174,7 @@ use apps4net\tasks\libraries\App;
      * @param id
      */
     const deleteTask = (id) => {
-            // Create form data object from json
+            // Create formData object from json
             const formData = new FormData();
             formData.append('taskId', id);
 
