@@ -103,33 +103,41 @@ use apps4net\tasks\libraries\App;
         const taskForm = document.getElementById('taskForm' + id);
         taskForm.classList.remove('d-none');
 
-        // Make the API call
-        fetch('api/addTask', {
-            method: 'POST',
-            body: new FormData(this)
-        })
-            .then(response => {
-                // Get the response and check if it's ok
-                if (!response.ok) {
-                    return response.json().then(err => {
-                        throw new Error(err.error);
-                    });
-                }
+        // On createListForm submit, call the API to create a new task list
+        taskForm.addEventListener('submit', function (e) {
+            // Prevent the default form submit
+            e.preventDefault();
 
-                // Return the success response
-                return response.json();
+            // Make the API call
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this)
             })
-            .then(data => {
-                // Do this on success
-                // console.log('Success: ', data.data);
+                .then(response => {
+                    // Get the response and check if it's ok
+                    if (!response.ok) {
+                        return response.json().then(err => {
+                            throw new Error(err.error);
+                        });
+                    }
 
-                // Display new tasks list component with the new data, at the top of the page
-                const tasksList = document.querySelector('.row');
-                tasksList.insertAdjacentHTML('afterbegin', data.data.HTMLComponent);
-            })
-            .catch(error => {
-                // Do this on error
-                console.error('Error: ', error);
-            });
+                    // Return the success response
+                    return response.json();
+                })
+                .then(data => {
+                    // Do this on success
+                    // console.log('Success: ', data.data);
+
+                    // Display new tasks list component with the new data, at the top of the page
+                    const tasksList = document.querySelector('.row');
+                    tasksList.insertAdjacentHTML('afterbegin', data.data.HTMLComponent);
+                })
+                .catch(error => {
+                    // Do this on error
+                    console.error('Error: ', error);
+                });
+
+            taskForm.classList.add('d-none');
+        });
     }
 </script>

@@ -9,9 +9,10 @@
                       class="bg-light d-none position-absolute form-inline" style="right: 10px;">
                     <div class="input-group">
                         <input type="text" id="title" name="title" class="form-control" placeholder="Τίτλος εργασίας">
+                        <input type="hidden" name="tasksListId" value="<?= $list->getId() ?>">
 
                         <div class="input-group-append">
-                            <button type="submit" class="btn saveButton">
+                            <button type="submit" title="Save task" class="btn saveButton">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="26" fill="green"
                                      class="bi bi-check-circle"
                                      viewBox="0 0 16 16">

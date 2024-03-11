@@ -80,9 +80,10 @@ class TasksListController extends Controller
     {
         // Get the data from the form
         $title = $_POST['title'];
-        $listId = (int)$_POST['listId'];
+        $tasksListId = (int)$_POST['tasksListId'];
 
         error_log($title);
+        error_log($tasksListId);
 
 //        try {
 //            // Create the new task in DB
