@@ -23,6 +23,7 @@ Route::get('logout', [UserController::class, 'logout']);
 
 // APIs
 Route::post('api/createTasksList', [TasksListController::class, 'createTasksList']);
+Route::post('api/addTask', [TasksListController::class, 'addTask']);
 
 // Run the routes
 

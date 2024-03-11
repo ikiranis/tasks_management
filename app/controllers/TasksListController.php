@@ -71,4 +71,32 @@ class TasksListController extends Controller
         }
     }
 
+    /**
+     * Add a task to a list
+     *
+     * @return void
+     */
+    public function addTask(): void
+    {
+        // Get the data from the form
+        $title = $_POST['title'];
+        $listId = (int)$_POST['listId'];
+
+        error_log($title);
+
+//        try {
+//            // Create the new task in DB
+//            $task = $this->tasksListService->addTask($title, $listId);
+//
+//            // Get the HTML of the task component, to add it to the page, without refreshing
+//            $HTMLComponent = App::componentHTML('task', ['task' => $task]);
+//
+//            // Return success json response
+//            $this->returnSuccess(['task' => $task, 'HTMLComponent' => $HTMLComponent]);
+//        } catch (\Exception $e) {
+//            // Return error message
+//            $this->returnError(400, $e->getMessage());
+//        }
+    }
+
 }

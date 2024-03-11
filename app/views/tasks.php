@@ -93,4 +93,43 @@ use apps4net\tasks\libraries\App;
                 });
         });
     });
+
+    /**
+     * Add a task to a list
+     *
+     * @param id
+     */
+    const addTask = (id) => {
+        const taskForm = document.getElementById('taskForm' + id);
+        taskForm.classList.remove('d-none');
+
+        // Make the API call
+        fetch('api/addTask', {
+            method: 'POST',
+            body: new FormData(this)
+        })
+            .then(response => {
+                // Get the response and check if it's ok
+                if (!response.ok) {
+                    return response.json().then(err => {
+                        throw new Error(err.error);
+                    });
+                }
+
+                // Return the success response
+                return response.json();
+            })
+            .then(data => {
+                // Do this on success
+                // console.log('Success: ', data.data);
+
+                // Display new tasks list component with the new data, at the top of the page
+                const tasksList = document.querySelector('.row');
+                tasksList.insertAdjacentHTML('afterbegin', data.data.HTMLComponent);
+            })
+            .catch(error => {
+                // Do this on error
+                console.error('Error: ', error);
+            });
+    }
 </script>
