@@ -44,8 +44,6 @@ class TasksListController extends Controller
             $this->returnError(400, $e->getMessage());
         }
 
-        error_log(print_r($categories, true));
-
         // Get the tasks lists and return them, with the categories
         try {
             $tasksList = $this->tasksListService->getAll();
