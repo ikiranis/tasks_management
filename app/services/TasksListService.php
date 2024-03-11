@@ -118,4 +118,31 @@ class TasksListService
 
         return $task;
     }
+
+    /**
+     * Get the categories for lists
+     *
+     * @throws \Exception
+     */
+    public function getCategories(): array
+    {
+        DB::connect();
+
+        $sql = "SELECT * FROM categories";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->execute();
+
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\Category');
+
+            $categories = $stmt->fetchAll();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        DB::close();
+
+        return $categories;
+    }
 }

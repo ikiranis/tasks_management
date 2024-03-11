@@ -32,9 +32,14 @@ use apps4net\tasks\libraries\App;
 
                 <div class="col-12 col-lg-3 mt-2 mt-lg-0">
                     <select class="form-select" name="category" aria-label="Κατηγορία">
-                        <option selected value="1">Κατηγορία 1</option>
-                        <option value="2">Κατηγορία 2</option>
-                        <option value="3">Κατηγορία 3</option>
+                        <?php
+                        // Display the categories options
+                        foreach ($categories as $category) {
+                            ?>
+                            <option value="<?= $category->getId() ?>"><?= $category->getName() ?></option>
+                            <?php
+                        }
+                        ?>
                     </select>
                 </div>
 

@@ -34,10 +34,23 @@ class TasksListController extends Controller
      */
     public function index(): void
     {
+        $categories = [];
+
+        // Get the categories for lists
+        try {
+            $categories = $this->tasksListService->getCategories();
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+
+        error_log(print_r($categories, true));
+
+        // Get the tasks lists and return them, with the categories
         try {
             $tasksList = $this->tasksListService->getAll();
 
-            App::view('tasks', ['tasksList' => $tasksList]);
+            App::view('tasks', ['tasksList' => $tasksList, 'categories' => $categories]);
         } catch (\Exception $e) {
             // Return error message
             $this->returnError(400, $e->getMessage());
@@ -93,5 +106,4 @@ class TasksListController extends Controller
             $this->returnError(400, $e->getMessage());
         }
     }
-
 }
