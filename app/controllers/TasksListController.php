@@ -106,4 +106,28 @@ class TasksListController extends Controller
             $this->returnError(400, $e->getMessage());
         }
     }
+
+    /**
+     * Delete a task
+     *
+     * @return void
+     */
+    public function deleteTask(): void
+    {
+        // Get the data from the form
+        $taskId = (int)$_POST['taskId'];
+
+        error_log($taskId);
+
+        try {
+            // Delete the task from DB
+            $this->tasksListService->deleteTask($taskId);
+
+            // Return success json response
+            $this->returnSuccess(['taskId' => $taskId]);
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+    }
 }

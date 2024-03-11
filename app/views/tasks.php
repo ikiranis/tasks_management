@@ -167,4 +167,43 @@ use apps4net\tasks\libraries\App;
         // Add a custom attribute to the form to indicate that an event listener has been added
         taskForm.setAttribute('data-event-listener-added', 'true');
     }
+
+    /**
+     * Delete a task
+     *
+     * @param id
+     */
+    const deleteTask = (id) => {
+            // Create form data object from json
+            const formData = new FormData();
+            formData.append('taskId', id);
+
+            // Make the API call
+            fetch('api/deleteTask', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    // Get the response and check if it's ok
+                    if (!response.ok) {
+                        return response.json().then(err => {
+                            throw new Error(err.error);
+                        });
+                    }
+
+                    // Return the success response
+                    return response.json();
+                })
+                .then(data => {
+                    // Do this on success
+
+                    // Remove the task from the tasks list
+                    const task = document.getElementById('task' + id);
+                    task.remove();
+                })
+                .catch(error => {
+                    // Do this on error
+                    console.error('Error: ', error);
+                });
+    }
 </script>
