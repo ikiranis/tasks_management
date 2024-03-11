@@ -100,7 +100,9 @@ use apps4net\tasks\libraries\App;
      * @param id
      */
     const addTask = (id) => {
+        // Get the form to add a new task. Every form has a unique id, based on tasksListId
         const taskForm = document.getElementById('taskForm' + id);
+        // Remove the d-none class to display the form
         taskForm.classList.remove('d-none');
 
         // Check if submit event listener has been added
