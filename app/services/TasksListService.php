@@ -14,6 +14,7 @@
 namespace apps4net\tasks\services;
 
 use apps4net\tasks\libraries\DB;
+use apps4net\tasks\models\Task;
 use apps4net\tasks\models\TasksList;
 
 class TasksListService
@@ -80,4 +81,41 @@ class TasksListService
         return $tasksList;
     }
 
+    /**
+     * Add a task to a list
+     *
+     * @param string $title
+     * @param int $tasksListId
+     * @return Task
+     *
+     * @throws \Exception
+     */
+    public function addTask(string $title, int $tasksListId): Task
+    {
+        error_log("here");
+        DB::connect();
+
+        $sql = "INSERT INTO tasks (title, tasksListId) VALUES (:title, :tasksListId)";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':tasksListId', $tasksListId);
+
+            $stmt->execute();
+
+            // Create Task object with the new data
+            $task = new Task();
+
+            $task->setId(DB::$conn->lastInsertId());
+            $task->setTitle($title);
+            $task->setTasksListId($tasksListId);
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        DB::close();
+
+        return $task;
+    }
 }

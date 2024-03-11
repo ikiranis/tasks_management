@@ -82,22 +82,17 @@ class TasksListController extends Controller
         $title = $_POST['title'];
         $tasksListId = (int)$_POST['tasksListId'];
 
-        error_log($title);
-        error_log($tasksListId);
+        try {
+            // Create the new task in DB
+            $task = $this->tasksListService->addTask($title, $tasksListId);
 
-//        try {
-//            // Create the new task in DB
-//            $task = $this->tasksListService->addTask($title, $listId);
-//
-//            // Get the HTML of the task component, to add it to the page, without refreshing
-//            $HTMLComponent = App::componentHTML('task', ['task' => $task]);
-//
-//            // Return success json response
-//            $this->returnSuccess(['task' => $task, 'HTMLComponent' => $HTMLComponent]);
-//        } catch (\Exception $e) {
-//            // Return error message
-//            $this->returnError(400, $e->getMessage());
-//        }
+            error_log(print_r($task, true));
+            // Return success json response
+            $this->returnSuccess(['task' => $task]);
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
     }
 
 }

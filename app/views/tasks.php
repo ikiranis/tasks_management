@@ -85,7 +85,7 @@ use apps4net\tasks\libraries\App;
 
                     // Display new tasks list component with the new data, at the top of the page
                     const tasksList = document.querySelector('.row');
-                    tasksList.insertAdjacentHTML('afterbegin', data.data.HTMLComponent);
+                    tasksList.insertAdjacentHTML('afterbegin', data.HTMLComponent);
                 })
                 .catch(error => {
                     // Do this on error
@@ -126,11 +126,12 @@ use apps4net\tasks\libraries\App;
                 })
                 .then(data => {
                     // Do this on success
-                    // console.log('Success: ', data.data);
 
-                    // Display new tasks list component with the new data, at the top of the page
-                    const tasksList = document.querySelector('.row');
-                    tasksList.insertAdjacentHTML('afterbegin', data.data.HTMLComponent);
+                    // Add new task to the tasks list component
+                    const parentCard = taskForm.closest('.card');
+                    const cardText = parentCard.querySelector('.card-text');
+
+                    cardText.insertAdjacentHTML('beforeend', '<div>' + data.task.title + '</div>')
                 })
                 .catch(error => {
                     // Do this on error

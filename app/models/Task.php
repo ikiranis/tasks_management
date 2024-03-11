@@ -13,20 +13,13 @@
 
 namespace apps4net\tasks\models;
 
-class Task
+use JsonSerializable;
+
+class Task implements JsonSerializable
 {
     private int $id;
     private string $title;
-
-    /**
-     * @param int $id
-     * @param string $title
-     */
-    public function __construct(int $id, string $title)
-    {
-        $this->id = $id;
-        $this->title = $title;
-    }
+    private int $tasksListId;
 
     public function getId(): int
     {
@@ -46,5 +39,28 @@ class Task
     public function setTitle(string $title): void
     {
         $this->title = $title;
+    }
+
+    public function getTasksListId(): int
+    {
+        return $this->tasksListId;
+    }
+
+    public function setTasksListId(int $tasksListId): void
+    {
+        $this->tasksListId = $tasksListId;
+    }
+
+    /**
+     * Return json representation of the object
+     *
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title
+        ];
     }
 }
