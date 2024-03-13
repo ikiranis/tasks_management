@@ -4,7 +4,9 @@ use apps4net\tasks\libraries\App;
 
 ?>
 
+
 <div id="tasksList<?= $list->getId() ?>" class="col-lg-6 col-12 mb-3 mt-3 mb-lg-0">
+
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <div class="my-auto">
@@ -12,7 +14,6 @@ use apps4net\tasks\libraries\App;
             </div>
             <div class="my-auto">
                 <?php App::component('taskForm', ['list' => $list]); ?>
-                <?php App::component('editListForm', ['list' => $list, 'categories' => $categories]); ?>
 
                 <a class="btn" title="Επεξεργασία Λίστας" onclick="editTasksList(<?= $list->getId() ?>)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -39,6 +40,8 @@ use apps4net\tasks\libraries\App;
         </div>
         <div class="card-body">
             <div class="card-text">
+
+                <?php App::component('editListForm', ['list' => $list, 'categories' => $categories]); ?>
 
                 <?php
                 if (count($list->getTasks()) == 0) {
