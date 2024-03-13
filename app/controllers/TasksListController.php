@@ -97,8 +97,11 @@ class TasksListController extends Controller
             // Create the new task in DB
             $task = $this->tasksListService->addTask($title, $tasksListId);
 
+             // Get the HTML of the task component, to add it to the page, without refreshing
+            $HTMLComponent = App::componentHTML('task', ['task' => $task]);
+
             // Return success json response
-            $this->returnSuccess(['task' => $task]);
+            $this->returnSuccess(['task' => $task, 'HTMLComponent' => $HTMLComponent]);
         } catch (\Exception $e) {
             // Return error message
             $this->returnError(400, $e->getMessage());

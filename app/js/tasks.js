@@ -55,7 +55,7 @@ const addTask = (id) => {
         return
     }
 
-    // On createListForm submit, call the API to create a new task list
+    // On taskForm submit, call the API to create a new task list
     taskForm.addEventListener('submit', function (e) {
         // Prevent the default form submit
         e.preventDefault();
@@ -93,7 +93,7 @@ const addTask = (id) => {
                 }
 
                 // Display the new task
-                cardText.insertAdjacentHTML('beforeend', '<div>' + data.task.title + '</div>')
+                cardText.insertAdjacentHTML('beforeend', data.HTMLComponent);
             })
             .catch(error => {
                 // Do this on error
