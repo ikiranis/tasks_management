@@ -87,7 +87,7 @@ const addTask = (id) => {
                 const cardText = parentCard.querySelector('.card-text');
                 const emptyTasks = parentCard.querySelector('.emptyTasks');
 
-                // Remove the empty tasks message
+                // Remove the empty list message, if it exists
                 if (emptyTasks) {
                     emptyTasks.remove();
                 }

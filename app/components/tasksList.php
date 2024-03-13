@@ -46,7 +46,7 @@ use apps4net\tasks\libraries\App;
                 <?php
                 if (count($list->getTasks()) == 0) {
                     ?>
-                    <div class="text-center emptyTasks">Δεν υπάρχουν εργασίες</div>
+                    <div class="text-center emptyList">Δεν υπάρχουν εργασίες</div>
                     <?php
                 }
 
