@@ -25,6 +25,7 @@ Route::get('logout', [UserController::class, 'logout']);
 Route::post('api/createTasksList', [TasksListController::class, 'createTasksList']);
 Route::post('api/addTask', [TasksListController::class, 'addTask']);
 Route::post('api/deleteTask', [TasksListController::class, 'deleteTask']);
+Route::post('api/deleteTasksList', [TasksListController::class, 'deleteTasksList']);
 
 // Run the routes
 

@@ -167,4 +167,26 @@ class TasksListService
 
         DB::close();
     }
+
+    /**
+     * Delete a tasks list
+     *
+     * @throws \Exception
+     */
+    public function deleteTasksList(int $tasksListId): void
+    {
+        DB::connect();
+
+        $sql = "DELETE FROM tasks_list WHERE id = :tasksListId";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':tasksListId', $tasksListId);
+            $stmt->execute();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        DB::close();
+    }
 }

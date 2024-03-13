@@ -145,3 +145,86 @@ const deleteTask = (id) => {
             console.error('Error: ', error);
         });
 }
+
+/**
+ * Delete a tasks list
+ *
+ * @param id
+ */
+const deleteTasksList = (id) => {
+    // display alert to delete
+    if (!confirm('Είσαι σίγουρος ότι θέλεις να σβήσεις αυτή την λίστα;')) {
+        return;
+    }
+
+    // Create formData object from json
+    const formData = new FormData();
+    formData.append('tasksListId', id);
+
+    // Make the API call
+    fetch('api/deleteTasksList', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            // Get the response and check if it's ok
+            if (!response.ok) {
+                return response.json().then(err => {
+                    throw new Error(err.error);
+                });
+            }
+
+            // Return the success response
+            return response.json();
+        })
+        .then(data => {
+            // Do this on success
+
+            // Remove the task from the tasks list
+            const tasksList = document.getElementById('tasksList' + id);
+            tasksList.remove();
+        })
+        .catch(error => {
+            // Do this on error
+            console.error('Error: ', error);
+        });
+}
+
+/**
+ * Edit a tasks list
+ *
+ * @param id
+ */
+const editTasksList = (id) => {
+    // Create formData object from json
+    const formData = new FormData();
+    formData.append('taskId', id);
+
+    // Make the API call
+    fetch('api/deleteTask', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            // Get the response and check if it's ok
+            if (!response.ok) {
+                return response.json().then(err => {
+                    throw new Error(err.error);
+                });
+            }
+
+            // Return the success response
+            return response.json();
+        })
+        .then(data => {
+            // Do this on success
+
+            // Remove the task from the tasks list
+            const task = document.getElementById('task' + id);
+            task.remove();
+        })
+        .catch(error => {
+            // Do this on error
+            console.error('Error: ', error);
+        });
+}
