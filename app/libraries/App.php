@@ -89,4 +89,15 @@ class App
 
         return $page;
     }
+
+    /**
+     * Add the selected script to page
+     *
+     * @param string $script
+     * @return void
+     */
+    public static function script(string $script): void
+    {
+        echo "<script src=" . "app/js/" . $script . ".js></script>";
+    }
 }
