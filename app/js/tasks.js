@@ -196,35 +196,51 @@ const deleteTasksList = (id) => {
  * @param id
  */
 const editTasksList = (id) => {
-    // Create formData object from json
-    const formData = new FormData();
-    formData.append('taskId', id);
+    // Get the form to add a new task. Every form has a unique id, based on tasksListId
+    const editListForm = document.getElementById('editListForm' + id);
+    // Remove the d-none class to display the form
+    editListForm.classList.remove('d-none');
 
-    // Make the API call
-    fetch('api/deleteTask', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => {
-            // Get the response and check if it's ok
-            if (!response.ok) {
-                return response.json().then(err => {
-                    throw new Error(err.error);
-                });
-            }
+    // Check if submit event listener has been added
+    // Prevent adding the same event listener multiple times
+    if (editListForm.hasAttribute('data-event-listener-added')) {
+        return
+    }
 
-            // Return the success response
-            return response.json();
+    // On editListForm submit, call the API to create a new task list
+    editListForm.addEventListener('submit', function (e) {
+        // Prevent the default form submit
+        e.preventDefault();
+
+        // Make the API call
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this)
         })
-        .then(data => {
-            // Do this on success
+            .then(response => {
+                // Get the response and check if it's ok
+                if (!response.ok) {
+                    return response.json().then(err => {
+                        throw new Error(err.error);
+                    });
+                }
 
-            // Remove the task from the tasks list
-            const task = document.getElementById('task' + id);
-            task.remove();
-        })
-        .catch(error => {
-            // Do this on error
-            console.error('Error: ', error);
-        });
+                // Return the success response
+                return response.json();
+            })
+            .then(data => {
+                // Do this on success
+
+                // Replace the tasks list component with the new data
+                const tasksList = document.getElementById('tasksList' + id);
+                tasksList.outerHTML = data.HTMLComponent;
+            })
+            .catch(error => {
+                // Do this on error
+                console.error('Error: ', error);
+            });
+    });
+
+    // Add a custom attribute to the form to indicate that an event listener has been added
+    editListForm.setAttribute('data-event-listener-added', 'true');
 }

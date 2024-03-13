@@ -23,6 +23,7 @@ Route::get('logout', [UserController::class, 'logout']);
 
 // APIs
 Route::post('api/createTasksList', [TasksListController::class, 'createTasksList']);
+Route::post('api/updateTasksList', [TasksListController::class, 'updateTasksList']);
 Route::post('api/addTask', [TasksListController::class, 'addTask']);
 Route::post('api/deleteTask', [TasksListController::class, 'deleteTask']);
 Route::post('api/deleteTasksList', [TasksListController::class, 'deleteTasksList']);

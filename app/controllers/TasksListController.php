@@ -83,6 +83,44 @@ class TasksListController extends Controller
     }
 
     /**
+     * Update a tasks list
+     *
+     * @return void
+     */
+    public function updateTasksList(): void
+    {
+        // Get the data from the form
+        $tasksListId = (int)$_POST['tasksListId'];
+        $title = $_POST['title'];
+        $categoryId = (int)$_POST['category'];
+        $statusId = 0;
+
+        try {
+            // Update the tasks list in DB
+            $tasksList = $this->tasksListService->updateTasksList($tasksListId, $title, $categoryId, $statusId);
+
+            $categories = [];
+
+            // Get the categories for lists
+            try {
+                $categories = $this->tasksListService->getCategories();
+            } catch (\Exception $e) {
+                // Return error message
+                $this->returnError(400, $e->getMessage());
+            }
+
+            // Get the HTML of the tasks list component, to update it to the page, without refreshing
+            $HTMLComponent = App::componentHTML('tasksList', ['list' => $tasksList, 'categories' => $categories]);
+
+            // Return success json response
+            $this->returnSuccess(['tasksList' => $tasksList, 'HTMLComponent' => $HTMLComponent]);
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+    }
+
+    /**
      * Add a task to a list
      *
      * @return void

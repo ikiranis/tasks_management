@@ -12,7 +12,7 @@ use apps4net\tasks\libraries\App;
             </div>
             <div class="my-auto">
                 <?php App::component('taskForm', ['list' => $list]); ?>
-                <?php App::component('editListForm', ['list' => $list]); ?>
+                <?php App::component('editListForm', ['list' => $list, 'categories' => $categories]); ?>
 
                 <a class="btn" title="Επεξεργασία Λίστας" onclick="editTasksList(<?= $list->getId() ?>)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

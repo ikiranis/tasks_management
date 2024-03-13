@@ -57,6 +57,49 @@ class TasksListService
     }
 
     /**
+     * Update a task list
+     *
+     * @param int $tasksListId
+     * @param string $title
+     * @param int $categoryId
+     * @param int $statusId
+     * @return TasksList
+     *
+     * @throws \Exception
+     */
+    public function updateTasksList(int $tasksListId, string $title, int $categoryId, int $statusId): TasksList
+    {
+        DB::connect();
+
+        // Update the task list
+        $sql = "UPDATE tasks_list SET title = :title, categoryId = :categoryId, statusId = :statusId WHERE id = :tasksListId";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':categoryId', $categoryId);
+            $stmt->bindParam(':statusId', $statusId);
+            $stmt->bindParam(':tasksListId', $tasksListId);
+
+            $stmt->execute();
+
+            // Create TasksList object with the new data
+            $tasksList = new TasksList();
+
+            $tasksList->setId($tasksListId);
+            $tasksList->setTitle($title);
+            $tasksList->setCategoryId($categoryId);
+            $tasksList->setStatusId($statusId);
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        DB::close();
+
+        return $tasksList;
+    }
+
+    /**
      * @throws \Exception
      */
     public function getAll(): false|array
