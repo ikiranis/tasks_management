@@ -4,13 +4,17 @@ use apps4net\tasks\libraries\App;
 
 ?>
 
-
 <div id="tasksList<?= $list->getId() ?>" class="col-lg-6 col-12 mb-3 mt-3 mb-lg-0">
 
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <div class="my-auto">
-                <strong><?= $list->getTitle() ?></strong>
+               <div>
+                   <strong><?= $list->getTitle() ?></strong> (<?= $list->getStatusName() ?>)
+               </div>
+                <div>
+                    <small><?= $list->getCategoryName() ?></small>
+                </div>
             </div>
             <div class="my-auto">
                 <?php App::component('taskForm', ['list' => $list]); ?>

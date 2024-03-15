@@ -63,6 +63,62 @@ class TasksList
     }
 
     /**
+     * Get the category name for the current list
+     *
+     * @throws \Exception
+     */
+    public function getCategoryName(): string
+    {
+        DB::connect();
+
+        $sql = "SELECT * FROM categories WHERE id = :categoryId";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':categoryId', $this->categoryId);
+            $stmt->execute();
+
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\Category');
+
+            $category = $stmt->fetch();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        DB::close();
+
+        return $category->getName();
+    }
+
+    /**
+     * Get the status name for the current list
+     *
+     * @throws \Exception
+     */
+    public function getStatusName(): string
+    {
+        DB::connect();
+
+        $sql = "SELECT * FROM statuses WHERE id = :statusId";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':statusId', $this->statusId);
+            $stmt->execute();
+
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\Status');
+
+            $status = $stmt->fetch();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        DB::close();
+
+        return $status->getName();
+    }
+
+    /**
      * Get the tasks for the current list
      *
      * @throws \Exception
