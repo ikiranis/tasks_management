@@ -9,9 +9,9 @@ use apps4net\tasks\libraries\App;
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <div class="my-auto">
-               <div>
-                   <strong><?= $list->getTitle() ?></strong> (<?= $list->getStatusName() ?>)
-               </div>
+                <div>
+                    <strong><?= $list->getTitle() ?></strong> (<?= $list->getStatusName() ?>)
+                </div>
                 <div>
                     <small><?= $list->getCategoryName() ?></small>
                 </div>
@@ -45,7 +45,11 @@ use apps4net\tasks\libraries\App;
         <div class="card-body">
             <div class="card-text">
 
-                <?php App::component('editListForm', ['list' => $list, 'categories' => $categories]); ?>
+                <?php App::component('editListForm', [
+                    'list' => $list,
+                    'categories' => $categories,
+                    'statuses' => $statuses
+                ]); ?>
 
                 <?php
                 if (count($list->getTasks()) == 0) {

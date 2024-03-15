@@ -135,7 +135,6 @@ class TasksListService
      */
     public function addTask(string $title, int $tasksListId): Task
     {
-        error_log("here");
         DB::connect();
 
         $sql = "INSERT INTO tasks (title, tasksListId) VALUES (:title, :tasksListId)";
@@ -187,6 +186,34 @@ class TasksListService
         DB::close();
 
         return $categories;
+    }
+
+    /**
+     * Get the statuses for lists
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function getStatuses(): array
+    {
+        DB::connect();
+
+        $sql = "SELECT * FROM statuses";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->execute();
+
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\Status');
+
+            $statuses = $stmt->fetchAll();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        DB::close();
+
+        return $statuses;
     }
 
     /**

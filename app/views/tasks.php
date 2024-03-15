@@ -19,7 +19,11 @@ use apps4net\tasks\libraries\App;
                 <?php
                 // Display the tasks lists components, for every item in array $tasksList
                 foreach ($tasksList as $list) {
-                    App::component('tasksList', ['list' => $list, 'categories' => $categories]);
+                    App::component('tasksList', [
+                        'list' => $list,
+                        'categories' => $categories,
+                        'statuses' => $statuses
+                    ]);
                 }
                 ?>
             </div>

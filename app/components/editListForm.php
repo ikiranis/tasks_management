@@ -13,8 +13,22 @@
             // Display the categories options
             foreach ($categories as $category) {
                 ?>
-                <option value="<?= $category->getId() ?>" <?= $category->getId() === $list->getCategoryId() ? 'selected' : '' ?>>
+                <option value="<?= $category->getId() ?>" <?= $category->getId() == $list->getCategoryId() ? 'selected' : '' ?>>
                     <?= $category->getName() ?></option>
+                <?php
+            }
+            ?>
+        </select>
+    </div>
+
+    <div class="col-12 mt-2">
+        <select class="form-select" name="status" aria-label="Κατάσταση">
+            <?php
+            // Display the statuses options
+            foreach ($statuses as $status) {
+                ?>
+                <option value="<?= $status->getId() ?>" <?= $status->getId() == $list->getStatusId() ? 'selected' : '' ?>>
+                    <?= $status->getName() ?> </option>
                 <?php
             }
             ?>
