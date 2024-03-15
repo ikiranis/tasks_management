@@ -106,7 +106,7 @@ class TasksListService
     {
         DB::connect();
 
-        $sql = "SELECT * FROM tasks_list";
+        $sql = "SELECT * FROM tasks_list order by statusId asc";
 
         try {
             $stmt = DB::$conn->prepare($sql);

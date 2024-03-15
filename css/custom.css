@@ -8,3 +8,11 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.card {
+    z-index: 5;
+}
+
+.listForm {
+    z-index: 10;
+}

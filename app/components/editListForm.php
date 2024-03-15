@@ -1,5 +1,5 @@
 <form id="editListForm<?= $list->getId() ?>" action="api/updateTasksList" method="post"
-      class="bg-light d-none position-fixed border border-secondary p-2">
+      class="listForm bg-light d-none position-fixed mt-3 mx-3 border border-secondary p-2">
     <div class="col-12 mt-2">
         <input type="text" class="form-control" placeholder="Τίτλος Λίστας" name="title" value="<?= $list->getTitle() ?>"
                aria-label="Τίτλος Λίστας">
