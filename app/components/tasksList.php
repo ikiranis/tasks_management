@@ -4,7 +4,7 @@ use apps4net\tasks\libraries\App;
 
 ?>
 
-<div id="tasksList<?= $list->getId() ?>" class="col-lg-6 col-12 mb-3 mt-3 mb-lg-0">
+<div id="tasksList<?= $list->getId() ?>" class="tasksList col-lg-6 col-12 mb-3 mt-3 mb-lg-0">
 
     <?php App::component('editListForm', [
         'list' => $list,
@@ -16,7 +16,8 @@ use apps4net\tasks\libraries\App;
         <div class="card-header d-flex justify-content-between text-start">
             <div class="my-auto">
                 <div>
-                    <strong><?= $list->getTitle() ?></strong> (<?= $list->getStatusName() ?>)
+                    <span><strong><?= $list->getTitle() ?></strong></span> <span><?= $list->getStatusName() ?>)</span>
+                    <input type="hidden" value="<?= $list->getStatusId() ?>" class="status" id="statusId<?= $list->getId() ?>">
                 </div>
                 <div>
                     <small><?= $list->getCategoryName() ?></small>

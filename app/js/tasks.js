@@ -234,6 +234,9 @@ const editTasksList = (id) => {
                 // Replace the tasks list component with the new data
                 const tasksList = document.getElementById('tasksList' + id);
                 tasksList.outerHTML = data.HTMLComponent;
+
+                // Sort tasks lists by status
+                sortTasksLists()
             })
             .catch(error => {
                 // Do this on error
@@ -244,3 +247,32 @@ const editTasksList = (id) => {
     // Add a custom attribute to the form to indicate that an event listener has been added
     editListForm.setAttribute('data-event-listener-added', 'true');
 }
+
+/**
+ * Sort tasks lists by status
+ */
+const sortTasksLists = () => {
+    // Get the tasks lists elements in array
+    const tasksLists = Array.from(document.querySelectorAll('.tasksList'));
+
+    // Sort the tasks lists by input value on the element with class "status"
+    tasksLists.sort((a, b) => {
+        const aStatus = a.querySelector('.status').value;
+        const bStatus = b.querySelector('.status').value;
+
+        return aStatus - bStatus;
+    });
+
+    // Display again the tasks lists in the correct order
+
+    // Get the tasksListsContainer
+    const tasksListsContainer = document.querySelector('.tasksListsContainer');
+
+    // Delete the current html content
+    tasksListsContainer.innerHTML = '';
+
+    // Display the tasks lists inside the container
+    tasksLists.forEach(tasksList => {
+        tasksListsContainer.appendChild(tasksList);
+    });
+ }
