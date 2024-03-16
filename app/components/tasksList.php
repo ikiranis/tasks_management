@@ -16,8 +16,10 @@ use apps4net\tasks\libraries\App;
         <div class="card-header d-flex justify-content-between text-start">
             <div class="my-auto">
                 <div>
-                    <span><strong><?= $list->getTitle() ?></strong></span> <span><?= $list->getStatusName() ?>)</span>
-                    <input type="hidden" value="<?= $list->getStatusId() ?>" class="status" id="statusId<?= $list->getId() ?>">
+                    <span><strong><?= $list->getTitle() ?></strong> <?= $list->getStatusName() ?>)</span>
+
+                    <!-- Set statusId value, to use in sort tasks lists -->
+                    <input type="hidden" value="<?= $list->getStatusId() ?>" class="status" id="status<?= $list->getId() ?>">
                 </div>
                 <div>
                     <small><?= $list->getCategoryName() ?></small>
