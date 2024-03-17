@@ -40,6 +40,6 @@ use apps4net\tasks\libraries\App;
 </html>
 
 <?php
-// Add the script for the teams page
+// Add external JavaScript file (teams.js) to page
 App::script('teams');
 ?>
