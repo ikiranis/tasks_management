@@ -28,6 +28,26 @@ class TeamsController extends Controller
     }
 
     /**
+     * Display the teams main view
+     *
+     * @return void
+     */
+    public function index(): void
+    {
+        // Get the teams and return them
+        try {
+            $teams = $this->teamsService->getAll();
+
+            App::view('teams', [
+                'teams' => $teams
+            ]);
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+    }
+
+    /**
      * Create a new team
      *
      * @return void
@@ -49,4 +69,5 @@ class TeamsController extends Controller
             $this->returnError(400, $e->getMessage());
         }
     }
+
 }

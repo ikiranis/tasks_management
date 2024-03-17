@@ -12,7 +12,7 @@ use apps4net\tasks\controllers\MainController;
 
 // Main views
 Route::get('', [MainController::class, 'index']);
-Route::get('teams', [MainController::class, 'teams']);
+Route::get('teams', [TeamsController::class, 'index']);
 Route::get('login', [MainController::class, 'login']);
 Route::get('register', [MainController::class, 'register']);
 Route::get('tasks', [TasksListController::class, 'index']);

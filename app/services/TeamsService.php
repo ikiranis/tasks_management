@@ -18,8 +18,35 @@ use apps4net\tasks\models\Team;
 
 class TeamsService
 {
+    /**
+     * Get all teams
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function getAll(): array
+    {
+        DB::connect();
+
+        $sql = "SELECT * FROM teams";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->execute();
+
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\Team');
+
+            $teams = $stmt->fetchAll();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        return $teams;
+    }
 
     /**
+     * Create a new team
+     *
      * @throws \Exception
      */
     public function createTeam($name): Team

@@ -1,5 +1,7 @@
 <?php
+
 use apps4net\tasks\libraries\App;
+
 ?>
 
 <!DOCTYPE html>
@@ -14,12 +16,19 @@ use apps4net\tasks\libraries\App;
     <section class="mb-5">
         <div class="container text-center">
             <div class="row">
-                <?php App::component('team'); ?>
-                <?php App::component('team'); ?>
+                <?php
+                // Display the team components, for every item in array $teams
+                foreach ($teams as $team) {
+                    App::component('team', [
+                        'team' => $team
+                    ]);
+                }
+                ?>
             </div>
 
             <div class="row my-5">
-                <form id="createTeamForm" action="api/createTeam" method="POST" class="input-group mt-3 w-75 mx-auto row">
+                <form id="createTeamForm" action="api/createTeam" method="POST"
+                      class="input-group mt-3 w-75 mx-auto row">
                     <div class="col-12 col-lg-8 mt-2 mt-lg-0">
                         <input type="text" class="form-control mx-1" name="name" placeholder="Όνομα Ομάδας"
                                aria-label="Όνομα Ομάδας">
