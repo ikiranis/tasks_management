@@ -3,6 +3,7 @@
 namespace apps4net\tasks\routes;
 
 use apps4net\tasks\controllers\TasksListController;
+use apps4net\tasks\controllers\TeamsController;
 use apps4net\tasks\controllers\UserController;
 use apps4net\tasks\libraries\Route;
 use apps4net\tasks\controllers\MainController;
@@ -27,6 +28,7 @@ Route::post('api/updateTasksList', [TasksListController::class, 'updateTasksList
 Route::post('api/addTask', [TasksListController::class, 'addTask']);
 Route::post('api/deleteTask', [TasksListController::class, 'deleteTask']);
 Route::post('api/deleteTasksList', [TasksListController::class, 'deleteTasksList']);
+Route::post('api/createTeam', [TeamsController::class, 'createTeam']);
 
 // Run the routes
 

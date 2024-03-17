@@ -16,17 +16,7 @@ namespace apps4net\tasks\models;
 class Team
 {
     private int $id;
-    private string $title;
-
-    /**
-     * @param int $id
-     * @param string $title
-     */
-    public function __construct(int $id, string $title)
-    {
-        $this->id = $id;
-        $this->title = $title;
-    }
+    private string $name;
 
     public function getId(): int
     {
@@ -38,13 +28,13 @@ class Team
         $this->id = $id;
     }
 
-    public function getTitle(): string
+    public function getName(): string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): void
+    public function setName(string $name): void
     {
-        $this->title = $title;
+        $this->name = $name;
     }
 }
