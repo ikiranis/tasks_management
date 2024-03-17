@@ -54,8 +54,6 @@ use apps4net\tasks\libraries\App;
         <div class="card-body">
             <div class="card-text">
 
-
-
                 <?php
                 if (count($list->getTasks()) == 0) {
                     ?>

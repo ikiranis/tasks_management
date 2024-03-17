@@ -14,17 +14,21 @@
 namespace apps4net\tasks\controllers;
 
 use apps4net\tasks\libraries\App;
+use apps4net\tasks\models\User;
 use apps4net\tasks\services\TeamsService;
+use apps4net\tasks\services\UserService;
 
 class TeamsController extends Controller
 {
     private TeamsService $teamsService;
+    private UserService $userService;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->teamsService = new TeamsService();
+        $this->userService = new UserService();
     }
 
     /**
@@ -34,12 +38,23 @@ class TeamsController extends Controller
      */
     public function index(): void
     {
+        $users = [];
+
+        // Get all the users
+        try {
+            $users = $this->userService->getAll();
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+
         // Get the teams and return them
         try {
             $teams = $this->teamsService->getAll();
 
             App::view('teams', [
-                'teams' => $teams
+                'teams' => $teams,
+                'users' => $users
             ]);
         } catch (\Exception $e) {
             // Return error message
@@ -70,4 +85,27 @@ class TeamsController extends Controller
         }
     }
 
+    /**
+     * Add a user to a team
+     *
+     * @return void
+     */
+    public function addUserToTeam(): void
+    {
+        // TODO check if user is not already in the team
+        $teamId = (int)$_POST['team'];
+        $userId = (int)$_POST['user'];
+
+        try {
+            $user = $this->teamsService->addUserToTeam($teamId, $userId);
+
+            $HTMLComponent = App::componentHTML('user', ['user' => $user]);
+
+            // Return success json response
+            $this->returnSuccess(['user' => $user, 'HTMLComponent' => $HTMLComponent]);
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+    }
 }

@@ -15,6 +15,7 @@ namespace apps4net\tasks\services;
 
 use apps4net\tasks\libraries\DB;
 use apps4net\tasks\models\Team;
+use apps4net\tasks\models\User;
 
 class TeamsService
 {
@@ -72,5 +73,40 @@ class TeamsService
         }
 
         return $team;
+    }
+
+    /**
+     * Add a user to a team
+     *
+     * @param int $teamId
+     * @param int $userId
+     * @throws \Exception
+     */
+    public function addUserToTeam(int $teamId, int $userId): User
+    {
+        DB::connect();
+
+        // Add the user to the team
+        $sql = "INSERT INTO team_users (teamId, userId) VALUES (:teamId, :userId)";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':teamId', $teamId);
+            $stmt->bindParam(':userId', $userId);
+
+            $stmt->execute();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        // Get the user data
+        try {
+            $userService = new UserService();
+            $user = $userService->getUserById($userId);
+        } catch (\Exception $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        return $user;
     }
 }

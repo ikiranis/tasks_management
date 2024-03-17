@@ -20,7 +20,8 @@ use apps4net\tasks\libraries\App;
                 // Display the team components, for every item in array $teams
                 foreach ($teams as $team) {
                     App::component('team', [
-                        'team' => $team
+                        'team' => $team,
+                        'users' => $users,
                     ]);
                 }
                 ?>

@@ -1,34 +1,37 @@
+<?php
+use apps4net\tasks\libraries\App;
+?>
+
 <div class="card col-12 mt-3">
     <h1 class="card-header"><?= $team?->getName() ?? 'Some team' ?></h1>
 
     <div class="card-body">
-        <div class="d-flex justify-content-center mt-3">
-            <div class="card mx-3 text-center">
-                <div class="card-body">
-                    Μέλος 1
-                </div>
-            </div>
-            <div class="card mx-3 text-center">
-                <div class="card-body">
-                    Μέλος 2
-                </div>
-            </div>
-            <div class="card mx-3 text-center">
-                <div class="card-body">
-                    Μέλος 3
-                </div>
-            </div>
+        <div id="usersInTeam<?= $team->getId() ?>" class="d-flex justify-content-center mt-3">
+            <?php
+            // Display the users in the team
+            foreach ($team->getUsers() as $user) {
+                App::component('user', ['user' => $user]);
+            }
+            ?>
         </div>
 
         <div class="row">
-            <form class="input-group mt-3 w-75 row mx-auto">
-                <div class="col-12 col-lg-8 mt-2 mt-lg-0">
-                    <input type="text" class="form-control mx-1" placeholder="Όνομα μέλους"
-                           aria-label="Όνομα μέλους">
-                </div>
+            <form id="addUserForm<?= $team?->getId() ?>" action="api/addUserToTeam" method="POST" class="input-group mt-3 w-75 row mx-auto">
+                <select class="form-select" name="user" aria-label="Χρήστης">
+                    <?php
+                    // Display the users options
+                    foreach ($users as $user) {
+                        ?>
+                        <option value="<?= $user->getId() ?>"><?= $user->getUsername() ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+
+                <input type="hidden" name="team" value="<?= $team?->getId() ?>">
 
                 <div class="col-12 col-lg-4 mt-2 mt-lg-0">
-                    <button class="form-control btn btn-primary mx-1 text-nowrap" type="button">Προσθήκη
+                    <button class="form-control btn btn-primary mx-1 text-nowrap" type="button" onclick="addUserToTeam(<?= $team?->getId() ?>)">Προσθήκη
                         Μέλους
                     </button>
                 </div>

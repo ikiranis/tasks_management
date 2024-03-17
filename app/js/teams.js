@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                 }
 
+                this.reset()
+
                 // Return the success response
                 return response.json();
             })
@@ -36,3 +38,41 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
+
+/**
+ * Add a user to a team
+ *
+ * @param teamId
+ */
+const addUserToTeam = (teamId) => {
+    // Get the form to add a user. Every form has a unique id, based on the team id
+    const addUserForm = document.getElementById('addUserForm' + teamId);
+
+    // Make the API call
+    fetch(addUserForm.action, {
+        method: 'POST',
+        body: new FormData(addUserForm)
+    })
+        .then(response => {
+            // Get the response and check if it's ok
+            if (!response.ok) {
+                return response.json().then(err => {
+                    throw new Error(err.error);
+                });
+            }
+
+            // Return the success response
+            return response.json();
+        })
+        .then(data => {
+            // Do this on success
+
+            // Add the new user to the list of users in the team
+            const usersInTeam = document.getElementById('usersInTeam' + teamId);
+            usersInTeam.insertAdjacentHTML('beforeend', data.HTMLComponent);
+        })
+        .catch(error => {
+            // Do this on error
+            console.error('Error: ', error);
+        });
+}

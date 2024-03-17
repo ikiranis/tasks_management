@@ -85,4 +85,55 @@ class UserService
             throw new \Exception("Error: " . $e->getMessage());
         }
     }
+
+    /**
+     * Get all users
+     *
+     * @throws \Exception
+     */
+    public function getAll(): array
+    {
+        DB::connect();
+
+        $sql = "SELECT * FROM users";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->execute();
+
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\User');
+
+            $users = $stmt->fetchAll();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        return $users;
+    }
+
+    /**
+     * Get a user by id
+     *
+     * @throws \Exception
+     */
+    public function getUserById(int $userId): User
+    {
+        DB::connect();
+
+        $sql = "SELECT * FROM users WHERE id = :userId";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':userId', $userId);
+            $stmt->execute();
+
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\User');
+
+            $user = $stmt->fetch();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        return $user;
+    }
 }
