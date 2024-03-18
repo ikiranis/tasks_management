@@ -244,6 +244,8 @@ const editTasksList = (id) => {
                 // Do this on error
                 console.error(error);
             });
+
+        editListForm.classList.add('d-none');
     });
 
     // Add a custom attribute to the form to indicate that an event listener has been added
@@ -277,4 +279,4 @@ const sortTasksLists = () => {
     tasksLists.forEach(tasksList => {
         tasksListsContainer.appendChild(tasksList);
     });
- }
+}

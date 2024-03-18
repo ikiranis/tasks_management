@@ -130,10 +130,11 @@ class TasksListController extends Controller
         $title = $_POST['title'];
         $categoryId = (int)$_POST['category'];
         $statusId = (int)$_POST['status'];
+        $userId = (int)$_POST['userId'];
 
         try {
             // Update the tasks list in DB
-            $tasksList = $this->tasksListService->updateTasksList($tasksListId, $title, $categoryId, $statusId);
+            $tasksList = $this->tasksListService->updateTasksList($tasksListId, $title, $categoryId, $statusId, $userId);
 
             $categories = [];
             $statuses = [];

@@ -77,7 +77,7 @@ class TasksListService
      *
      * @throws \Exception
      */
-    public function updateTasksList(int $tasksListId, string $title, int $categoryId, int $statusId): TasksList
+    public function updateTasksList(int $tasksListId, string $title, int $categoryId, int $statusId, int $userId): TasksList
     {
         DB::connect();
 
@@ -100,6 +100,7 @@ class TasksListService
             $tasksList->setTitle($title);
             $tasksList->setCategoryId($categoryId);
             $tasksList->setStatusId($statusId);
+            $tasksList->setUserId($userId);
         } catch (\PDOException $e) {
             throw new \Exception("Error: " . $e->getMessage());
         }

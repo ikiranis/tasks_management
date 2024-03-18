@@ -6,6 +6,7 @@
     </div>
 
     <input type="hidden" name="tasksListId" value="<?= $list->getId() ?>">
+    <input type="hidden" name="userId" value="<?= $list->getUserId() ?>">
 
     <div class="col-12 mt-2">
         <select class="form-select" name="category" aria-label="Κατηγορία">
