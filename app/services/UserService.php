@@ -51,6 +51,7 @@ class UserService
                 // Set the session variables for the logged in user
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $user->getRole();
+                $_SESSION['userId'] = $user->getId();
 
                 return true;
             }

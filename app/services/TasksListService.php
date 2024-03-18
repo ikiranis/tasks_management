@@ -16,6 +16,7 @@ namespace apps4net\tasks\services;
 use apps4net\tasks\libraries\DB;
 use apps4net\tasks\models\Task;
 use apps4net\tasks\models\TasksList;
+use apps4net\tasks\models\User;
 
 class TasksListService
 {
@@ -48,6 +49,13 @@ class TasksListService
             $tasksList->setCategoryId($categoryId);
             $tasksList->setStatusId($statusId);
         } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        // Add current user to the new list
+        try {
+            $user = $this->addUserToTasksList((int)$_SESSION['userId'], $tasksList->getId());
+        } catch (\Exception $e) {
             throw new \Exception("Error: " . $e->getMessage());
         }
 
@@ -100,16 +108,24 @@ class TasksListService
     }
 
     /**
+     * Get all tasks lists for current user
+     *
+     * @return array
      * @throws \Exception
      */
-    public function getAll(): false|array
+    public function getAll(): array
     {
         DB::connect();
 
-        $sql = "SELECT * FROM tasks_list order by statusId asc";
+        // Get the tasks lists for the user (related with list_users table)
+        $sql = "SELECT tl.* FROM tasks_list tl
+                JOIN list_users lu ON tl.id = lu.tasksListId
+                WHERE lu.userId = :userId
+                ORDER BY tl.statusId ASC";
 
         try {
             $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':userId', $_SESSION['userId']);
             $stmt->execute();
 
             $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\TasksList');
@@ -258,5 +274,41 @@ class TasksListService
         }
 
         DB::close();
+    }
+
+    /**
+     * Add a user to a tasks list
+     *
+     * @param int $userId
+     * @param int $tasksListId
+     * @return User
+     * @throws \Exception
+     */
+    public function addUserToTasksList(int $userId, int $tasksListId): User
+    {
+        DB::connect();
+
+        $sql = "INSERT INTO list_users (userId, tasksListId) VALUES (:userId, :tasksListId)";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':userId', $userId);
+            $stmt->bindParam(':tasksListId', $tasksListId);
+            $stmt->execute();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        // Get the user data
+        try {
+            $userService = new UserService();
+            $user = $userService->getUserById($userId);
+        } catch (\Exception $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        DB::close();
+
+        return $user;
     }
 }

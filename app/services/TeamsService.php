@@ -80,6 +80,7 @@ class TeamsService
      *
      * @param int $teamId
      * @param int $userId
+     * @return User
      * @throws \Exception
      */
     public function addUserToTeam(int $teamId, int $userId): User
@@ -107,12 +108,17 @@ class TeamsService
             throw new \Exception("Error: " . $e->getMessage());
         }
 
+        DB::close();
+
         return $user;
     }
 
     /**
      * Check if user is already in team
      *
+     * @param int $teamId
+     * @param int $userId
+     * @return bool
      * @throws \Exception
      */
     public function isUserInTeam(int $teamId, int $userId): bool
@@ -131,6 +137,8 @@ class TeamsService
         } catch (\PDOException $e) {
             throw new \Exception("Error: " . $e->getMessage());
         }
+
+        DB::close();
 
         return (bool)$result;
     }

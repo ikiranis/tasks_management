@@ -84,6 +84,7 @@ class UserController extends Controller
     {
         $_SESSION['username'] = null;
         $_SESSION['role'] = null;
+        $_SESSION['userId'] = null;
 
         // Redirect to the index page
         header("Location: /");

@@ -80,12 +80,35 @@ class TasksListController extends Controller
         $categoryId = (int)$_POST['category'];
         $statusId = 1;  // StatusId for "Νέα"
 
+        $categories = [];
+        $statuses = [];
+
+        // Get the categories for lists
+        try {
+            $categories = $this->tasksListService->getCategories();
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+
+        // Get the statuses for lists
+        try {
+            $statuses = $this->tasksListService->getStatuses();
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+
         try {
             // Create the new tasks list in DB
             $tasksList = $this->tasksListService->create($title, $categoryId, $statusId);
 
             // Get the HTML of the tasks list component, to add it to the page, without refreshing
-            $HTMLComponent = App::componentHTML('tasksList', ['list' => $tasksList]);
+            $HTMLComponent = App::componentHTML('tasksList', [
+                'list' => $tasksList,
+                'categories' => $categories,
+                'statuses' => $statuses
+            ]);
 
             // Return success json response
             $this->returnSuccess(['tasksList' => $tasksList, 'HTMLComponent' => $HTMLComponent]);
