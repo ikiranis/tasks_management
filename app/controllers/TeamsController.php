@@ -92,13 +92,27 @@ class TeamsController extends Controller
      */
     public function addUserToTeam(): void
     {
-        // TODO check if user is not already in the team
+        // Get the team and user ids from form
         $teamId = (int)$_POST['team'];
         $userId = (int)$_POST['user'];
 
         try {
+            $isUserInTeam = $this->teamsService->isUserInTeam($teamId, $userId);
+
+            if($isUserInTeam) {
+                // Return error message
+                $this->returnError(400, 'Ο χρήστης είναι ήδη στην ομάδα');
+            }
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+
+        try {
+            // Add the user to the team
             $user = $this->teamsService->addUserToTeam($teamId, $userId);
 
+            // Get the HTML of the user component, to add it to the page, without refreshing
             $HTMLComponent = App::componentHTML('user', ['user' => $user]);
 
             // Return success json response

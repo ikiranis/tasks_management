@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Get the response and check if it's ok
                 if (!response.ok) {
                     return response.json().then(err => {
-                        throw new Error(err.error);
+                        throw new Error(err.message);
                     });
                 }
 
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 // Do this on error
-                console.error('Error: ', error);
+                console.error(error);
             });
     });
 });
@@ -69,7 +69,7 @@ const addTask = (id) => {
                 // Get the response and check if it's ok
                 if (!response.ok) {
                     return response.json().then(err => {
-                        throw new Error(err.error);
+                        throw new Error(err.message);
                     });
                 }
 
@@ -97,7 +97,7 @@ const addTask = (id) => {
             })
             .catch(error => {
                 // Do this on error
-                console.error('Error: ', error);
+                console.error(error);
             });
 
         taskForm.classList.add('d-none');
@@ -126,7 +126,7 @@ const deleteTask = (id) => {
             // Get the response and check if it's ok
             if (!response.ok) {
                 return response.json().then(err => {
-                    throw new Error(err.error);
+                    throw new Error(err.message);
                 });
             }
 
@@ -142,7 +142,7 @@ const deleteTask = (id) => {
         })
         .catch(error => {
             // Do this on error
-            console.error('Error: ', error);
+            console.error(error);
         });
 }
 
@@ -170,7 +170,7 @@ const deleteTasksList = (id) => {
             // Get the response and check if it's ok
             if (!response.ok) {
                 return response.json().then(err => {
-                    throw new Error(err.error);
+                    throw new Error(err.message);
                 });
             }
 
@@ -186,7 +186,7 @@ const deleteTasksList = (id) => {
         })
         .catch(error => {
             // Do this on error
-            console.error('Error: ', error);
+            console.error(error);
         });
 }
 
@@ -221,7 +221,7 @@ const editTasksList = (id) => {
                 // Get the response and check if it's ok
                 if (!response.ok) {
                     return response.json().then(err => {
-                        throw new Error(err.error);
+                        throw new Error(err.message);
                     });
                 }
 
@@ -240,7 +240,7 @@ const editTasksList = (id) => {
             })
             .catch(error => {
                 // Do this on error
-                console.error('Error: ', error);
+                console.error(error);
             });
     });
 

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Get the response and check if it's ok
                 if (!response.ok) {
                     return response.json().then(err => {
-                        throw new Error(err.error);
+                        throw new Error(err.message);
                     });
                 }
 
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 // Do this on error
-                console.error('Error: ', error);
+                console.error(error);
             });
     });
 });
@@ -57,7 +57,7 @@ const addUserToTeam = (teamId) => {
             // Get the response and check if it's ok
             if (!response.ok) {
                 return response.json().then(err => {
-                    throw new Error(err.error);
+                    throw new Error(err.message);
                 });
             }
 
@@ -73,6 +73,6 @@ const addUserToTeam = (teamId) => {
         })
         .catch(error => {
             // Do this on error
-            console.error('Error: ', error);
+            console.error(error);
         });
 }

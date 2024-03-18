@@ -109,4 +109,29 @@ class TeamsService
 
         return $user;
     }
+
+    /**
+     * Check if user is already in team
+     *
+     * @throws \Exception
+     */
+    public function isUserInTeam(int $teamId, int $userId): bool
+    {
+        DB::connect();
+
+        $sql = "SELECT * FROM team_users WHERE teamId = :teamId AND userId = :userId";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':teamId', $teamId);
+            $stmt->bindParam(':userId', $userId);
+            $stmt->execute();
+
+            $result = $stmt->fetch();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        return (bool)$result;
+    }
 }
