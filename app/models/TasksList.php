@@ -21,6 +21,7 @@ class TasksList
     private string $title;
     private int $categoryId;
     private int $statusId;
+    private int $userId;
 
     public function getId(): int
     {
@@ -60,6 +61,16 @@ class TasksList
     public function setStatusId(int $statusId): void
     {
         $this->statusId = $statusId;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): void
+    {
+        $this->userId = $userId;
     }
 
     /**

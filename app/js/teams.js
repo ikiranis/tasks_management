@@ -76,3 +76,39 @@ const addUserToTeam = (teamId) => {
             console.error(error);
         });
 }
+
+/**
+ * Add a user to a list
+ *
+ * @param teamId
+ */
+const addUserToList = (teamId) => {
+    // Get the form to add a user to a list. Every form has a unique id, based on the team id
+    const addUserToListForm = document.getElementById('addUserToListForm' + teamId);
+
+    // Make the API call
+    fetch(addUserToListForm.action, {
+        method: 'POST',
+        body: new FormData(addUserToListForm)
+    })
+        .then(response => {
+            // Get the response and check if it's ok
+            if (!response.ok) {
+                return response.json().then(err => {
+                    throw new Error(err.message);
+                });
+            }
+
+            // Return the success response
+            return response.json();
+        })
+        .then(data => {
+            // Do this on success
+
+            console.log(data.message);
+        })
+        .catch(error => {
+            // Do this on error
+            console.error(error);
+        });
+}

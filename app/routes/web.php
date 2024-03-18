@@ -30,6 +30,7 @@ Route::post('api/deleteTask', [TasksListController::class, 'deleteTask']);
 Route::post('api/deleteTasksList', [TasksListController::class, 'deleteTasksList']);
 Route::post('api/createTeam', [TeamsController::class, 'createTeam']);
 Route::post('api/addUserToTeam', [TeamsController::class, 'addUserToTeam']);
+Route::post('api/addUserToList', [TasksListController::class, 'addUserToList']);
 
 // Run the routes
 

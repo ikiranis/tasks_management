@@ -238,4 +238,27 @@ class TasksListController extends Controller
             $this->returnError(400, $e->getMessage());
         }
     }
+
+    /**
+     * Add a user to a tasks list
+     *
+     * @return void
+     */
+    public function addUserToList(): void
+    {
+        // Get the data from the form
+        $userId = (int)$_POST['user'];
+        $tasksListId = (int)$_POST['tasksList'];
+
+        try {
+            // Add the user to the tasks list
+            $user = $this->tasksListService->addUserToTasksList($userId, $tasksListId);
+
+            // Return success json response
+            $this->returnSuccess(['user' => $user, 'message' => "Ο χρήστης προστέθηκε στην λίστα εργασιών"]);
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+    }
 }

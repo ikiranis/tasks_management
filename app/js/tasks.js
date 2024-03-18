@@ -25,7 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(data => {
                 // Do this on success
-                // console.log('Success: ', data.data);
+
+                // Clean form data
+                this.reset();
 
                 // Display new tasks list component with the new data, at the top of the page
                 const tasksList = document.querySelector('.row');

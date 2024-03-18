@@ -15,6 +15,7 @@ namespace apps4net\tasks\controllers;
 
 use apps4net\tasks\libraries\App;
 use apps4net\tasks\models\User;
+use apps4net\tasks\services\TasksListService;
 use apps4net\tasks\services\TeamsService;
 use apps4net\tasks\services\UserService;
 
@@ -22,6 +23,7 @@ class TeamsController extends Controller
 {
     private TeamsService $teamsService;
     private UserService $userService;
+    private TasksListService $tasksListService;
 
     public function __construct()
     {
@@ -29,6 +31,7 @@ class TeamsController extends Controller
 
         $this->teamsService = new TeamsService();
         $this->userService = new UserService();
+        $this->tasksListService = new TasksListService();
     }
 
     /**
@@ -39,10 +42,18 @@ class TeamsController extends Controller
     public function index(): void
     {
         $users = [];
+        $tasksLists = [];
 
         // Get all the users
         try {
             $users = $this->userService->getAll();
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+
+        try {
+            $tasksLists = $this->tasksListService->getAll();
         } catch (\Exception $e) {
             // Return error message
             $this->returnError(400, $e->getMessage());
@@ -54,7 +65,8 @@ class TeamsController extends Controller
 
             App::view('teams', [
                 'teams' => $teams,
-                'users' => $users
+                'users' => $users,
+                'tasksLists' => $tasksLists
             ]);
         } catch (\Exception $e) {
             // Return error message

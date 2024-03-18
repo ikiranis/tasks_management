@@ -22,6 +22,7 @@ use apps4net\tasks\libraries\App;
                     App::component('team', [
                         'team' => $team,
                         'users' => $users,
+                        'tasksLists' => $tasksLists
                     ]);
                 }
                 ?>

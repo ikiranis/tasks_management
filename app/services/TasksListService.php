@@ -31,13 +31,14 @@ class TasksListService
         DB::connect();
 
         // Create the task list
-        $sql = "INSERT INTO tasks_list (title, categoryId, statusId) VALUES (:title, :categoryId, :statusId)";
+        $sql = "INSERT INTO tasks_list (title, categoryId, statusId, userId) VALUES (:title, :categoryId, :statusId, :userId)";
 
         try {
             $stmt = DB::$conn->prepare($sql);
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':categoryId', $categoryId);
             $stmt->bindParam(':statusId', $statusId);
+            $stmt->bindParam(':userId', $_SESSION['userId']);
 
             $stmt->execute();
 
@@ -48,6 +49,7 @@ class TasksListService
             $tasksList->setTitle($title);
             $tasksList->setCategoryId($categoryId);
             $tasksList->setStatusId($statusId);
+            $tasksList->setUserId($_SESSION['userId']);
         } catch (\PDOException $e) {
             throw new \Exception("Error: " . $e->getMessage());
         }
