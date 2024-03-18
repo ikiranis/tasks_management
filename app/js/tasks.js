@@ -87,11 +87,11 @@ const addTask = (id) => {
                 // Add new task to the tasks list
                 const parentCard = taskForm.closest('.card');
                 const cardText = parentCard.querySelector('.card-text');
-                const emptyTasks = parentCard.querySelector('.emptyTasks');
+                const emptyList = parentCard.querySelector('.emptyList');
 
                 // Remove the empty list message, if it exists
-                if (emptyTasks) {
-                    emptyTasks.remove();
+                if (emptyList) {
+                    emptyList.remove();
                 }
 
                 // Display the new task
