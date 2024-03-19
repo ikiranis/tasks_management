@@ -7,12 +7,12 @@
 
 <script>
     /**
-     * Display an error message (error/success)
+     * Display a message (error/success)
      *
      * @param message
      * @param errorType success/error
      */
-    const displayError = (message, errorType) => {
+    const displayMessage = (message, errorType) => {
         const error = document.getElementById('error');
         const errorMessage = document.getElementsByClassName('errorMessage');
 

@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const team = document.querySelector('.row');
                 team.insertAdjacentHTML('afterbegin', data.HTMLComponent);
 
-                displayError("Η ομάδα δημιουργήθηκε επιτυχώς", 'success');
+                displayMessage("Η ομάδα δημιουργήθηκε επιτυχώς", 'success');
             })
             .catch(error => {
                 // Do this on error
@@ -83,7 +83,7 @@ const addUserToTeam = (teamId) => {
 
             select.appendChild(option);
 
-            displayError("Ο χρήστης προστέθηκε επιτυχώς", 'success');
+            displayMessage("Ο χρήστης προστέθηκε επιτυχώς στην ομάδα", 'success');
         })
         .catch(error => {
             // Do this on error
@@ -119,7 +119,7 @@ const addUserToList = (teamId) => {
         .then(data => {
             // Do this on success
 
-            console.log(data.message);
+            displayMessage("Ο χρήστης προστέθηκε επιτυχώς στην λίστα", 'success');
         })
         .catch(error => {
             // Do this on error

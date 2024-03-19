@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const tasksList = document.querySelector('.row');
                 tasksList.insertAdjacentHTML('afterbegin', data.HTMLComponent);
 
-                displayError("Η λίστα δημιουργήθηκε επιτυχώς", 'success');
+                displayMessage("Η λίστα δημιουργήθηκε επιτυχώς", 'success');
             })
             .catch(error => {
                 // Do this on error
@@ -99,7 +99,7 @@ const addTask = (id) => {
                 // Display the new task
                 cardText.insertAdjacentHTML('beforeend', data.HTMLComponent);
 
-                displayError("Η εργασία προστέθηκε επιτυχώς", 'success');
+                displayMessage("Η εργασία προστέθηκε επιτυχώς", 'success');
             })
             .catch(error => {
                 // Do this on error
@@ -146,7 +146,7 @@ const deleteTask = (id) => {
             const task = document.getElementById('task' + id);
             task.remove();
 
-            displayError("Η εργασία διαγράφηκε επιτυχώς", 'success');
+            displayMessage("Η εργασία διαγράφηκε επιτυχώς", 'success');
         })
         .catch(error => {
             // Do this on error
@@ -192,7 +192,7 @@ const deleteTasksList = (id) => {
             const tasksList = document.getElementById('tasksList' + id);
             tasksList.remove();
 
-            displayError("Η λίστα διαγράφηκε επιτυχώς", 'success');
+            displayMessage("Η λίστα διαγράφηκε επιτυχώς", 'success');
         })
         .catch(error => {
             // Do this on error
@@ -248,7 +248,7 @@ const editTasksList = (id) => {
                 // Sort tasks lists by status
                 sortTasksLists()
 
-                displayError("Η λίστα ενημερώθηκε επιτυχώς", 'success');
+                displayMessage("Η λίστα ενημερώθηκε επιτυχώς", 'success');
             })
             .catch(error => {
                 // Do this on error
