@@ -13,7 +13,9 @@
 
 namespace apps4net\tasks\models;
 
-class User
+use JsonSerializable;
+
+class User implements JsonSerializable
 {
     private int $id;
     private string $username;
@@ -80,5 +82,16 @@ class User
     public function setRole(int $role): void
     {
         $this->role = $role;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'username' => $this->username,
+            'name' => $this->name,
+            'email' => $this->email,
+            'role' => $this->role
+        ];
     }
 }

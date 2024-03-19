@@ -57,7 +57,7 @@ use apps4net\tasks\libraries\App;
             </div>
 
             <div class="col-12 col-lg-3 mt-2 mt-lg-0">
-                <select class="form-select mx-1" name="user" aria-label="Μέλος">
+                <select class="form-select mx-1" name="user" id="name" aria-label="Μέλος">
                     <?php
                     // Display the users (of the team) options
                     foreach ($team->getUsers() as $user) {

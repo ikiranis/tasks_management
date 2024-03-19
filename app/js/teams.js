@@ -70,6 +70,16 @@ const addUserToTeam = (teamId) => {
             // Add the new user to the list of users in the team
             const usersInTeam = document.getElementById('usersInTeam' + teamId);
             usersInTeam.insertAdjacentHTML('beforeend', data.HTMLComponent);
+
+            // Add the new user to the list of users in the addUserToListForm
+            const addUserToListForm = document.getElementById('addUserToListForm' + teamId);
+            const select = addUserToListForm.querySelector('#name');
+            const option = document.createElement('option');
+
+            option.value = data.user.id;
+            option.text = data.user.username;
+
+            select.appendChild(option);
         })
         .catch(error => {
             // Do this on error
