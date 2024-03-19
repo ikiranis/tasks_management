@@ -83,11 +83,33 @@ class TeamsController extends Controller
     {
         $name = $_POST['name'];
 
+        $users = [];
+        $tasksLists = [];
+
+        // Get all the users
+        try {
+            $users = $this->userService->getAll();
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+
+        try {
+            $tasksLists = $this->tasksListService->getAll();
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+
         try {
             $team = $this->teamsService->createTeam($name);
 
             // Get the HTML of the tasks list component, to add it to the page, without refreshing
-            $HTMLComponent = App::componentHTML('team', ['team' => $team]);
+            $HTMLComponent = App::componentHTML('team', [
+                'team' => $team,
+                'users' => $users,
+                'tasksLists' => $tasksLists
+            ]);
 
             // Return success json response
             $this->returnSuccess(['team' => $team, 'HTMLComponent' => $HTMLComponent]);
