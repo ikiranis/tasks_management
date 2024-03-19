@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 // Do this on error
-                console.error(error);
+                displayMessage(error, 'error');
             });
     });
 });
@@ -103,7 +103,7 @@ const addTask = (id) => {
             })
             .catch(error => {
                 // Do this on error
-                console.error(error);
+                displayMessage(error, 'error');
             });
 
         taskForm.classList.add('d-none');
@@ -150,7 +150,7 @@ const deleteTask = (id) => {
         })
         .catch(error => {
             // Do this on error
-            console.error(error);
+            displayMessage(error, 'error');
         });
 }
 
@@ -196,7 +196,7 @@ const deleteTasksList = (id) => {
         })
         .catch(error => {
             // Do this on error
-            console.error(error);
+            displayMessage(error, 'error');
         });
 }
 
@@ -252,7 +252,7 @@ const editTasksList = (id) => {
             })
             .catch(error => {
                 // Do this on error
-                console.error(error);
+                displayMessage(error, 'error');
             });
 
         editListForm.classList.add('d-none');

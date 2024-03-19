@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 // Do this on error
-                console.error(error);
+                displayMessage(error, 'error');
             });
     });
 });
@@ -87,7 +87,7 @@ const addUserToTeam = (teamId) => {
         })
         .catch(error => {
             // Do this on error
-            console.error(error);
+            displayMessage(error, 'error');
         });
 }
 
@@ -123,6 +123,6 @@ const addUserToList = (teamId) => {
         })
         .catch(error => {
             // Do this on error
-            console.error(error);
+            displayMessage(error, 'error');
         });
 }
