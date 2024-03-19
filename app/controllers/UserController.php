@@ -47,7 +47,7 @@ class UserController extends Controller
                 App::view('login');
             }
         } catch (\Exception $e) {
-            echo "Error: " . $e->getMessage();
+            echo $e->getMessage();
         }
     }
 
@@ -68,7 +68,7 @@ class UserController extends Controller
         try {
             $this->userService->registerUser($username, $password, $name, $email);
         } catch (\Exception $e) {
-            echo "Error: " . $e->getMessage();
+            echo $e->getMessage();
         }
 
         // Redirect to the login page

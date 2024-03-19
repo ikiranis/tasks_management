@@ -39,11 +39,6 @@ class MainController extends Controller
         App::view('index');
     }
 
-    public function teams(): void
-    {
-        App::view('teams');
-    }
-
     public function login(): void
     {
         App::view('login');
@@ -53,6 +48,4 @@ class MainController extends Controller
     {
         App::view('register');
     }
-
-
 }

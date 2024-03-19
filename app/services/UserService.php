@@ -39,7 +39,7 @@ class UserService
 
             $user = $stmt->fetch();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         DB::close();
@@ -83,7 +83,7 @@ class UserService
 
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 
@@ -106,7 +106,7 @@ class UserService
 
             $users = $stmt->fetchAll();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         return $users;
@@ -132,7 +132,7 @@ class UserService
 
             $user = $stmt->fetch();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         return $user;

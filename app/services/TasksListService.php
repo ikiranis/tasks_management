@@ -51,14 +51,14 @@ class TasksListService
             $tasksList->setStatusId($statusId);
             $tasksList->setUserId($_SESSION['userId']);
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         // Add current user to the new list
         try {
             $user = $this->addUserToTasksList((int)$_SESSION['userId'], $tasksList->getId());
         } catch (\Exception $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         DB::close();
@@ -103,7 +103,7 @@ class TasksListService
             $tasksList->setStatusId($statusId);
             $tasksList->setUserId($userId);
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         DB::close();
@@ -136,7 +136,7 @@ class TasksListService
 
             $tasksList = $stmt->fetchAll();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         DB::close();
@@ -175,7 +175,7 @@ class TasksListService
             $task->setTasksListId($tasksListId);
             $task->setUserId($_SESSION['userId']);
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         DB::close();
@@ -202,7 +202,7 @@ class TasksListService
 
             $categories = $stmt->fetchAll();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         DB::close();
@@ -230,7 +230,7 @@ class TasksListService
 
             $statuses = $stmt->fetchAll();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         DB::close();
@@ -254,7 +254,7 @@ class TasksListService
             $stmt->bindParam(':taskId', $taskId);
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         DB::close();
@@ -276,7 +276,7 @@ class TasksListService
             $stmt->bindParam(':tasksListId', $tasksListId);
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         DB::close();
@@ -302,7 +302,7 @@ class TasksListService
             $stmt->bindParam(':tasksListId', $tasksListId);
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         // Get the user data
@@ -310,7 +310,7 @@ class TasksListService
             $userService = new UserService();
             $user = $userService->getUserById($userId);
         } catch (\Exception $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         DB::close();

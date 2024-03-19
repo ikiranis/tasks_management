@@ -39,7 +39,7 @@ class TeamsService
 
             $teams = $stmt->fetchAll();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         return $teams;
@@ -69,7 +69,7 @@ class TeamsService
             $team->setId(DB::$conn->lastInsertId());
             $team->setName($name);
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         return $team;
@@ -97,7 +97,7 @@ class TeamsService
 
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         // Get the user data
@@ -105,7 +105,7 @@ class TeamsService
             $userService = new UserService();
             $user = $userService->getUserById($userId);
         } catch (\Exception $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         DB::close();
@@ -135,7 +135,7 @@ class TeamsService
 
             $result = $stmt->fetch();
         } catch (\PDOException $e) {
-            throw new \Exception("Error: " . $e->getMessage());
+            throw new \Exception($e->getMessage());
         }
 
         DB::close();
