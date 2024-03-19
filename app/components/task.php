@@ -1,10 +1,10 @@
-<div id="task<?= $task->getId() ?>" class="d-flex justify-content-between">
-    <div class="my-auto"><?= $task->getTitle() ?></div>
+<div id="task<?= $task->getId() ?>" class="d-flex justify-content-between align-items-center">
+    <div class="my-1"><?= $task->getTitle() ?></div>
     <?php
     // Only task owner and admin has the right to delete a task
     if ($task->getUserId() == $_SESSION['userId'] || $_SESSION['role'] == 0) {
         ?>
-        <div class="my-auto">
+        <div>
             <a class="btn" onclick="deleteTask(<?= $task->getId() ?>)" title="Διαγραφή της εργασίας">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-trash3" viewBox="0 0 16 16">
