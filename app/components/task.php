@@ -1,6 +1,7 @@
 <div id="task<?= $task->getId() ?>" class="d-flex justify-content-between">
     <div class="my-auto"><?= $task->getTitle() ?></div>
     <?php
+    // Only task owner and admin has the right to delete a task
     if ($task->getUserId() == $_SESSION['userId'] || $_SESSION['role'] == 0) {
         ?>
         <div class="my-auto">
