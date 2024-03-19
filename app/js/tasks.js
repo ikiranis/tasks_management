@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Display new tasks list component with the new data, at the top of the page
                 const tasksList = document.querySelector('.row');
                 tasksList.insertAdjacentHTML('afterbegin', data.HTMLComponent);
+
+                displayError("Η λίστα δημιουργήθηκε επιτυχώς", 'success');
             })
             .catch(error => {
                 // Do this on error
@@ -143,6 +145,8 @@ const deleteTask = (id) => {
             // Remove the task from the tasks list
             const task = document.getElementById('task' + id);
             task.remove();
+
+            displayError("Η εργασία διαγράφηκε επιτυχώς", 'success');
         })
         .catch(error => {
             // Do this on error
@@ -187,6 +191,8 @@ const deleteTasksList = (id) => {
             // Remove the task from the tasks list
             const tasksList = document.getElementById('tasksList' + id);
             tasksList.remove();
+
+            displayError("Η λίστα διαγράφηκε επιτυχώς", 'success');
         })
         .catch(error => {
             // Do this on error
@@ -241,6 +247,8 @@ const editTasksList = (id) => {
 
                 // Sort tasks lists by status
                 sortTasksLists()
+
+                displayError("Η λίστα ενημερώθηκε επιτυχώς", 'success');
             })
             .catch(error => {
                 // Do this on error

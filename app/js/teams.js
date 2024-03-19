@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Display new team component with the new data, at the top of the page
                 const team = document.querySelector('.row');
                 team.insertAdjacentHTML('afterbegin', data.HTMLComponent);
+
+                displayError("Η ομάδα δημιουργήθηκε επιτυχώς", 'success');
             })
             .catch(error => {
                 // Do this on error
@@ -80,6 +82,8 @@ const addUserToTeam = (teamId) => {
             option.text = data.user.username;
 
             select.appendChild(option);
+
+            displayError("Ο χρήστης προστέθηκε επιτυχώς", 'success');
         })
         .catch(error => {
             // Do this on error
