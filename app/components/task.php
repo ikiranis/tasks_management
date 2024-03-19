@@ -1,5 +1,5 @@
 <div id="task<?= $task->getId() ?>" class="d-flex justify-content-between align-items-center">
-    <div class="my-1"><?= $task->getTitle() ?></div>
+    <div class="my-1 text-start"><?= $task->getTitle() ?></div>
     <?php
     // Only task owner and admin has the right to delete a task
     if ($task->getUserId() == $_SESSION['userId'] || $_SESSION['role'] == 0) {
