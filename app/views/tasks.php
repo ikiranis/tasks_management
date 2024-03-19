@@ -30,6 +30,8 @@ use apps4net\tasks\libraries\App;
 
             <?php App::component('createListForm', ['categories' => $categories]); ?>
         </div>
+
+        <?php App::component('error'); ?>
     </section>
 
     <?php App::component('footer'); ?>

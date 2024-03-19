@@ -96,6 +96,8 @@ const addTask = (id) => {
 
                 // Display the new task
                 cardText.insertAdjacentHTML('beforeend', data.HTMLComponent);
+
+                displayError("Η εργασία προστέθηκε επιτυχώς", 'success');
             })
             .catch(error => {
                 // Do this on error
@@ -280,3 +282,4 @@ const sortTasksLists = () => {
         tasksListsContainer.appendChild(tasksList);
     });
 }
+

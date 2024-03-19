@@ -29,8 +29,9 @@ use apps4net\tasks\libraries\App;
             </div>
 
            <?php App::component('createTeamForm'); ?>
-
         </div>
+
+        <?php App::component('error'); ?>
     </section>
 
     <?php App::component('footer'); ?>
