@@ -20,6 +20,7 @@ class Task implements JsonSerializable
     private int $id;
     private string $title;
     private int $tasksListId;
+    private int $userId;
 
     public function getId(): int
     {
@@ -51,8 +52,18 @@ class Task implements JsonSerializable
         $this->tasksListId = $tasksListId;
     }
 
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): void
+    {
+        $this->userId = $userId;
+    }
+
     /**
-     * Return json representation of the object
+     * Return json representation of the object, to use it from JavaScript
      *
      * @return array
      */

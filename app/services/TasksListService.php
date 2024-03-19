@@ -73,6 +73,7 @@ class TasksListService
      * @param string $title
      * @param int $categoryId
      * @param int $statusId
+     * @param int $userId
      * @return TasksList
      *
      * @throws \Exception
@@ -156,12 +157,13 @@ class TasksListService
     {
         DB::connect();
 
-        $sql = "INSERT INTO tasks (title, tasksListId) VALUES (:title, :tasksListId)";
+        $sql = "INSERT INTO tasks (title, tasksListId, userId) VALUES (:title, :tasksListId, :userId)";
 
         try {
             $stmt = DB::$conn->prepare($sql);
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':tasksListId', $tasksListId);
+            $stmt->bindParam(':userId', $_SESSION['userId']);
 
             $stmt->execute();
 
@@ -171,6 +173,7 @@ class TasksListService
             $task->setId(DB::$conn->lastInsertId());
             $task->setTitle($title);
             $task->setTasksListId($tasksListId);
+            $task->setUserId($_SESSION['userId']);
         } catch (\PDOException $e) {
             throw new \Exception("Error: " . $e->getMessage());
         }
