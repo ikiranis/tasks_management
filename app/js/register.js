@@ -37,7 +37,7 @@ const validateForm = () => {
         valid = false;
     }
 
-    if (checkForUsernameExistence(username.value)) {
+    if (!checkForUsernameExistence(username.value)) {
         const usernameError = document.getElementById('usernameError');
         usernameError.classList.remove('d-none');
         usernameError.innerText = 'Username already exists';
@@ -96,12 +96,9 @@ const clearErrorTexts = () => {
  * @param username
  */
 const checkForUsernameExistence = (username) => {
-    const formData = new FormData();
-    formData.append('username', username);
 
-    fetch('api/checkUsername', {
-        method: 'GET',
-        body: formData
+    fetch('api/checkUsername?username=' + username, {
+        method: 'GET'
     })
         .then(response => {
             if (!response.ok) {
