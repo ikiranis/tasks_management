@@ -137,4 +137,9 @@ class UserService
 
         return $user;
     }
+
+    public function checkUsername(string $username): bool
+    {
+        return false;
+    }
 }

@@ -20,30 +20,35 @@ use apps4net\tasks\libraries\App;
                             <h3>Εγγραφή Χρήστη</h3>
                         </div>
                         <div class="card-body text-start">
-                            <form action="registerUser" method="POST">
+                            <form id="registerUserForm" action="registerUser" method="POST">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Όνομα Χρήστη</label>
                                     <input type="text" class="form-control" name="username" id="username" required>
+                                    <span id="usernameError" class="text-danger small d-none"></span>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Ονοματεπώνυμο</label>
                                     <input type="text" class="form-control" name="name" id="name">
+                                    <span id="nameError" class="text-danger small d-none"></span>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="email" class="form-control" name="email" id="email" required>
+                                    <span id="emailError" class="text-danger small d-none"></span>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Κωδικός Πρόσβασης</label>
                                     <input type="password" class="form-control" name="password" id="password" required>
+                                    <span id="passwordError" class="text-danger small d-none"></span>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="verify_password" class="form-label">Επιβεβαίωση Κωδικού</label>
                                     <input type="password" class="form-control" name="verify_password" id="verify_password" required>
+                                    <span id="verifyPasswordError" class="text-danger small d-none"></span>
                                 </div>
 
                                 <div class="row justify-content-center">
@@ -61,3 +66,9 @@ use apps4net\tasks\libraries\App;
 </div>
 </body>
 </html>
+
+<?php
+// Load the JavaScript for register
+App::component('error');
+App::script('register');
+?>

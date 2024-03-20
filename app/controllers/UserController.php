@@ -89,4 +89,21 @@ class UserController extends Controller
         // Redirect to the index page
         header("Location: /");
     }
+
+    public function checkUsername(): void
+    {
+        $username = $_GET['username'];
+
+        try {
+            $result = $this->userService->checkUsername($username);
+
+            if ($result) {
+                $this->returnSuccess(['exists' => true]);
+            } else {
+                $this->returnSuccess(['exists' => false]);
+            }
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }
