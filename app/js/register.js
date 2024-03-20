@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             registerUserForm.submit();
         } else {
             // Form is not valid, display an error message
-            displayMessage('Please fill in the form correctly', 'error');
+            displayMessage('Παρακαλώ συμπλήρωσε σωστά την φόρμα εγγραφής', 'error');
         }
     });
 });
