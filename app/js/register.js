@@ -1,15 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
     const registerUserForm = document.getElementById('registerUserForm');
 
-    registerUserForm.addEventListener('submit', function (e) {
+    // On registerUserForm submit check for form validation
+    registerUserForm.addEventListener('submit', async function (e) {
         // Prevent the default form submit
         e.preventDefault();
 
         clearErrorTexts();
 
-        if (validateForm()) {
+        // Check for form validation.
+        // Using await, because checkForUsernameExistence is an async function, with API call.
+        // So we need to wait for the response before we continue
+        if (await validateForm()) {
+            // Form is valid, submit it
             registerUserForm.submit();
         } else {
+            // Form is not valid, display an error message
             displayMessage('Please fill in the form correctly', 'error');
         }
     });
@@ -20,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
  *
  * @returns {boolean}
  */
-const validateForm = () => {
+const validateForm = async () => {
     const username = document.getElementById('username');
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('verify_password');
@@ -32,15 +38,17 @@ const validateForm = () => {
     if (!username.checkValidity()) {
         const usernameError = document.getElementById('usernameError');
         usernameError.classList.remove('d-none');
-        usernameError.innerText = 'Please enter a valid username';
+        usernameError.innerText = 'Παρακαλώ εισάγετε ένα έγκυρο όνομα χρήστη';
 
         valid = false;
     }
 
-    if (!checkForUsernameExistence(username.value)) {
+    // Need to get asynchronously the API call response
+    const exists = await checkForUsernameExistence(username.value)
+    if (exists) {
         const usernameError = document.getElementById('usernameError');
         usernameError.classList.remove('d-none');
-        usernameError.innerText = 'Username already exists';
+        usernameError.innerText = 'Το όνομα χρήστη υπάρχει ήδη';
 
         valid = false;
     }
@@ -48,7 +56,7 @@ const validateForm = () => {
     if (!password.checkValidity()) {
         const passwordError = document.getElementById('passwordError');
         passwordError.classList.remove('d-none');
-        passwordError.innerText = 'Please enter a valid password';
+        passwordError.innerText = 'Παρακαλώ εισάγετε έναν έγκυρο κωδικό';
 
         valid = false;
     }
@@ -56,7 +64,15 @@ const validateForm = () => {
     if (!email.checkValidity()) {
         const emailError = document.getElementById('emailError');
         emailError.classList.remove('d-none');
-        emailError.innerText = 'Please enter a valid email';
+        emailError.innerText = 'Παρακαλώ εισάγετε μία έγκυρη διεύθυνση email';
+
+        valid = false;
+    }
+
+    if (!name.checkValidity()) {
+        const nameError = document.getElementById('nameError');
+        nameError.classList.remove('d-none');
+        nameError.innerText = 'Παρακαλώ εισάγετε το όνομά σας';
 
         valid = false;
     }
@@ -65,7 +81,7 @@ const validateForm = () => {
     if (password.value !== confirmPassword.value) {
         const verifyPasswordError = document.getElementById('verifyPasswordError');
         verifyPasswordError.classList.remove('d-none');
-        verifyPasswordError.innerText = 'Passwords do not match';
+        verifyPasswordError.innerText = 'Ο κωδικός επιβεβαίωσης δεν ταιριάζει';
 
         valid = false;
     }
@@ -92,12 +108,13 @@ const clearErrorTexts = () => {
 
 /**
  * Check if a username exists in the database
+ * Async function, because it makes an API call
+ * Returns a promise
  *
  * @param username
  */
-const checkForUsernameExistence = (username) => {
-
-    fetch('api/checkUsername?username=' + username, {
+const checkForUsernameExistence = async (username) => {
+    return fetch('api/checkUsername?username=' + username, {
         method: 'GET'
     })
         .then(response => {
@@ -109,12 +126,8 @@ const checkForUsernameExistence = (username) => {
 
             return response.json();
         })
-        .then(data => {
-            return !!data.exists;
-        })
+        .then(data => data.exists)
         .catch(error => {
             displayMessage(error, 'error');
         });
-
-    return false;
 }

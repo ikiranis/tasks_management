@@ -90,18 +90,21 @@ class UserController extends Controller
         header("Location: /");
     }
 
+    /**
+     * Check if the username exists
+     *
+     * @return void
+     */
     public function checkUsername(): void
     {
         $username = $_GET['username'];
 
         try {
+            // Check if the username exists
             $result = $this->userService->checkUsername($username);
 
-            if ($result) {
-                $this->returnSuccess(['exists' => true]);
-            } else {
-                $this->returnSuccess(['exists' => false]);
-            }
+            // Return the result (true/false)
+            $this->returnSuccess(['exists' => $result]);
         } catch (\Exception $e) {
             echo $e->getMessage();
         }

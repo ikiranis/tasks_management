@@ -138,8 +138,30 @@ class UserService
         return $user;
     }
 
+    /**
+     * Check if the username exists
+     *
+     * @throws \Exception
+     */
     public function checkUsername(string $username): bool
     {
-        return false;
+        DB::connect();
+
+        $sql = "SELECT * FROM users WHERE username = :username";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
+
+            // if the username exists return true
+            if ($stmt->rowCount() > 0) {
+                return true;
+            }
+
+            return false;
+        } catch (\PDOException $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 }
