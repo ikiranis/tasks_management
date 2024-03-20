@@ -8,6 +8,6 @@
 <?php
 use apps4net\tasks\libraries\App;
 
-// Load the error script
+// Load the JavaScript for error component
 App::script('error');
 ?>
