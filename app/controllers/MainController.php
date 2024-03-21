@@ -34,18 +34,13 @@ class MainController extends Controller
         }
     }
 
+    /**
+     * Display the main page
+     *
+     * @return void
+     */
     public function index(): void
     {
         App::view('index');
-    }
-
-    public function login(): void
-    {
-        App::view('login');
-    }
-
-    public function register(): void
-    {
-        App::view('register');
     }
 }

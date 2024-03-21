@@ -28,6 +28,26 @@ class UserController extends Controller
     }
 
     /**
+     * Display the login page
+     *
+     * @return void
+     */
+    public function login(): void
+    {
+        App::view('login');
+    }
+
+    /**
+     * Display the register page
+     *
+     * @return void
+     */
+    public function register(): void
+    {
+        App::view('register');
+    }
+
+    /**
      * Check the login
      *
      * @return void
