@@ -100,6 +100,14 @@ const addUserToList = (teamId) => {
     // Get the form to add a user to a list. Every form has a unique id, based on the team id
     const addUserToListForm = document.getElementById('addUserToListForm' + teamId);
 
+    // Check if user selected is empty
+    const userSelected = addUserToListForm.querySelector('#user');
+
+    if (!userSelected.value) {
+        displayMessage("Πρέπει να επιλέξεις έναν χρήστη", 'error');
+        return;
+    }
+
     // Make the API call
     fetch(addUserToListForm.action, {
         method: 'POST',

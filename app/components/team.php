@@ -57,20 +57,30 @@ use apps4net\tasks\libraries\App;
             </div>
 
             <div class="col-12 col-lg-3 mt-2 mt-lg-0">
-                <select class="form-select mx-1" name="user" id="name" aria-label="Μέλος">
+                <select class="form-select mx-1" name="user" id="user" aria-label="Μέλος">
                     <?php
-                    // Display the users (of the team) options
-                    foreach ($team->getUsers() as $user) {
+                    // Get users in team and check if there are any
+                    $users = $team->getUsers();
+
+                    if (count($users) == 0) {
                         ?>
-                        <option value="<?= $user->getId() ?>"><?= $user->getUsername() ?></option>
+                        <option value="" disabled selected>Επιλογή χρήστη</option>
                         <?php
+                    } else {
+                        // Display the users (of the team) options
+                        foreach ($team->getUsers() as $user) {
+                            ?>
+                            <option value="<?= $user->getId() ?>"><?= $user->getUsername() ?></option>
+                            <?php
+                        }
                     }
                     ?>
                 </select>
             </div>
 
             <div class="col-12 col-lg-3 mt-2 mt-lg-0">
-                <button class="form-control btn btn-primary mx-1" type="button" onclick="addUserToList(<?= $team->getId() ?>)">Ανάθεση Εργασίας
+                <button class="form-control btn btn-primary mx-1" type="button"
+                        onclick="addUserToList(<?= $team->getId() ?>)">Ανάθεση Εργασίας
                 </button>
             </div>
         </form>
