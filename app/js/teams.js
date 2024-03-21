@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Display new team component with the new data, at the top of the page
                 const team = document.querySelector('.row');
-                team.insertAdjacentHTML('afterbegin', data.HTMLComponent);
+                team.insertAdjacentHTML('beforeend', data.HTMLComponent);
 
                 displayMessage("Η ομάδα δημιουργήθηκε επιτυχώς", 'success');
             })
