@@ -252,6 +252,18 @@ class TasksListController extends Controller
         $tasksListId = (int)$_POST['tasksList'];
 
         try {
+            $isUserInList = $this->tasksListService->isUserInList($userId, $tasksListId);
+
+            if($isUserInList) {
+                // Return error message
+                $this->returnError(400, 'Η λίστα έχει ήδη ανατεθεί στον χρήστη');
+            }
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+
+        try {
             // Add the user to the tasks list
             $user = $this->tasksListService->addUserToTasksList($userId, $tasksListId);
 

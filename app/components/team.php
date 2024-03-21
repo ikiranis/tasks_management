@@ -44,7 +44,7 @@ use apps4net\tasks\libraries\App;
 
         <form id="addUserToListForm<?= $team->getId() ?>" action="api/addUserToList" method="POST" class="row mt-5">
             <div class="col-12 col-lg-6 mt-2 mt-lg-0">
-                <select class="form-select mx-1" name="tasksList" aria-label="Εργασία">
+                <select class="form-select mx-1" name="tasksList" id="tasksList" aria-label="Εργασία">
                     <?php
                     // Display the tasks lists options
                     foreach ($tasksLists as $list) {

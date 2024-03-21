@@ -75,7 +75,7 @@ const addUserToTeam = (teamId) => {
 
             // Add the new user to the list of users in the addUserToListForm
             const addUserToListForm = document.getElementById('addUserToListForm' + teamId);
-            const select = addUserToListForm.querySelector('#name');
+            const select = addUserToListForm.querySelector('#user');
             const option = document.createElement('option');
 
             option.value = data.user.id;

@@ -317,4 +317,31 @@ class TasksListService
 
         return $user;
     }
+
+    /**
+     * Check if user is already in list
+     *
+     * @throws \Exception
+     */
+    public function isUserInList(int $userId, int $tasksListId): bool
+    {
+        DB::connect();
+
+        $sql = "SELECT * FROM list_users WHERE userId = :userId AND tasksListId = :tasksListId";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':userId', $userId);
+            $stmt->bindParam(':tasksListId', $tasksListId);
+            $stmt->execute();
+
+            $result = $stmt->fetch();
+        } catch (\PDOException $e) {
+            throw new \Exception($e->getMessage());
+        }
+
+        DB::close();
+
+        return (bool)$result;
+    }
 }
