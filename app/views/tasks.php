@@ -15,7 +15,7 @@ use apps4net\tasks\libraries\App;
 
     <section class="mb-5">
         <div class="container text-center">
-            <div class="row tasksListsContainer">
+            <div class="tasksListsContainer d-flex flex-row overflow-auto">
                 <?php
                 // Display the tasks lists components, for every item in array $tasksList
                 foreach ($tasksList as $list) {

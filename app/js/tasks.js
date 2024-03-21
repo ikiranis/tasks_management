@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 this.reset();
 
                 // Display new tasks list component with the new data, at the top of the page
-                const tasksList = document.querySelector('.row');
+                const tasksList = document.querySelector('.tasksListsContainer');
                 tasksList.insertAdjacentHTML('afterbegin', data.HTMLComponent);
 
                 displayMessage("Η λίστα δημιουργήθηκε επιτυχώς", 'success');
