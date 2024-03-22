@@ -13,7 +13,7 @@ use apps4net\tasks\libraries\App;
     ]); ?>
 
     <div class="card">
-        <div class="card-header d-flex justify-content-between text-start">
+        <div class="card-header d-sm-block d-lg-flex justify-content-lg-between text-start">
             <div class="my-auto">
                 <div>
                     <span><strong><?= $list->getTitle() ?></strong> (<?= $list->getStatusName() ?>)</span>
