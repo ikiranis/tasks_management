@@ -22,7 +22,7 @@ function isActive(string $pageToCheck): string
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-light my-0">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="<?= App::getSubdir() ?>">
             <img src="images/logo.svg" alt="Logo" width="100">
         </a>
 
@@ -35,7 +35,7 @@ function isActive(string $pageToCheck): string
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item mx-1">
-                    <a class="nav-link btn btn-light <?php echo isActive('index'); ?>" href="/">Αρχική</a>
+                    <a class="nav-link btn btn-light <?php echo isActive('index'); ?>" href="<?= App::getSubdir() ?>">Αρχική</a>
                 </li>
                 <?php
                 // Check if the user has permission to view the tasks and teams menu items

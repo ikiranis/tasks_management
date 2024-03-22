@@ -100,4 +100,14 @@ class App
     {
         echo "<script src=" . "app/js/" . $script . ".js></script>";
     }
+
+    /**
+     * Get the subdirectory of the app, to use it in the URLs, if project is in subdirectory
+     *
+     * @return string
+     */
+    public static function getSubdir(): string
+    {
+        return str_replace($_SERVER['DOCUMENT_ROOT'], '', dirname($_SERVER['PHP_SELF']));
+    }
 }
