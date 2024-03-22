@@ -4,7 +4,7 @@ use apps4net\tasks\libraries\App;
 
 ?>
 
-<div id="tasksList<?= $list->getId() ?>" class="tasksList col-4 mx-3 mb-5">
+<div id="tasksList<?= $list->getId() ?>" class="tasksList col-lg-4 col-12 mx-lg-3 mx-0 mb-5">
 
     <?php App::component('editListForm', [
         'list' => $list,
