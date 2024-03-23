@@ -8,7 +8,6 @@ Options -Indexes
 </Files>
 
 # Set routing rules for apache
-
 RewriteEngine On
 
 # Redirect Trailing Slashes If Not A Folder...
