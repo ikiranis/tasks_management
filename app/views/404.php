@@ -14,8 +14,8 @@ use apps4net\tasks\libraries\App;
     <section class="container">
         <div class="text-center">
             <div class="alert alert-danger" role="alert">
-                <h4 class="alert-heading">Η σελίδα δεν υπάρχει!</h4>
-                <p>Δυστυχώς, η σελίδα που αναζητάτε δεν υπάρχει ή δεν έχετε δικαιώματα πρόσβασης.</p>
+                <h4 class="alert-heading">Η σελίδα δεν μπορεί να εμφανισθεί!</h4>
+                <p>Δυστυχώς, δεν έχετε δικαιώματα πρόσβασης.</p>
                 <hr>
                 <p class="mb-0">Παρακαλούμε επιστρέψτε στην αρχική σελίδα ή επικοινωνήστε με τον διαχειριστή για περισσότερες πληροφορίες.</p>
             </div>

@@ -16,12 +16,21 @@
 namespace apps4net\tasks\controllers;
 
 use apps4net\tasks\libraries\App;
+use apps4net\tasks\libraries\Permission;
 
 class Controller
 {
     public function __construct()
     {
         $this->checkCORS();
+
+        // Check if the user has permission to access the page
+        // If not, display 404 page
+
+        if (!Permission::getPermissionFor(App::getCurrentPage())) {
+            App::view('404');
+            exit();
+        }
     }
 
     /**
