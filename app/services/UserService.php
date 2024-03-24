@@ -63,9 +63,13 @@ class UserService
     /**
      * Register a new user with default user role
      *
+     * @param string $username
+     * @param string $password
+     * @param string $name
+     * @param string $email
      * @throws \Exception
      */
-    public function registerUser(mixed $username, mixed $password, mixed $name, mixed $email): void
+    public function registerUser(string $username, string $password, string $name, string $email): void
     {
         DB::connect();
 
@@ -141,6 +145,8 @@ class UserService
     /**
      * Check if the username exists
      *
+     * @param string $username
+     * @return bool
      * @throws \Exception
      */
     public function checkUsername(string $username): bool
