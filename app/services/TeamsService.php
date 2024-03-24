@@ -48,9 +48,11 @@ class TeamsService
     /**
      * Create a new team
      *
+     * @param string $name
+     * @return Team
      * @throws \Exception
      */
-    public function createTeam($name): Team
+    public function createTeam(string $name): Team
     {
         DB::connect();
 

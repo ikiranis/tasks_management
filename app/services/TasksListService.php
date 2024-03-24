@@ -24,6 +24,10 @@ class TasksListService
     /**
      * Create a new task list
      *
+     * @param string $title
+     * @param int $categoryId
+     * @param int $statusId
+     * @return TasksList
      * @throws \Exception
      */
     public function create(string $title, int $categoryId, int $statusId): TasksList
