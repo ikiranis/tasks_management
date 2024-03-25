@@ -18,5 +18,4 @@ cp .env.example .env
 
 Edit the file
 
-## Usage
 
