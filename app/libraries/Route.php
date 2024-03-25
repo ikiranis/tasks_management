@@ -100,15 +100,14 @@ class Route
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $currentRootDir = dirname($_SERVER['PHP_SELF']);
 
-        // Get the subdirectory
+        // Get the subdirectory (for app running in a subdirectory)
         $subdirectory = str_replace($_SERVER['DOCUMENT_ROOT'], '', $currentRootDir);
 
-        // Remove the root directory from the path
-//        $path = substr($path, strlen($currentRootDir));
+        // Remove the root directory (with subdirectory) from the path
         $path = substr($path, strlen($subdirectory));
         $path = rtrim($path, '/');
         $path = ltrim($path, '/');
-        // remove double slashes
+
         $callback = self::$routes[$path];
 
 
