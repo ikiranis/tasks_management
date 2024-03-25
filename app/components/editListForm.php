@@ -29,7 +29,8 @@
             foreach ($statuses as $status) {
                 ?>
                 <option value="<?= $status->getId() ?>" <?= $status->getId() == $list->getStatusId() ? 'selected' : '' ?>>
-                    <?= $status->getName() ?> </option>
+                    <?= $status->getName() ?>
+                </option>
                 <?php
             }
             ?>
