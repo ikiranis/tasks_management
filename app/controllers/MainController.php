@@ -34,4 +34,24 @@ class MainController extends Controller
     {
         App::view('index');
     }
+
+    /**
+     * Display the terms of use page
+     *
+     * @return void
+     */
+    public function termsOfUse(): void
+    {
+        App::view('termsOfUse');
+    }
+
+    /**
+     * Display the privacy policy page
+     *
+     * @return void
+     */
+    public function privacyPolicy(): void
+    {
+        App::view('privacyPolicy');
+    }
 }
