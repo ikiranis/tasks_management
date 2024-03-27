@@ -22,8 +22,6 @@ class Controller
 {
     public function __construct()
     {
-        $this->checkCORS();
-
         // Check if the user has permission to access the page
         // If not, display 404 page
 
@@ -31,17 +29,6 @@ class Controller
             App::view('404');
             exit();
         }
-    }
-
-    /**
-     * Check if the request is CORS
-     *
-     * @return void
-     */
-    private function checkCORS(): void
-    {
-        // set headers to allow CORS
-        header("Access-Control-Allow-Origin: *");
     }
 
     /**
