@@ -62,7 +62,7 @@ class UserController extends Controller
 
             if ($result) {
                 // Redirect page
-                header("Location: /");
+                header("Location: " . App::getSubdir());
             } else {
                 App::view('login');
             }
@@ -107,7 +107,7 @@ class UserController extends Controller
         $_SESSION['userId'] = null;
 
         // Redirect to the index page
-        header("Location: /");
+        header("Location: " . App::getSubdir());
     }
 
     /**
