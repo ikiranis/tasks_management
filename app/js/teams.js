@@ -66,9 +66,10 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 // Do this on success
 
-                console.log(data);
+                // Export xml to file
+                exportXMLToFile(data.xml);
 
-                displayMessage('To XML δημιουργήθηξε', 'success');
+                displayMessage('To XML δημιουργήθηκε', 'success');
             })
             .catch(error => {
                 // Do this on error
@@ -76,6 +77,16 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
+
+const exportXMLToFile = (data) => {
+    const blob = new Blob([data], {type: 'application/xml'});
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'teams.xml';
+    a.click();
+    window.URL.revokeObjectURL(url);
+}
 
 /**
  * Add a user to a team
