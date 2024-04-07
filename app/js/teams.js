@@ -78,6 +78,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+/**
+ * Export data to file
+ *
+ * @param data
+ */
 const exportXMLToFile = (data) => {
     const blob = new Blob([data], {type: 'application/xml'});
     const url = window.URL.createObjectURL(blob);
