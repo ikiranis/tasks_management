@@ -34,6 +34,7 @@ Route::post('api/createTeam', [TeamsController::class, 'createTeam']);
 Route::post('api/addUserToTeam', [TeamsController::class, 'addUserToTeam']);
 Route::post('api/addUserToList', [TasksListController::class, 'addUserToList']);
 Route::get('api/checkUsername', [UserController::class, 'checkUsername']);
+Route::get('api/exportTeamsToXML', [TeamsController::class, 'exportTeamsToXML']);
 
 // Run the routes
 

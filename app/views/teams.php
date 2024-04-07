@@ -28,7 +28,9 @@ use apps4net\tasks\libraries\App;
                 ?>
             </div>
 
-           <?php App::component('createTeamForm'); ?>
+            <?php App::component('createTeamForm'); ?>
+
+            <?php App::component('exportToXMLForm'); ?>
         </div>
 
         <?php App::component('error'); ?>

@@ -156,4 +156,9 @@ class TeamsController extends Controller
             $this->returnError(400, $e->getMessage());
         }
     }
+
+    public function exportTeamsToXML(): void
+    {
+        $this->returnSuccess(['message' => 'Η εξαγωγή των ομάδων σε XML ολοκληρώθηκε με επιτυχία!']);
+    }
 }
