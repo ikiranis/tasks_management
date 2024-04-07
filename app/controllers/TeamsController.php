@@ -159,6 +159,16 @@ class TeamsController extends Controller
 
     public function exportTeamsToXML(): void
     {
-        $this->returnSuccess(['message' => 'Η εξαγωγή των ομάδων σε XML ολοκληρώθηκε με επιτυχία!']);
+        $xml= '';
+
+        try {
+            $xml = $this->teamsService->getXML();
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+
+        // Return success json response
+        $this->returnSuccess(['xml' => $xml]);
     }
 }

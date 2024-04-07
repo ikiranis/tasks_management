@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 console.log(data);
 
-                displayMessage(data.message, 'success');
+                displayMessage('To XML δημιουργήθηξε', 'success');
             })
             .catch(error => {
                 // Do this on error

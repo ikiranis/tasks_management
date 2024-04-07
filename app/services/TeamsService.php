@@ -16,6 +16,8 @@ namespace apps4net\tasks\services;
 use apps4net\tasks\libraries\DB;
 use apps4net\tasks\models\Team;
 use apps4net\tasks\models\User;
+use DOMDocument;
+use SimpleXMLElement;
 
 class TeamsService
 {
@@ -143,5 +145,65 @@ class TeamsService
         DB::close();
 
         return (bool)$result;
+    }
+
+    /**
+     * Export teams to XML
+     *
+     * @throws \DOMException
+     * @throws \Exception
+     */
+    public function getXML(): string
+    {
+        // Create a new DOM document with the XML version and encoding
+        $dom = new DOMDocument('1.0', 'UTF-8');
+
+        // Create the root element
+        $root = $dom->createElement('TEAMS');
+        $root = $dom->appendChild($root);
+
+        $teams = $this->getAll();
+
+        foreach ($teams as $team) {
+            $teamElement = $dom->createElement('TEAM');
+            $teamElement = $root->appendChild($teamElement);
+
+            $teamElement->appendChild($dom->createElement('ID', $team->getId()));
+            $teamElement->appendChild($dom->createElement('NAME', $team->getName()));
+
+            $users = $team->getUsers();
+
+            $usersElement = $dom->createElement('USERS');
+            $usersElement = $teamElement->appendChild($usersElement);
+
+            foreach ($users as $user) {
+                $userElement = $dom->createElement('USER');
+                $userElement = $usersElement->appendChild($userElement);
+
+                $userElement->appendChild($dom->createElement('ID', $user->getId()));
+                $userElement->appendChild($dom->createElement('NAME', $user->getName()));
+                $userElement->appendChild($dom->createElement('EMAIL', $user->getEmail()));
+                $userElement->appendChild($dom->createElement('ROLE', $user->getRole()));
+
+                $tasksLists = $user->getTasksLists();
+
+                $tasksListsElement = $dom->createElement('TASKSLISTS');
+                $tasksListsElement = $userElement->appendChild($tasksListsElement);
+
+                foreach ($tasksLists as $tasksList) {
+                    $tasksListElement = $dom->createElement('TASKSLIST');
+                    $tasksListElement = $tasksListsElement->appendChild($tasksListElement);
+
+                    $tasksListElement->appendChild($dom->createElement('ID', $tasksList->getId()));
+                    $tasksListElement->appendChild($dom->createElement('TITTLE', $tasksList->getTitle()));
+                }
+            }
+
+        }
+
+        // Format the output to be readable
+        $dom->formatOutput = true;
+
+        return $dom->saveXML();
     }
 }

@@ -13,6 +13,7 @@
 
 namespace apps4net\tasks\models;
 
+use apps4net\tasks\libraries\DB;
 use JsonSerializable;
 
 class User implements JsonSerializable
@@ -82,6 +83,34 @@ class User implements JsonSerializable
     public function setRole(int $role): void
     {
         $this->role = $role;
+    }
+
+    /**
+     * Get the tasks lists of the user
+     *
+     * @throws \Exception
+     */
+    public function getTasksLists(): array
+    {
+        DB::connect();
+
+        $sql = "SELECT tl.* FROM tasks_list tl JOIN list_users lu ON tl.id = lu.tasksListId WHERE lu.userId = :userId";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':userId', $this->id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\TasksList');
+
+            $tasksLists = $stmt->fetchAll();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        DB::close();
+
+        return $tasksLists;
     }
 
     public function jsonSerialize(): mixed
