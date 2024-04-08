@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 // Do this on success
 
-                // Export xml to file
+                // Export xml to file and download it
                 exportXMLToFile(data.xml);
 
                 displayMessage('To XML δημιουργήθηκε', 'success');
@@ -84,12 +84,18 @@ document.addEventListener('DOMContentLoaded', function () {
  * @param data
  */
 const exportXMLToFile = (data) => {
+    // Create a blob with the data
     const blob = new Blob([data], {type: 'application/xml'});
+    // Create a URL for the blob
     const url = window.URL.createObjectURL(blob);
+
+    // Create an anchor element and download the file
     const a = document.createElement('a');
     a.href = url;
     a.download = 'teams.xml';
     a.click();
+
+    // Revoke the URL
     window.URL.revokeObjectURL(url);
 }
 

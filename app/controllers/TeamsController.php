@@ -157,11 +157,17 @@ class TeamsController extends Controller
         }
     }
 
+    /**
+     * Export the teams to XML file
+     *
+     * @return void
+     */
     public function exportTeamsToXML(): void
     {
         $xml= '';
 
         try {
+            // Get the XML of the teams as an XML string
             $xml = $this->teamsService->getXML();
         } catch (\Exception $e) {
             // Return error message
