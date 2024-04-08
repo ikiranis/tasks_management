@@ -156,9 +156,9 @@ class TeamsService
      */
     public function getXML(): string
     {
+        // Define the DTD for the XML document
         $implementation = new DOMImplementation();
 
-        // Define your DTD
         $dtd = <<<DTD
 <!DOCTYPE teams [
 <!ELEMENT teams (team*)>
@@ -196,54 +196,85 @@ DTD;
         $root = $dom->createElement('teams');
         $root = $dom->appendChild($root);
 
+        // Get all teams
         $teams = $this->getAll();
 
         foreach ($teams as $team) {
+            // Create the team element
             $teamElement = $dom->createElement('team');
+
+            // Set the team id as an attribute
             $teamElement->setAttribute('id', $team->getId());
+
+            // Append the team element to the root
             $teamElement = $root->appendChild($teamElement);
 
+            // Append the team name
             $teamElement->appendChild($dom->createElement('name', $team->getName()));
 
+            // Get all users in the team
             $users = $team->getUsers();
 
+            // Create the users element
             $usersElement = $dom->createElement('users');
             $usersElement = $teamElement->appendChild($usersElement);
 
             foreach ($users as $user) {
+                // Create the user element
                 $userElement = $dom->createElement('user');
+
+                // Set the user id as an attribute
                 $userElement->setAttribute('id', $user->getId());
+
+                // Append the user element to the users element
                 $userElement = $usersElement->appendChild($userElement);
 
+                // Append the user data
                 $userElement->appendChild($dom->createElement('username', $user->getUserName()));
                 $userElement->appendChild($dom->createElement('name', $user->getName()));
                 $userElement->appendChild($dom->createElement('email', $user->getEmail()));
             }
 
+            // Get all tasks lists for the team
             $tasksLists = $team->getTasksLists();
 
+            // Create the tasks lists element
             $tasksListsElement = $dom->createElement('tasksLists');
             $tasksListsElement = $teamElement->appendChild($tasksListsElement);
 
             foreach ($tasksLists as $tasksList) {
+                // Create the tasks list element
                 $tasksListElement = $dom->createElement('taskslist');
+
+                // Set the tasks list id as an attribute
                 $tasksListElement->setAttribute('id', $tasksList->getId());
+
+                // Append the tasks list element to the tasks lists element
                 $tasksListElement = $tasksListsElement->appendChild($tasksListElement);
 
+                // Append the tasks list data
                 $tasksListElement->appendChild($dom->createElement('tittle', $tasksList->getTitle()));
                 $tasksListElement->appendChild($dom->createElement('category', $tasksList->getCategoryName()));
                 $tasksListElement->appendChild($dom->createElement('status', $tasksList->getStatusName()));
 
+                // Get the tasks for the tasks list
                 $tasks = $tasksList->getTasks();
 
+                // Create the tasks element
                 $tasksElement = $dom->createElement('tasks');
                 $tasksElement = $tasksListElement->appendChild($tasksElement);
 
                 foreach ($tasks as $task) {
+                    // Create the task element
                     $taskElement = $dom->createElement('task');
+
+                    // Set the task id as an attribute
                     $taskElement->setAttribute('id', $task->getId());
+
+                    // Append the task element to the tasks element
                     $taskElement = $tasksElement->appendChild($taskElement);
 
+                    // Append the task data
                     $taskElement->appendChild($dom->createElement('title', $task->getTitle()));
                 }
             }
@@ -252,6 +283,7 @@ DTD;
         // Format the output to be readable
         $dom->formatOutput = true;
 
+        // Return the XML document as a string
         return $dom->saveXML();
     }
 }
