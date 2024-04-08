@@ -159,43 +159,55 @@ class TeamsService
         $dom = new DOMDocument('1.0', 'UTF-8');
 
         // Create the root element
-        $root = $dom->createElement('TEAMS');
+        $root = $dom->createElement('teams');
         $root = $dom->appendChild($root);
 
         $teams = $this->getAll();
 
         foreach ($teams as $team) {
-            $teamElement = $dom->createElement('TEAM');
+            $teamElement = $dom->createElement('team');
             $teamElement = $root->appendChild($teamElement);
 
-            $teamElement->appendChild($dom->createElement('ID', $team->getId()));
-            $teamElement->appendChild($dom->createElement('NAME', $team->getName()));
+            $teamElement->appendChild($dom->createElement('name', $team->getName()));
 
             $users = $team->getUsers();
 
-            $usersElement = $dom->createElement('USERS');
+            $usersElement = $dom->createElement('users');
             $usersElement = $teamElement->appendChild($usersElement);
 
             foreach ($users as $user) {
-                $userElement = $dom->createElement('USER');
+                $userElement = $dom->createElement('user');
                 $userElement = $usersElement->appendChild($userElement);
 
-                $userElement->appendChild($dom->createElement('ID', $user->getId()));
-                $userElement->appendChild($dom->createElement('NAME', $user->getName()));
-                $userElement->appendChild($dom->createElement('EMAIL', $user->getEmail()));
-                $userElement->appendChild($dom->createElement('ROLE', $user->getRole()));
+
+                $userElement->appendChild($dom->createElement('username', $user->getUserName()));
+                $userElement->appendChild($dom->createElement('name', $user->getName()));
+                $userElement->appendChild($dom->createElement('email', $user->getEmail()));
 
                 $tasksLists = $user->getTasksLists();
 
-                $tasksListsElement = $dom->createElement('TASKSLISTS');
+                $tasksListsElement = $dom->createElement('tasksLists');
                 $tasksListsElement = $userElement->appendChild($tasksListsElement);
 
                 foreach ($tasksLists as $tasksList) {
-                    $tasksListElement = $dom->createElement('TASKSLIST');
+                    $tasksListElement = $dom->createElement('taskslist');
                     $tasksListElement = $tasksListsElement->appendChild($tasksListElement);
 
-                    $tasksListElement->appendChild($dom->createElement('ID', $tasksList->getId()));
-                    $tasksListElement->appendChild($dom->createElement('TITTLE', $tasksList->getTitle()));
+                    $tasksListElement->appendChild($dom->createElement('tittle', $tasksList->getTitle()));
+                    $tasksListElement->appendChild($dom->createElement('category', $tasksList->getCategoryName()));
+                    $tasksListElement->appendChild($dom->createElement('status', $tasksList->getStatusName()));
+
+                    $tasks = $tasksList->getTasks();
+
+                    $tasksElement = $dom->createElement('tasks');
+                    $tasksElement = $tasksListElement->appendChild($tasksElement);
+
+                    foreach ($tasks as $task) {
+                        $taskElement = $dom->createElement('task');
+                        $taskElement = $tasksElement->appendChild($taskElement);
+
+                        $taskElement->appendChild($dom->createElement('title', $task->getTitle()));
+                    }
                 }
             }
 
