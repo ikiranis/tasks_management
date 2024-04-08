@@ -17,6 +17,7 @@ use apps4net\tasks\libraries\DB;
 use apps4net\tasks\models\Team;
 use apps4net\tasks\models\User;
 use DOMDocument;
+use DOMImplementation;
 use SimpleXMLElement;
 
 class TeamsService
@@ -155,8 +156,41 @@ class TeamsService
      */
     public function getXML(): string
     {
+        $implementation = new DOMImplementation();
+
+        // Define your DTD
+        $dtd = <<<DTD
+<!DOCTYPE teams [
+<!ELEMENT teams (team*)>
+<!ELEMENT team (name, users, tasksLists)>
+<!ATTLIST team id CDATA #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT users (user+)>
+<!ELEMENT user (username, name, email)>
+<!ATTLIST user id CDATA #REQUIRED>
+<!ELEMENT username (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT tasksLists (taskslist*)>
+<!ELEMENT taskslist (tittle, category, status, tasks)>
+<!ATTLIST taskslist id CDATA #REQUIRED>
+<!ELEMENT tittle (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT tasks (task*)>
+<!ELEMENT task (title)>
+<!ATTLIST task id CDATA #REQUIRED>
+<!ELEMENT title (#PCDATA)>
+]>
+DTD;
+
+        // Create a DOMDocumentType instance
+        $dtd = $implementation->createDocumentType('teams', '', $dtd);
+
         // Create a new DOM document with the XML version and encoding
-        $dom = new DOMDocument('1.0', 'UTF-8');
+        $dom = $implementation->createDocument('1.0', '', $dtd);
+
+        // Add utf-8 encoding
+        $dom->encoding = 'UTF-8';
 
         // Create the root element
         $root = $dom->createElement('teams');
@@ -166,6 +200,7 @@ class TeamsService
 
         foreach ($teams as $team) {
             $teamElement = $dom->createElement('team');
+            $teamElement->setAttribute('id', $team->getId());
             $teamElement = $root->appendChild($teamElement);
 
             $teamElement->appendChild($dom->createElement('name', $team->getName()));
@@ -177,40 +212,41 @@ class TeamsService
 
             foreach ($users as $user) {
                 $userElement = $dom->createElement('user');
+                $userElement->setAttribute('id', $user->getId());
                 $userElement = $usersElement->appendChild($userElement);
-
 
                 $userElement->appendChild($dom->createElement('username', $user->getUserName()));
                 $userElement->appendChild($dom->createElement('name', $user->getName()));
                 $userElement->appendChild($dom->createElement('email', $user->getEmail()));
-
-                $tasksLists = $user->getTasksLists();
-
-                $tasksListsElement = $dom->createElement('tasksLists');
-                $tasksListsElement = $userElement->appendChild($tasksListsElement);
-
-                foreach ($tasksLists as $tasksList) {
-                    $tasksListElement = $dom->createElement('taskslist');
-                    $tasksListElement = $tasksListsElement->appendChild($tasksListElement);
-
-                    $tasksListElement->appendChild($dom->createElement('tittle', $tasksList->getTitle()));
-                    $tasksListElement->appendChild($dom->createElement('category', $tasksList->getCategoryName()));
-                    $tasksListElement->appendChild($dom->createElement('status', $tasksList->getStatusName()));
-
-                    $tasks = $tasksList->getTasks();
-
-                    $tasksElement = $dom->createElement('tasks');
-                    $tasksElement = $tasksListElement->appendChild($tasksElement);
-
-                    foreach ($tasks as $task) {
-                        $taskElement = $dom->createElement('task');
-                        $taskElement = $tasksElement->appendChild($taskElement);
-
-                        $taskElement->appendChild($dom->createElement('title', $task->getTitle()));
-                    }
-                }
             }
 
+            $tasksLists = $team->getTasksLists();
+
+            $tasksListsElement = $dom->createElement('tasksLists');
+            $tasksListsElement = $teamElement->appendChild($tasksListsElement);
+
+            foreach ($tasksLists as $tasksList) {
+                $tasksListElement = $dom->createElement('taskslist');
+                $tasksListElement->setAttribute('id', $tasksList->getId());
+                $tasksListElement = $tasksListsElement->appendChild($tasksListElement);
+
+                $tasksListElement->appendChild($dom->createElement('tittle', $tasksList->getTitle()));
+                $tasksListElement->appendChild($dom->createElement('category', $tasksList->getCategoryName()));
+                $tasksListElement->appendChild($dom->createElement('status', $tasksList->getStatusName()));
+
+                $tasks = $tasksList->getTasks();
+
+                $tasksElement = $dom->createElement('tasks');
+                $tasksElement = $tasksListElement->appendChild($tasksElement);
+
+                foreach ($tasks as $task) {
+                    $taskElement = $dom->createElement('task');
+                    $taskElement->setAttribute('id', $task->getId());
+                    $taskElement = $tasksElement->appendChild($taskElement);
+
+                    $taskElement->appendChild($dom->createElement('title', $task->getTitle()));
+                }
+            }
         }
 
         // Format the output to be readable

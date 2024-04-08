@@ -67,4 +67,31 @@ class Team
 
         return $users;
     }
+
+    /**
+     * Get all tasks lists set for all users in a team
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function getTasksLists(): array
+    {
+        DB::connect();
+
+        $sql = "SELECT tl.* FROM tasks_list tl JOIN list_users lu ON tl.id = lu.tasksListId WHERE lu.userId IN (SELECT userId FROM team_users WHERE teamId = :teamId) GROUP BY tl.id";
+
+        try {
+            $stmt = DB::$conn->prepare($sql);
+            $stmt->bindParam(':teamId', $this->id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, '\apps4net\tasks\models\TasksList');
+
+            $tasksLists = $stmt->fetchAll();
+        } catch (\PDOException $e) {
+            throw new \Exception("Error: " . $e->getMessage());
+        }
+
+        return $tasksLists;
+    }
 }
