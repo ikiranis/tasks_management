@@ -18,6 +18,8 @@ use apps4net\tasks\models\User;
 use apps4net\tasks\services\TasksListService;
 use apps4net\tasks\services\TeamsService;
 use apps4net\tasks\services\UserService;
+use DOMDocument;
+use XSLTProcessor;
 
 class TeamsController extends Controller
 {
@@ -176,5 +178,28 @@ class TeamsController extends Controller
 
         // Return success json response
         $this->returnSuccess(['xml' => $xml]);
+    }
+
+    public function displayTranformedXML(): void
+    {
+        $xml = '';
+        $xsl = new DOMDocument();
+        $xsl->load('xsl/default.xsl');
+
+        try {
+            // Get the XML of the teams as an XML string
+            $xml = $this->teamsService->getXML();
+        } catch (\Exception $e) {
+            // Return error message
+            $this->returnError(400, $e->getMessage());
+        }
+
+        $proc = new XSLTProcessor();
+
+        $xsl->loadXML($xml);
+
+        $transformed = $proc->transformToXML($xsl);
+
+        echo $transformed;
     }
 }
