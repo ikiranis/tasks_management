@@ -9,7 +9,7 @@
 
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
                       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-                      crossorigin="anonymous" />
+                      crossorigin="anonymous"/>
 
             </head>
             <body>
@@ -47,6 +47,37 @@
                                 </xls:for-each>
                             </tbody>
                         </table>
+
+                        <div class="d-flex justify-content-center bg-secondary text-light">
+                            <h3>Λίστες εργασιών</h3>
+                        </div>
+
+                        <xls:for-each select="taskslists/taskslist">
+                            <div>
+                                <div class="d-flex">
+                                    <h3> : : : <xsl:value-of select="tittle"/></h3>
+                                    <span class="badge bg-primary mx-3 my-auto">
+                                        <xsl:value-of select="status"/>
+                                    </span>
+                                </div>
+
+                                <div>
+                                    <span class="badge bg-secondary">
+                                        <xsl:value-of select="category"/>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <h4>Εργασίες</h4>
+
+                            <ul>
+                                <xls:for-each select="tasks/task">
+                                    <li>
+                                        <xsl:value-of select="title"/>
+                                    </li>
+                                </xls:for-each>
+                            </ul>
+                        </xls:for-each>
                     </div>
                 </xls:for-each>
             </body>
