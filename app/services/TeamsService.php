@@ -162,7 +162,7 @@ class TeamsService
         $dtd = <<<DTD
 <!DOCTYPE teams [
 <!ELEMENT teams (team*)>
-<!ELEMENT team (name, users, tasksLists)>
+<!ELEMENT team (name, users, taskslists)>
 <!ATTLIST team id CDATA #REQUIRED>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT users (user+)>
@@ -170,7 +170,7 @@ class TeamsService
 <!ATTLIST user id CDATA #REQUIRED>
 <!ELEMENT username (#PCDATA)>
 <!ELEMENT email (#PCDATA)>
-<!ELEMENT tasksLists (taskslist*)>
+<!ELEMENT taskslists (taskslist*)>
 <!ELEMENT taskslist (tittle, category, status, tasks)>
 <!ATTLIST taskslist id CDATA #REQUIRED>
 <!ELEMENT tittle (#PCDATA)>
@@ -239,7 +239,7 @@ DTD;
             $tasksLists = $team->getTasksLists();
 
             // Create the tasks lists element
-            $tasksListsElement = $dom->createElement('tasksLists');
+            $tasksListsElement = $dom->createElement('taskslists');
             $tasksListsElement = $teamElement->appendChild($tasksListsElement);
 
             foreach ($tasksLists as $tasksList) {
