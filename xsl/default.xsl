@@ -17,7 +17,7 @@
                 <xls:for-each select="/teams/team">
                     <div class="team">
                         <h1>
-                            <xsl:value-of select="/teams/name"/>
+                            <xsl:value-of select="name"/>
                         </h1>
                     </div>
                 </xls:for-each>

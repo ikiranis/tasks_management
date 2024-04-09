@@ -195,6 +195,7 @@ class TeamsController extends Controller
         }
 
         $proc = new XSLTProcessor();
+        $proc->importStylesheet($xsl);
 
         $xsl->loadXML($xml);
 
