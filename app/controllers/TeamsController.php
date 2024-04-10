@@ -212,6 +212,8 @@ class TeamsController extends Controller
                 }
             }
         } catch (\Exception $e) {
+            // Display the errors
+
             echo "<p>The XML document is not valid according to its DTD</p>";
 
             echo '<p>' . $e->getMessage() . '</p>';
