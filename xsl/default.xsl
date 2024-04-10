@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="d-flex justify-content-center bg-secondary text-light">
-                            <h3>Χρήστες</h3>
+                            <h4>Χρήστες</h4>
                         </div>
 
                         <div class="table-responsive mx-3 mt-3">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="d-flex justify-content-center bg-secondary text-light">
-                            <h3>Λίστες εργασιών</h3>
+                            <h4>Λίστες εργασιών</h4>
                         </div>
 
                         <div class="row row-cols-1 row-cols-md-2 g-4 mt-3 mx-2 mb-3">

@@ -135,7 +135,7 @@ class TeamsController extends Controller
         try {
             $isUserInTeam = $this->teamsService->isUserInTeam($teamId, $userId);
 
-            if($isUserInTeam) {
+            if ($isUserInTeam) {
                 // Return error message
                 $this->returnError(400, 'Ο χρήστης είναι ήδη στην ομάδα');
             }
@@ -166,7 +166,7 @@ class TeamsController extends Controller
      */
     public function exportTeamsToXML(): void
     {
-        $xml= '';
+        $xml = '';
 
         try {
             // Get the XML of the teams as an XML string
@@ -180,15 +180,26 @@ class TeamsController extends Controller
         $this->returnSuccess(['xml' => $xml]);
     }
 
+    /**
+     * Display the transformed XML, with default.xsl
+     *
+     * @return void
+     */
     public function displayTranformedXML(): void
     {
-        $xml = '';
+        $xml = new DOMDocument();
         $xsl = new DOMDocument();
         $xsl->load('xsl/default.xsl');
 
         try {
             // Get the XML of the teams as an XML string
-            $xml = $this->teamsService->getXML();
+            $xmlString = $this->teamsService->getXML();
+
+            $xml->loadXML($xmlString, LIBXML_DTDLOAD | LIBXML_DTDVALID | LIBXML_NOENT);
+
+            if (!$xml->validate()) {
+                echo('The XML document is not valid according to its DTD');
+            }
         } catch (\Exception $e) {
             // Return error message
             $this->returnError(400, $e->getMessage());
@@ -197,9 +208,7 @@ class TeamsController extends Controller
         $proc = new XSLTProcessor();
         $proc->importStylesheet($xsl);
 
-        $xsl->loadXML($xml);
-
-        $transformed = $proc->transformToXML($xsl);
+        $transformed = $proc->transformToXML($xml);
 
         echo $transformed;
     }

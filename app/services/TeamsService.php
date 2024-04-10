@@ -156,10 +156,7 @@ class TeamsService
      */
     public function getXML(): string
     {
-        // Define the DTD for the XML document
-        $implementation = new DOMImplementation();
-
-        $dtd = <<<DTD
+        $dtdText = "
 <!DOCTYPE teams [
 <!ELEMENT teams (team*)>
 <!ELEMENT team (name, users, taskslists)>
@@ -181,15 +178,12 @@ class TeamsService
 <!ATTLIST task id CDATA #REQUIRED>
 <!ELEMENT title (#PCDATA)>
 ]>
-DTD;
 
-        // Create a DOMDocumentType instance
-        $dtd = $implementation->createDocumentType('teams', '', $dtd);
+";
 
-        // Create a new DOM document with the XML version and encoding
-        $dom = $implementation->createDocument('1.0', '', $dtd);
+        $dom = new DOMDocument();
 
-        // Add utf-8 encoding
+       // Add utf-8 encoding
         $dom->encoding = 'UTF-8';
 
         // Create the root element
@@ -284,6 +278,9 @@ DTD;
         $dom->formatOutput = true;
 
         // Return the XML document as a string
-        return $dom->saveXML();
+        $xml = $dom->saveXML();
+
+        // Add the DTD to the XML document
+        return str_replace('<teams>', $dtdText . '<teams>', $xml);
     }
 }

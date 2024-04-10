@@ -15,7 +15,8 @@
         "vlucas/phpdotenv": "^5.6",
         "ext-curl": "*",
         "ext-dom": "*",
-        "ext-xsl": "*"
+        "ext-xsl": "*",
+        "ext-libxml": "*"
     },
     "autoload": {
         "psr-4": {
