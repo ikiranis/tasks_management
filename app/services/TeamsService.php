@@ -263,7 +263,7 @@ class TeamsService
                     $taskElement = $dom->createElement('task');
 
                     // Set the task id as an attribute
-                    $taskElement->setAttribute('id', $task->getId());
+                    $taskElement->setAttribute('paok', $task->getId());
 
                     // Append the task element to the tasks element
                     $taskElement = $tasksElement->appendChild($taskElement);

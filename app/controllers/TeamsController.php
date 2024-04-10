@@ -19,6 +19,7 @@ use apps4net\tasks\services\TasksListService;
 use apps4net\tasks\services\TeamsService;
 use apps4net\tasks\services\UserService;
 use DOMDocument;
+use ErrorException;
 use XSLTProcessor;
 
 class TeamsController extends Controller
@@ -184,6 +185,7 @@ class TeamsController extends Controller
      * Display the transformed XML, with default.xsl
      *
      * @return void
+     * @throws ErrorException
      */
     public function displayTranformedXML(): void
     {
@@ -191,18 +193,30 @@ class TeamsController extends Controller
         $xsl = new DOMDocument();
         $xsl->load('xsl/default.xsl');
 
+        // Enable user error handling
+        libxml_use_internal_errors(true);
+
         try {
             // Get the XML of the teams as an XML string
             $xmlString = $this->teamsService->getXML();
 
-            $xml->loadXML($xmlString, LIBXML_DTDLOAD | LIBXML_DTDVALID | LIBXML_NOENT);
+            $xml->loadXML($xmlString);
 
             if (!$xml->validate()) {
-                echo('The XML document is not valid according to its DTD');
+                // Get the validation errors
+                $errors = libxml_get_errors();
+
+                // If there are errors, throw an exception with the first error message
+                if (!empty($errors)) {
+                    throw new \Exception($errors[0]->message);
+                }
             }
         } catch (\Exception $e) {
-            // Return error message
-            $this->returnError(400, $e->getMessage());
+            echo "<p>The XML document is not valid according to its DTD</p>";
+
+            echo '<p>' . $e->getMessage() . '</p>';
+
+            exit();
         }
 
         $proc = new XSLTProcessor();
@@ -211,5 +225,8 @@ class TeamsController extends Controller
         $transformed = $proc->transformToXML($xml);
 
         echo $transformed;
+
+        // Clear the libxml error buffer
+        libxml_clear_errors();
     }
 }
