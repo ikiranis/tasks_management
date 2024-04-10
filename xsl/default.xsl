@@ -15,9 +15,11 @@
             <body>
                 <xls:for-each select="/teams/team">
                     <div class="team">
-                        <h1>
-                            <xsl:value-of select="name"/>
-                        </h1>
+                        <div class="d-flex justify-content-center">
+                            <h1>
+                                <xsl:value-of select="name"/>
+                            </h1>
+                        </div>
 
                         <div class="d-flex justify-content-center bg-secondary text-light">
                             <h3>Χρήστες</h3>
@@ -52,33 +54,44 @@
                             <h3>Λίστες εργασιών</h3>
                         </div>
 
-                        <xls:for-each select="taskslists/taskslist">
-                            <div>
-                                <div class="d-flex">
-                                    <h3> : : : <xsl:value-of select="tittle"/></h3>
-                                    <span class="badge bg-primary mx-3 my-auto">
-                                        <xsl:value-of select="status"/>
-                                    </span>
+                        <div class="row row-cols-1 row-cols-md-2 g-4 mt-3 mx-2 mb-3">
+                            <xls:for-each select="taskslists/taskslist">
+
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="d-flex">
+                                                <h4>
+                                                    <xsl:value-of select="tittle"/>
+                                                </h4>
+                                                <span class="badge bg-primary mx-3 my-auto">
+                                                    <xsl:value-of select="status"/>
+                                                </span>
+                                            </div>
+
+                                            <div>
+                                                <span class="badge bg-secondary">
+                                                    <xsl:value-of select="category"/>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <ul>
+                                                <xls:for-each select="tasks/task">
+                                                    <li>
+                                                        <xsl:value-of select="title"/>
+                                                    </li>
+                                                </xls:for-each>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <div>
-                                    <span class="badge bg-secondary">
-                                        <xsl:value-of select="category"/>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <h4>Εργασίες</h4>
-
-                            <ul>
-                                <xls:for-each select="tasks/task">
-                                    <li>
-                                        <xsl:value-of select="title"/>
-                                    </li>
-                                </xls:for-each>
-                            </ul>
-                        </xls:for-each>
+                            </xls:for-each>
+                        </div>
                     </div>
+
+                    <hr/>
                 </xls:for-each>
             </body>
         </html>
