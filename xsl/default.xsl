@@ -24,31 +24,34 @@
                         <div class="d-flex justify-content-center bg-secondary text-light">
                             <h3>Χρήστες</h3>
                         </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>username</th>
-                                    <th>Όνομα χρήστη</th>
-                                    <th>Email</th>
-                                </tr>
-                            </thead>
 
-                            <tbody>
-                                <xls:for-each select="users/user">
+                        <div class="table-responsive mx-3 mt-3">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-dark">
                                     <tr>
-                                        <td>
-                                            <xsl:value-of select="username"/>
-                                        </td>
-                                        <td>
-                                            <xsl:value-of select="name"/>
-                                        </td>
-                                        <td>
-                                            <xsl:value-of select="email"/>
-                                        </td>
+                                        <th>username</th>
+                                        <th>Όνομα χρήστη</th>
+                                        <th>Email</th>
                                     </tr>
-                                </xls:for-each>
-                            </tbody>
-                        </table>
+                                </thead>
+
+                                <tbody>
+                                    <xls:for-each select="users/user">
+                                        <tr>
+                                            <td>
+                                                <xsl:value-of select="username"/>
+                                            </td>
+                                            <td>
+                                                <xsl:value-of select="name"/>
+                                            </td>
+                                            <td>
+                                                <xsl:value-of select="email"/>
+                                            </td>
+                                        </tr>
+                                    </xls:for-each>
+                                </tbody>
+                            </table>
+                        </div>
 
                         <div class="d-flex justify-content-center bg-secondary text-light">
                             <h3>Λίστες εργασιών</h3>
