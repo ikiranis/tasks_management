@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:xls="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <xsl:template match="/">
         <html>
@@ -14,29 +12,61 @@
             </head>
             <body>
                 <div class="d-flex justify-content-center">
-                    <h1>Statistics</h1>
+                    <h1>Στατιστικά</h1>
                 </div>
 
                 <div>
-                    <strong>Συνολικός αριθμός ομάδων: </strong>
-                    <xsl:value-of select="count(/teams/team)"/>
+                    <strong>Συνολικός αριθμός ομάδων:</strong>
+                    <xsl:value-of select="count(teams/team)"/>
                 </div>
 
                 <div>
                     <xsl:for-each select="/teams/team">
                         <div>
-                            <strong>Χρήστες στην Ομάδα => </strong>
+                            <strong>Χρήστες στην Ομάδα =></strong>
                             <span>
                                 <xsl:value-of select="name"/>:
                             </span>
                             <span>
-                                <xsl:value-of select="count(users/user)"/>
+                                <xsl:variable name="userCount" select="count(users/user)"/>
+                                <xsl:value-of select="$userCount"/>
                             </span>
                         </div>
                     </xsl:for-each>
                 </div>
 
-                <xls:for-each select="/teams/team">
+                <xsl:for-each select="/teams/team">
+                    <xsl:sort select="count(users/user)" order="descending"/>
+                    <xsl:if test="position() = 1">
+                        <div>
+                            <span>Η ομάδα με τους περισσότερους χρήστες
+                                (<xsl:value-of select="count(users/user)"/>), είναι η:
+                                <strong>
+                                    <xsl:value-of select="name"/>
+                                </strong>
+                            </span>
+                        </div>
+                    </xsl:if>
+                </xsl:for-each>
+
+                <xsl:for-each select="/teams/team">
+                    <xsl:sort select="count(users/user)" order="ascending"/>
+                    <xsl:if test="position() = 1">
+                        <div>
+                            <span>Η ομάδα με τους λιγότερους χρήστες
+                                (<xsl:value-of select="count(users/user)"/>), είναι η:
+                                <strong>
+                                    <xsl:value-of select="name"/>
+                                </strong>
+                            </span>
+                        </div>
+                    </xsl:if>
+                </xsl:for-each>
+
+
+                <hr/>
+
+                <xsl:for-each select="/teams/team">
                     <div class="team">
                         <div class="d-flex justify-content-center">
                             <h1>
@@ -59,7 +89,7 @@
                                 </thead>
 
                                 <tbody>
-                                    <xls:for-each select="users/user">
+                                    <xsl:for-each select="users/user">
                                         <tr>
                                             <td>
                                                 <xsl:value-of select="username"/>
@@ -71,7 +101,7 @@
                                                 <xsl:value-of select="email"/>
                                             </td>
                                         </tr>
-                                    </xls:for-each>
+                                    </xsl:for-each>
                                 </tbody>
                             </table>
                         </div>
@@ -81,7 +111,7 @@
                         </div>
 
                         <div class="row row-cols-1 row-cols-md-2 g-4 mt-3 mx-2 mb-3">
-                            <xls:for-each select="taskslists/taskslist">
+                            <xsl:for-each select="taskslists/taskslist">
 
                                 <div class="col">
                                     <div class="card">
@@ -104,21 +134,21 @@
 
                                         <div class="card-body">
                                             <ul>
-                                                <xls:for-each select="tasks/task">
+                                                <xsl:for-each select="tasks/task">
                                                     <li>
                                                         <xsl:value-of select="title"/>
                                                     </li>
-                                                </xls:for-each>
+                                                </xsl:for-each>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                            </xls:for-each>
+                            </xsl:for-each>
                         </div>
                     </div>
 
                     <hr/>
-                </xls:for-each>
+                </xsl:for-each>
             </body>
         </html>
     </xsl:template>
