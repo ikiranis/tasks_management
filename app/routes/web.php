@@ -18,7 +18,7 @@ Route::get('register', [UserController::class, 'register']);
 Route::get('tasks', [TasksListController::class, 'index']);
 Route::get('termsOfUse', [MainController::class, 'termsOfUse']);
 Route::get('privacyPolicy', [MainController::class, 'privacyPolicy']);
-Route::get('xml', [TeamsController::class, 'displayTranformedXML']);
+Route::get('xml', [TeamsController::class, 'displayTransformedXML']);
 
 // Utilities
 Route::post('checkLogin', [UserController::class, 'checkLogin']);

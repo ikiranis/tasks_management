@@ -185,13 +185,14 @@ class TeamsController extends Controller
      * Display the transformed XML, with default.xsl
      *
      * @return void
-     * @throws ErrorException
      */
-    public function displayTranformedXML(): void
+    public function displayTransformedXML(): void
     {
+        $enhance = $_GET['enhance'];
+
         $xml = new DOMDocument();
         $xsl = new DOMDocument();
-        $xsl->load('xsl/default.xsl');
+        $xsl->load($enhance == 'true' ? 'xsl/enhanced.xsl' : 'xsl/default.xsl');
 
         // Enable user error handling
         libxml_use_internal_errors(true);
