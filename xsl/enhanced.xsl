@@ -63,6 +63,25 @@
                     </xsl:if>
                 </xsl:for-each>
 
+                <div>
+                    <strong>Συνολικός αριθμός λιστών εργασιών: </strong>
+                    <xsl:value-of select="count(/teams/team/taskslists/taskslist[not(. = preceding::taskslist)])"/>
+                </div>
+
+                <div>
+                    <strong>Συνολικός αριθμών λιστών εργασιών σε κατάσταση "Νέα": </strong>
+                    <xsl:value-of select="count(/teams/team/taskslists/taskslist[not(. = preceding::taskslist)][status='Νέα'])"/>
+                </div>
+
+                <div>
+                    <strong>Συνολικός αριθμών λιστών εργασιών σε κατάσταση "Σε εξέλιξη": </strong>
+                    <xsl:value-of select="count(/teams/team/taskslists/taskslist[not(. = preceding::taskslist)][status='Σε εξέλιξη'])"/>
+                </div>
+
+                <div>
+                    <strong>Συνολικός αριθμών λιστών εργασιών σε κατάσταση "Ολοκληρωμένη": </strong>
+                    <xsl:value-of select="count(/teams/team/taskslists/taskslist[not(. = preceding::taskslist)][status='Ολοκληρωμένη'])"/>
+                </div>
 
                 <hr/>
 
