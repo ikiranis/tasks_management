@@ -16,14 +16,14 @@
                 </div>
 
                 <div>
-                    <strong>Συνολικός αριθμός ομάδων:</strong>
+                    <strong>Συνολικός αριθμός ομάδων: </strong>
                     <xsl:value-of select="count(teams/team)"/>
                 </div>
 
                 <div>
                     <xsl:for-each select="/teams/team">
                         <div>
-                            <strong>Χρήστες στην Ομάδα =></strong>
+                            <strong>Χρήστες στην Ομάδα => </strong>
                             <span>
                                 <xsl:value-of select="name"/>:
                             </span>

@@ -188,7 +188,7 @@ class TeamsController extends Controller
      */
     public function displayTransformedXML(): void
     {
-        $enhance = $_GET['enhance'];
+        $enhance = $_GET['enhance'] ?? false;
 
         $xml = new DOMDocument();
         $xsl = new DOMDocument();

@@ -31,6 +31,9 @@ class Permission
         'teams' => [
             'login', 0
         ],
+        'xml' => [
+            'login', 0
+        ],
     ];
 
     /**
