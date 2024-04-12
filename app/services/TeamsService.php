@@ -151,8 +151,8 @@ class TeamsService
     /**
      * Export teams to XML
      *
+     * @return string
      * @throws \DOMException
-     * @throws \Exception
      */
     public function getXML(): string
     {

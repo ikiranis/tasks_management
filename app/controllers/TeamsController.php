@@ -188,8 +188,10 @@ class TeamsController extends Controller
      */
     public function displayTransformedXML(): void
     {
+        // Get the enhance parameter from the URL, if it exists
         $enhance = $_GET['enhance'] ?? false;
 
+        // Load the XML and XSL files
         $xml = new DOMDocument();
         $xsl = new DOMDocument();
         $xsl->load($enhance == 'true' ? 'xsl/enhanced.xsl' : 'xsl/default.xsl');
@@ -201,8 +203,10 @@ class TeamsController extends Controller
             // Get the XML of the teams as an XML string
             $xmlString = $this->teamsService->getXML();
 
+            // Load the XML string
             $xml->loadXML($xmlString);
 
+            // Validate the XML document against its DTD
             if (!$xml->validate()) {
                 // Get the validation errors
                 $errors = libxml_get_errors();
@@ -214,7 +218,6 @@ class TeamsController extends Controller
             }
         } catch (\Exception $e) {
             // Display the errors
-
             echo "<p>The XML document is not valid according to its DTD</p>";
 
             echo '<p>' . $e->getMessage() . '</p>';
@@ -222,11 +225,14 @@ class TeamsController extends Controller
             exit();
         }
 
+        // Create a new XSLTProcessor and import the XSL file
         $proc = new XSLTProcessor();
         $proc->importStylesheet($xsl);
 
+        // Transform the XML document to HTML
         $transformed = $proc->transformToXML($xml);
 
+        // Display the new HTML content
         echo $transformed;
 
         // Clear the libxml error buffer
