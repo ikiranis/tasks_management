@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT teams (team*)>
+<!ELEMENT team (name, users, taskslists)>
+<!ATTLIST team id CDATA #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT users (user+)>
+<!ELEMENT user (username, name, email)>
+<!ATTLIST user id CDATA #REQUIRED>
+<!ELEMENT username (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT taskslists (taskslist*)>
+<!ELEMENT taskslist (tittle, category, status, tasks)>
+<!ATTLIST taskslist id CDATA #REQUIRED>
+<!ELEMENT tittle (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT tasks (task*)>
+<!ELEMENT task (title)>
+<!ATTLIST task id CDATA #REQUIRED>
+<!ELEMENT title (#PCDATA)>

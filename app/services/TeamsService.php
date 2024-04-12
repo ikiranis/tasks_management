@@ -156,32 +156,14 @@ class TeamsService
      */
     public function getXML(): string
     {
-        $dtdText = "
-<!DOCTYPE teams [
-<!ELEMENT teams (team*)>
-<!ELEMENT team (name, users, taskslists)>
-<!ATTLIST team id CDATA #REQUIRED>
-<!ELEMENT name (#PCDATA)>
-<!ELEMENT users (user+)>
-<!ELEMENT user (username, name, email)>
-<!ATTLIST user id CDATA #REQUIRED>
-<!ELEMENT username (#PCDATA)>
-<!ELEMENT email (#PCDATA)>
-<!ELEMENT taskslists (taskslist*)>
-<!ELEMENT taskslist (tittle, category, status, tasks)>
-<!ATTLIST taskslist id CDATA #REQUIRED>
-<!ELEMENT tittle (#PCDATA)>
-<!ELEMENT category (#PCDATA)>
-<!ELEMENT status (#PCDATA)>
-<!ELEMENT tasks (task*)>
-<!ELEMENT task (title)>
-<!ATTLIST task id CDATA #REQUIRED>
-<!ELEMENT title (#PCDATA)>
-]>
+        // Define the DTD for the XML document
+        $implementation = new DOMImplementation();
 
-";
+        // Create a DOMDocumentType instance and define the DTD file
+        $dtd = $implementation->createDocumentType('teams', '', 'xsl/style.dtd');
 
-        $dom = new DOMDocument();
+        // Create a new DOM document with the XML version and encoding
+        $dom = $implementation->createDocument('1.0', '', $dtd);
 
        // Add utf-8 encoding
         $dom->encoding = 'UTF-8';
@@ -278,9 +260,6 @@ class TeamsService
         $dom->formatOutput = true;
 
         // Return the XML document as a string
-        $xml = $dom->saveXML();
-
-        // Add the DTD to the XML document
-        return str_replace('<teams>', $dtdText . '<teams>', $xml);
+        return $dom->saveXML();
     }
 }
