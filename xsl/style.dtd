@@ -9,9 +9,9 @@
 <!ELEMENT username (#PCDATA)>
 <!ELEMENT email (#PCDATA)>
 <!ELEMENT taskslists (taskslist*)>
-<!ELEMENT taskslist (tittle, category, status, tasks)>
+<!ELEMENT taskslist (listName, category, status, tasks)>
 <!ATTLIST taskslist id CDATA #REQUIRED>
-<!ELEMENT tittle (#PCDATA)>
+<!ELEMENT listName (#PCDATA)>
 <!ELEMENT category (#PCDATA)>
 <!ELEMENT status (#PCDATA)>
 <!ELEMENT tasks (task*)>

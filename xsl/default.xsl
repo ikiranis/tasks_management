@@ -65,7 +65,7 @@
                                         <div class="card-header">
                                             <div class="d-flex">
                                                 <h4>
-                                                    <xsl:value-of select="tittle"/>
+                                                    <xsl:value-of select="listName"/>
                                                 </h4>
                                                 <span class="badge bg-primary mx-3 my-auto">
                                                     <xsl:value-of select="status"/>

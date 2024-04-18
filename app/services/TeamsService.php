@@ -229,7 +229,7 @@ class TeamsService
                 $tasksListElement = $tasksListsElement->appendChild($tasksListElement);
 
                 // Append the tasks list data
-                $tasksListElement->appendChild($dom->createElement('tittle', $tasksList->getTitle()));
+                $tasksListElement->appendChild($dom->createElement('listName', $tasksList->getTitle()));
                 $tasksListElement->appendChild($dom->createElement('category', $tasksList->getCategoryName()));
                 $tasksListElement->appendChild($dom->createElement('status', $tasksList->getStatusName()));
 
