@@ -16,9 +16,7 @@ namespace apps4net\tasks\services;
 use apps4net\tasks\libraries\DB;
 use apps4net\tasks\models\Team;
 use apps4net\tasks\models\User;
-use DOMDocument;
 use DOMImplementation;
-use SimpleXMLElement;
 
 class TeamsService
 {
@@ -153,6 +151,7 @@ class TeamsService
      *
      * @return string
      * @throws \DOMException
+     * @throws \Exception
      */
     public function getXML(): string
     {
@@ -173,7 +172,11 @@ class TeamsService
         $root = $dom->appendChild($root);
 
         // Get all teams
-        $teams = $this->getAll();
+        try {
+            $teams = $this->getAll();
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
 
         foreach ($teams as $team) {
             // Create the team element
