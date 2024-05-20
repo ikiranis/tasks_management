@@ -11,76 +11,81 @@
 
             </head>
             <body>
-                <div class="d-flex justify-content-center">
-                    <h1>Στατιστικά</h1>
-                </div>
+                <div class="px-5">
+                    <div class="d-flex justify-content-center">
+                        <h1>Στατιστικά</h1>
+                    </div>
 
-                <div>
-                    <strong>Συνολικός αριθμός ομάδων: </strong>
-                    <xsl:value-of select="count(teams/team)"/>
-                </div>
+                    <div>
+                        <strong>Συνολικός αριθμός ομάδων:</strong>
+                        <xsl:value-of select="count(teams/team)"/>
+                    </div>
 
-                <div>
+                    <div>
+                        <xsl:for-each select="/teams/team">
+                            <div>
+                                <strong>Χρήστες στην Ομάδα =></strong>
+                                <span>
+                                    <xsl:value-of select="name"/>:
+                                </span>
+                                <span>
+                                    <xsl:variable name="userCount" select="count(users/user)"/>
+                                    <xsl:value-of select="$userCount"/>
+                                </span>
+                            </div>
+                        </xsl:for-each>
+                    </div>
+
                     <xsl:for-each select="/teams/team">
-                        <div>
-                            <strong>Χρήστες στην Ομάδα => </strong>
-                            <span>
-                                <xsl:value-of select="name"/>:
-                            </span>
-                            <span>
-                                <xsl:variable name="userCount" select="count(users/user)"/>
-                                <xsl:value-of select="$userCount"/>
-                            </span>
-                        </div>
+                        <xsl:sort select="count(users/user)" order="descending"/>
+                        <xsl:if test="position() = 1">
+                            <div>
+                                <span>Η ομάδα με τους περισσότερους χρήστες
+                                    (<xsl:value-of select="count(users/user)"/>), είναι η:
+                                    <strong>
+                                        <xsl:value-of select="name"/>
+                                    </strong>
+                                </span>
+                            </div>
+                        </xsl:if>
                     </xsl:for-each>
-                </div>
 
-                <xsl:for-each select="/teams/team">
-                    <xsl:sort select="count(users/user)" order="descending"/>
-                    <xsl:if test="position() = 1">
-                        <div>
-                            <span>Η ομάδα με τους περισσότερους χρήστες
-                                (<xsl:value-of select="count(users/user)"/>), είναι η:
-                                <strong>
-                                    <xsl:value-of select="name"/>
-                                </strong>
-                            </span>
-                        </div>
-                    </xsl:if>
-                </xsl:for-each>
+                    <xsl:for-each select="/teams/team">
+                        <xsl:sort select="count(users/user)" order="ascending"/>
+                        <xsl:if test="position() = 1">
+                            <div>
+                                <span>Η ομάδα με τους λιγότερους χρήστες
+                                    (<xsl:value-of select="count(users/user)"/>), είναι η:
+                                    <strong>
+                                        <xsl:value-of select="name"/>
+                                    </strong>
+                                </span>
+                            </div>
+                        </xsl:if>
+                    </xsl:for-each>
 
-                <xsl:for-each select="/teams/team">
-                    <xsl:sort select="count(users/user)" order="ascending"/>
-                    <xsl:if test="position() = 1">
-                        <div>
-                            <span>Η ομάδα με τους λιγότερους χρήστες
-                                (<xsl:value-of select="count(users/user)"/>), είναι η:
-                                <strong>
-                                    <xsl:value-of select="name"/>
-                                </strong>
-                            </span>
-                        </div>
-                    </xsl:if>
-                </xsl:for-each>
+                    <div>
+                        <strong>Συνολικός αριθμός λιστών εργασιών:</strong>
+                        <xsl:value-of select="count(/teams/team/taskslists/taskslist[not(. = preceding::taskslist)])"/>
+                    </div>
 
-                <div>
-                    <strong>Συνολικός αριθμός λιστών εργασιών: </strong>
-                    <xsl:value-of select="count(/teams/team/taskslists/taskslist[not(. = preceding::taskslist)])"/>
-                </div>
+                    <div>
+                        <strong>Συνολικός αριθμών λιστών εργασιών σε κατάσταση "Νέα":</strong>
+                        <xsl:value-of
+                                select="count(/teams/team/taskslists/taskslist[not(. = preceding::taskslist)][status='Νέα'])"/>
+                    </div>
 
-                <div>
-                    <strong>Συνολικός αριθμών λιστών εργασιών σε κατάσταση "Νέα": </strong>
-                    <xsl:value-of select="count(/teams/team/taskslists/taskslist[not(. = preceding::taskslist)][status='Νέα'])"/>
-                </div>
+                    <div>
+                        <strong>Συνολικός αριθμών λιστών εργασιών σε κατάσταση "Σε εξέλιξη":</strong>
+                        <xsl:value-of
+                                select="count(/teams/team/taskslists/taskslist[not(. = preceding::taskslist)][status='Σε εξέλιξη'])"/>
+                    </div>
 
-                <div>
-                    <strong>Συνολικός αριθμών λιστών εργασιών σε κατάσταση "Σε εξέλιξη": </strong>
-                    <xsl:value-of select="count(/teams/team/taskslists/taskslist[not(. = preceding::taskslist)][status='Σε εξέλιξη'])"/>
-                </div>
-
-                <div>
-                    <strong>Συνολικός αριθμών λιστών εργασιών σε κατάσταση "Ολοκληρωμένη": </strong>
-                    <xsl:value-of select="count(/teams/team/taskslists/taskslist[not(. = preceding::taskslist)][status='Ολοκληρωμένη'])"/>
+                    <div>
+                        <strong>Συνολικός αριθμών λιστών εργασιών σε κατάσταση "Ολοκληρωμένη":</strong>
+                        <xsl:value-of
+                                select="count(/teams/team/taskslists/taskslist[not(. = preceding::taskslist)][status='Ολοκληρωμένη'])"/>
+                    </div>
                 </div>
 
                 <hr/>
