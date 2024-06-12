@@ -18,4 +18,4 @@ cp .env.example .env
 
 Edit the file
 
-
+[Documentation](docs.pdf)
